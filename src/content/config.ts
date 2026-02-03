@@ -1,12 +1,13 @@
 import { defineCollection, z } from 'astro:content';
 
 const artworkSchema = z.object({
-  title: z.string(),
-  description: z.string(),
+  titleEs: z.string(),
+  titleEn: z.string(),
+  descriptionEs: z.string(),
+  descriptionEn: z.string(),
   price: z.string().optional(),
   year: z.number(),
-  dimensions: z.string(),
-  medium: z.string(),
+  dimensionsCm: z.string(), // Format: "60 x 80" (width x height in cm)
   image: z.string(),
   available: z.boolean().default(true),
 });

@@ -1,10 +1,10 @@
 {
-  "title": "Ocean Waves Print",
-  "description": "High-quality print of the original Ocean Waves painting.",
-  "price": "$60",
+  "titleEs": "Impresión Bosque Místico",
+  "titleEn": "Mystical Forest Print",
+  "descriptionEs": "Impresión de alta calidad de la pintura original Bosque Místico.",
+  "descriptionEn": "High-quality print of the original Mystical Forest painting.",
   "year": 2024,
-  "dimensions": "20 x 30 inches",
-  "medium": "Giclée print",
-  "image": "/images/sample-print-2.jpg",
+  "dimensionsCm": "50 x 70",
+  "image": "/web-portfolio/images/sample-print-2.svg",
   "available": true
 }

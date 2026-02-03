@@ -1,10 +1,11 @@
 {
-  "title": "Ocean Waves",
-  "description": "A serene seascape capturing the beauty of ocean waves at dawn.",
-  "price": "$650",
-  "year": 2024,
-  "dimensions": "30 x 40 inches",
-  "medium": "Acrylic on canvas",
-  "image": "/images/sample-2.jpg",
+  "titleEs": "Bosque Místico",
+  "titleEn": "Mystical Forest",
+  "descriptionEs": "Un bosque envuelto en niebla, creando una atmósfera misteriosa y contemplativa.",
+  "descriptionEn": "A forest shrouded in mist, creating a mysterious and contemplative atmosphere.",
+  "price": "$950",
+  "year": 2023,
+  "dimensionsCm": "70 x 50",
+  "image": "/web-portfolio/images/sample-2.svg",
   "available": true
 }

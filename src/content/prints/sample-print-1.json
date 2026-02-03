@@ -1,10 +1,11 @@
 {
-  "title": "Mountain Landscape Print",
-  "description": "High-quality print of the original Mountain Landscape painting.",
-  "price": "$50",
+  "titleEs": "Impresión Paisaje Montañoso",
+  "titleEn": "Mountain Landscape Print",
+  "descriptionEs": "Impresión de alta calidad de la pintura original Paisaje al Atardecer.",
+  "descriptionEn": "High-quality print of the original Sunset Landscape painting.",
+  "price": "$120",
   "year": 2024,
-  "dimensions": "18 x 24 inches",
-  "medium": "Giclée print",
-  "image": "/images/sample-print-1.jpg",
+  "dimensionsCm": "45 x 60",
+  "image": "/web-portfolio/images/sample-print-1.svg",
   "available": true
 }

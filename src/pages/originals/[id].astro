@@ -16,22 +16,22 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const baseUrl = '/web-portfolio';
 
+// Get language-specific content
+const title = artwork.data.titleEs;
+const description = artwork.data.descriptionEs;
+
 // WhatsApp configuration
 const phoneNumber = '1234567890';
-const message = lang === 'es'
-  ? `Hola, estoy interesado en la obra "${artwork.data.title}". Me gustaría obtener más información.`
-  : `Hello, I'm interested in the artwork "${artwork.data.title}". I would like to get more information.`;
+const message = `Hola, estoy interesado en la obra "${title}". Me gustaría obtener más información.`;
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
 // Price inquiry message (when price is not listed)
-const priceInquiryMessage = lang === 'es'
-  ? `Hola, me gustaría conocer el precio de la obra "${artwork.data.title}".`
-  : `Hello, I would like to know the price of the artwork "${artwork.data.title}".`;
+const priceInquiryMessage = `Hola, me gustaría conocer el precio de la obra "${title}".`;
 const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(priceInquiryMessage)}`;
 ---
 
-<Layout title={`${artwork.data.title} - Artist Portfolio`} artworkTitle={artwork.data.title}>
-  <div data-artwork-id={artwork.id} data-artwork-title={artwork.data.title} class="max-w-5xl mx-auto">
+<Layout title={`${title} - Artist Portfolio`} artworkTitle={title}>
+  <div data-artwork-id={artwork.id} data-artwork-title={title} class="max-w-5xl mx-auto">
     <a
       href={`${baseUrl}/`}
       class="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
@@ -39,21 +39,21 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
-      {lang === 'es' ? 'Volver a Originales' : 'Back to Originals'}
+      Volver a Originales
     </a>
 
     <div class="grid md:grid-cols-2 gap-12">
       <div class="bg-gray-100 rounded-lg overflow-hidden">
         <img
           src={artwork.data.image}
-          alt={artwork.data.title}
+          alt={title}
           class="w-full h-auto"
         />
       </div>
 
       <div class="space-y-6">
         <div>
-          <h1 class="text-4xl font-bold text-gray-900 mb-2">{artwork.data.title}</h1>
+          <h1 class="text-4xl font-bold text-gray-900 mb-2">{title}</h1>
           {artwork.data.price ? (
             <p class="text-3xl font-semibold text-gray-900">{artwork.data.price}</p>
           ) : (
@@ -84,11 +84,11 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
             </div>
             <div>
               <dt class="text-sm font-medium text-gray-500">{t('common.dimensions')}</dt>
-              <dd class="text-base text-gray-900">{artwork.data.dimensions}</dd>
+              <dd class="text-base text-gray-900">{artwork.data.dimensionsCm} cm</dd>
             </div>
             <div>
               <dt class="text-sm font-medium text-gray-500">{t('common.medium')}</dt>
-              <dd class="text-base text-gray-900">{artwork.data.medium}</dd>
+              <dd class="text-base text-gray-900">{t('common.mediumValue')}</dd>
             </div>
             <div>
               <dt class="text-sm font-medium text-gray-500">
@@ -110,10 +110,10 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
 
         <div class="border-t border-gray-200 pt-6">
           <h2 class="text-sm font-medium text-gray-500 mb-2">
-            {lang === 'es' ? 'Descripción' : 'Description'}
+            Descripción
           </h2>
           <p class="text-base text-gray-700 leading-relaxed">
-            {artwork.data.description}
+            {description}
           </p>
         </div>
 
@@ -122,7 +122,7 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            data-artwork-title={artwork.data.title}
+            data-artwork-title={title}
             class="inline-flex items-center justify-center w-full px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200"
           >
             <svg

@@ -1,10 +1,10 @@
 {
-  "title": "Abstract Thoughts",
-  "description": "An abstract piece exploring emotions through color and form.",
-  "price": "$450",
-  "year": 2023,
-  "dimensions": "20 x 24 inches",
-  "medium": "Mixed media on canvas",
-  "image": "/images/sample-3.jpg",
-  "available": false
+  "titleEs": "Marina al Amanecer",
+  "titleEn": "Seascape at Dawn",
+  "descriptionEs": "El océano tranquilo al amanecer, con suaves tonos de azul y rosa reflejándose en el agua.",
+  "descriptionEn": "The calm ocean at dawn, with soft tones of blue and pink reflecting on the water.",
+  "year": 2024,
+  "dimensionsCm": "80 x 60",
+  "image": "/web-portfolio/images/sample-3.svg",
+  "available": true
 }
