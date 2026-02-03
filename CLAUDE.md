@@ -16,8 +16,8 @@ This file provides context and guidelines for AI assistants (like Claude) workin
 
 ## Project Status
 
-**Current State:** ✅ Production-ready with core features deployed
-**Phase:** 4 of 6 completed (Core platform + WhatsApp integration done)
+**Current State:** ✅ Production-ready with all core features deployed
+**Phase:** 6 of 6 completed (Core platform + WhatsApp + Google Analytics)
 
 ### Completed Features ✅
 - Two artwork galleries (Originals and Prints)
@@ -25,6 +25,13 @@ This file provides context and guidelines for AI assistants (like Claude) workin
 - Bilingual support (ES/EN) with language switcher
 - About page
 - WhatsApp contact integration (floating + inline buttons)
+- **Google Analytics 4 integration:**
+  - Track artwork page views
+  - Track WhatsApp button clicks (floating + inline)
+  - Track language switches (ES ↔ EN)
+  - Track gallery navigation
+  - Geographic tracking (automatic)
+  - Configured via GitHub secrets
 - CI/CD with automatic GitHub Pages deployment
 - Classic gallery design (neutral colors, clean typography)
 - Responsive mobile-first design
@@ -33,11 +40,9 @@ This file provides context and guidelines for AI assistants (like Claude) workin
 - Test WhatsApp phone number (1234567890) needs replacement
 - Sample artwork with placeholder SVG images
 - Placeholder About page content
-- GitHub Pages may need one-time configuration
 
 ### Future Work 🔜
 - Phase 5: Image optimization workflow
-- Phase 6: Google Analytics integration
 - SEO enhancements (sitemap, structured data)
 - Custom domain configuration
 
@@ -56,7 +61,8 @@ web-portfolio/
 ├── src/
 │   ├── components/
 │   │   ├── Navigation.astro    # Nav bar + language switcher
-│   │   └── WhatsAppButton.astro # Floating contact button
+│   │   ├── WhatsAppButton.astro # Floating contact button
+│   │   └── Analytics.astro     # Google Analytics 4 tracking
 │   │
 │   ├── content/
 │   │   ├── config.ts           # Content Collections schema
@@ -82,6 +88,7 @@ web-portfolio/
 │   └── styles/
 │       └── global.css          # Tailwind CSS imports
 │
+├── .env.example                # GA4 configuration template
 ├── astro.config.mjs            # Astro configuration
 ├── package.json                # Dependencies
 ├── tsconfig.json               # TypeScript configuration
@@ -91,6 +98,8 @@ web-portfolio/
 ├── findings.md                 # Technical documentation
 └── progress.md                 # Session logs
 ```
+
+**Note:** `.env` file exists locally for development but is gitignored (not in repository)
 
 ## Tech Stack
 
@@ -161,6 +170,34 @@ Artworks are stored as JSON files in `src/content/originals/` or `src/content/pr
 ### Bilingual URL Structure
 - Spanish (default): `/`, `/prints`, `/about`, `/originals/[id]`
 - English: `/en/`, `/en/prints`, `/en/about`, `/en/originals/[id]`
+
+### GitHub Secrets Configuration
+
+**Google Analytics 4 Measurement ID:**
+The GA4 Measurement ID is stored as a GitHub repository secret:
+
+**Location:** Repository Settings → Secrets and variables → Actions → `github-pages` environment
+**Secret Name:** `GA_MEASUREMENT_ID`
+**Secret Value:** `G-VGTBVLLR7E` (current production value)
+
+**How It Works:**
+1. GitHub Actions workflow references the `github-pages` environment in the build job
+2. During build, the secret is passed as environment variable: `PUBLIC_GA_MEASUREMENT_ID`
+3. Astro reads it via `import.meta.env.PUBLIC_GA_MEASUREMENT_ID`
+4. Analytics.astro component uses it to initialize GA4 tracking
+
+**Local Development:**
+- Create `.env` file in project root (gitignored)
+- Add: `PUBLIC_GA_MEASUREMENT_ID=G-VGTBVLLR7E`
+- Restart dev server to enable analytics locally
+
+**Why Secrets:**
+- Keeps configuration out of codebase
+- Can be updated without code changes
+- Follows security best practices
+- Automatically injected during CI/CD
+
+**Note:** GA4 Measurement IDs are public by design (visible in client-side code), but using secrets is best practice for configuration management.
 
 ## Development Workflow Requirements
 
@@ -343,6 +380,7 @@ npm run preview
 - `src/layouts/Layout.astro` - Main layout wrapper
 - `src/components/Navigation.astro` - Nav bar + language switcher
 - `src/components/WhatsAppButton.astro` - Contact button
+- `src/components/Analytics.astro` - Google Analytics 4 tracking
 
 ### i18n Files
 - `src/i18n/es.json` - Spanish translations
@@ -350,11 +388,16 @@ npm run preview
 - `src/i18n/index.ts` - Translation utilities
 
 ### Documentation Files
-- `README.md` - User-facing documentation
+- `README.md` - User-facing documentation (includes GA4 setup guide)
 - `task_plan.md` - Planning, TODOs, roadmap
 - `findings.md` - Technical documentation
 - `progress.md` - Session logs
 - `CLAUDE.md` - This file (AI assistant guide)
+
+### Environment & Configuration Files
+- `.env.example` - Template for local GA4 configuration
+- `.env` - Local environment variables (gitignored, not in repo)
+- `.github/workflows/deploy.yml` - CI/CD pipeline (includes secret injection)
 
 ## Common Tasks
 
@@ -609,6 +652,11 @@ gh run watch
 - Keep the classic gallery aesthetic consistent
 - Respect the bilingual structure (ES default, EN mirror)
 - WhatsApp phone number is test value (1234567890) - needs replacement
+- **Google Analytics:**
+  - GA4 Measurement ID stored in GitHub secret (github-pages environment)
+  - Never hardcode the Measurement ID in source code
+  - Use environment variables for configuration
+  - Analytics verified working in production
 
 ## Getting Help
 
@@ -623,5 +671,5 @@ gh run watch
 ---
 
 **Last Updated:** 2026-02-03
-**Project Version:** v1.0.0 (Core features complete)
-**Next Phase:** Image Optimization (Phase 5)
+**Project Version:** v1.1.0 (All 6 phases complete)
+**Next Phase:** Image Optimization (Phase 5 - optional enhancement)

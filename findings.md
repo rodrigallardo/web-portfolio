@@ -467,7 +467,25 @@ jobs:
 10. Enter stream name: "GitHub Pages"
 11. Click "Create stream"
 12. Copy the **Measurement ID** (format: G-XXXXXXXXXX)
-13. Use this ID in the implementation below
+13. Add as GitHub secret (see deployment section below)
+
+**GitHub Secret Configuration:**
+The Measurement ID is stored as a GitHub repository secret to keep it out of the codebase:
+1. Repository Settings → Secrets and variables → Actions
+2. In the `github-pages` environment, create secret: `GA_MEASUREMENT_ID`
+3. GitHub Actions workflow passes this as `PUBLIC_GA_MEASUREMENT_ID` during build
+4. Analytics component reads from `import.meta.env.PUBLIC_GA_MEASUREMENT_ID`
+
+**Why GitHub Secrets:**
+- Keeps Measurement ID out of version control
+- Can be updated without code changes
+- Follows security best practices
+- Automatically injected during CI/CD builds
+
+**Current Configuration:**
+- Production: Uses GitHub secret `GA_MEASUREMENT_ID` from github-pages environment
+- Local dev: Uses `.env` file with `PUBLIC_GA_MEASUREMENT_ID` (gitignored)
+- Measurement ID: G-VGTBVLLR7E (configured in github-pages environment)
 
 ## Future Work
 

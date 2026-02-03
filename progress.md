@@ -212,14 +212,27 @@
   - language_switch (ES ↔ EN)
   - gallery_navigation (Originals, Prints, About)
 - Created .env.example template
-- Added Measurement ID: G-VGTBVLLR7E
 - Updated README with comprehensive GA4 setup guide
 - Tested build successfully
+
+**Issue Encountered:**
+- GA4 not working in production - .env file is gitignored and not available in CI/CD
+
+**Solution Implemented:**
+- Configured GitHub secret in github-pages environment: GA_MEASUREMENT_ID
+- Updated GitHub Actions workflow to:
+  - Reference github-pages environment in build job
+  - Pass secret as PUBLIC_GA_MEASUREMENT_ID environment variable during build
+- Reverted hardcoded Measurement ID (security best practice)
+- Updated README with GitHub secrets setup instructions
+- Updated findings.md with secret-based approach
+- Deployed and verified GA4 working in production
 
 **Blockers:**
 - None
 
 **Completed:**
 - Phase 6: Google Analytics Integration ✅
+- Analytics verified working in production with real-time data
 
 ---
