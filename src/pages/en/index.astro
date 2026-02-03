@@ -1,13 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { useTranslations, getLangFromUrl } from '../i18n';
+import { useTranslations } from '../../i18n';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
+const t = useTranslations('en');
 const originals = await getCollection('originals');
-const baseUrl = '/web-portfolio';
+const baseUrl = '/web-portfolio/en';
 ---
 
 <Layout title={`${t('nav.originals')} - Artist Portfolio`}>
@@ -15,9 +13,7 @@ const baseUrl = '/web-portfolio';
     <div class="text-center">
       <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.originals')}</h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        {lang === 'es'
-          ? 'Explora la colección de obras originales.'
-          : 'Explore the collection of original artworks.'}
+        Explore the collection of original artworks.
       </p>
     </div>
 

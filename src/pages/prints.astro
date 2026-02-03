@@ -6,25 +6,25 @@ import { useTranslations, getLangFromUrl } from '../i18n';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const originals = await getCollection('originals');
+const prints = await getCollection('prints');
 const baseUrl = '/web-portfolio';
 ---
 
-<Layout title={`${t('nav.originals')} - Artist Portfolio`}>
+<Layout title={`${t('nav.prints')} - Artist Portfolio`}>
   <div class="space-y-8">
     <div class="text-center">
-      <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.originals')}</h1>
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.prints')}</h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         {lang === 'es'
-          ? 'Explora la colección de obras originales.'
-          : 'Explore the collection of original artworks.'}
+          ? 'Descubre impresiones de alta calidad de obras originales.'
+          : 'Discover high-quality prints of original artworks.'}
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-      {originals.map((artwork) => (
+      {prints.map((artwork) => (
         <a
-          href={`${baseUrl}/originals/${artwork.id}`}
+          href={`${baseUrl}/prints/${artwork.id}`}
           class="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
         >
           <div class="aspect-square bg-gray-200 overflow-hidden">

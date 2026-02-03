@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { useTranslations, getLangFromUrl } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t('nav.about')} - Artist Portfolio`}>
+  <div class="max-w-3xl mx-auto space-y-8">
+    <div class="text-center">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.about')}</h1>
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      {lang === 'es' ? (
+        <div class="space-y-6 text-gray-700">
+          <p class="text-xl leading-relaxed">
+            Bienvenido a mi galería de arte. Soy un artista apasionado por capturar la belleza del mundo
+            a través de diferentes medios y técnicas.
+          </p>
+          <p class="leading-relaxed">
+            Mi trabajo explora temas de naturaleza, emoción y abstracción. Cada pieza representa un momento
+            de inspiración congelado en el tiempo, invitando al espectador a experimentar el mundo desde
+            una nueva perspectiva.
+          </p>
+          <p class="leading-relaxed">
+            Las obras originales están disponibles para compra, y también ofrezco impresiones de alta calidad
+            para aquellos que deseen disfrutar de mi arte en sus hogares.
+          </p>
+          <h2 class="text-3xl font-bold text-gray-900 mt-12 mb-6">Contacto</h2>
+          <p class="leading-relaxed">
+            Para consultas sobre obras disponibles, comisiones o cualquier otra pregunta, no dudes en
+            ponerte en contacto.
+          </p>
+        </div>
+      ) : (
+        <div class="space-y-6 text-gray-700">
+          <p class="text-xl leading-relaxed">
+            Welcome to my art gallery. I am an artist passionate about capturing the beauty of the world
+            through different mediums and techniques.
+          </p>
+          <p class="leading-relaxed">
+            My work explores themes of nature, emotion, and abstraction. Each piece represents a moment
+            of inspiration frozen in time, inviting the viewer to experience the world from a new perspective.
+          </p>
+          <p class="leading-relaxed">
+            Original works are available for purchase, and I also offer high-quality prints for those
+            who wish to enjoy my art in their homes.
+          </p>
+          <h2 class="text-3xl font-bold text-gray-900 mt-12 mb-6">Contact</h2>
+          <p class="leading-relaxed">
+            For inquiries about available works, commissions, or any other questions, feel free to
+            get in touch.
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .prose p {
+    font-family: 'Inter', sans-serif;
+  }
+</style>

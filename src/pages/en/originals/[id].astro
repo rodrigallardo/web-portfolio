@@ -1,0 +1,85 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../../i18n';
+
+export async function getStaticPaths() {
+  const originals = await getCollection('originals');
+  return originals.map((artwork) => ({
+    params: { id: artwork.id },
+    props: { artwork },
+  }));
+}
+
+const { artwork } = Astro.props;
+const t = useTranslations('en');
+const baseUrl = '/web-portfolio/en';
+---
+
+<Layout title={`${artwork.data.title} - Artist Portfolio`}>
+  <div class="max-w-5xl mx-auto">
+    <a
+      href={`${baseUrl}/`}
+      class="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
+    >
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back to Originals
+    </a>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="bg-gray-100 rounded-lg overflow-hidden">
+        <img
+          src={artwork.data.image}
+          alt={artwork.data.title}
+          class="w-full h-auto"
+        />
+      </div>
+
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-4xl font-bold text-gray-900 mb-2">{artwork.data.title}</h1>
+          <p class="text-3xl font-semibold text-gray-900">{artwork.data.price}</p>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6">
+          <dl class="space-y-4">
+            <div>
+              <dt class="text-sm font-medium text-gray-500">{t('common.year')}</dt>
+              <dd class="text-base text-gray-900">{artwork.data.year}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">{t('common.dimensions')}</dt>
+              <dd class="text-base text-gray-900">{artwork.data.dimensions}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">{t('common.medium')}</dt>
+              <dd class="text-base text-gray-900">{artwork.data.medium}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-medium text-gray-500">Status</dt>
+              <dd>
+                <span class:list={[
+                  "inline-block px-3 py-1 rounded text-sm font-medium",
+                  artwork.data.available
+                    ? "bg-green-100 text-green-800"
+                    : "bg-gray-100 text-gray-800"
+                ]}>
+                  {artwork.data.available ? t('common.available') : t('common.sold')}
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6">
+          <h2 class="text-sm font-medium text-gray-500 mb-2">Description</h2>
+          <p class="text-base text-gray-700 leading-relaxed">
+            {artwork.data.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
