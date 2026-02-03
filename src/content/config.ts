@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 const artworkSchema = z.object({
   title: z.string(),
   description: z.string(),
-  price: z.string(),
+  price: z.string().optional(),
   year: z.number(),
   dimensions: z.string(),
   medium: z.string(),

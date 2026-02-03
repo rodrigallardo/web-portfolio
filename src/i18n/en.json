@@ -10,6 +10,7 @@
     "dimensions": "Dimensions",
     "medium": "Medium",
     "available": "Available",
-    "sold": "Sold"
+    "sold": "Sold",
+    "askPrice": "Ask price"
   }
 }
