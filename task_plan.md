@@ -4,106 +4,282 @@
 
 Build a static artist portfolio website showcasing paintings with detail pages. The site will be hosted on GitHub Pages with CI/CD for automatic deployments. Focus on simplicity, aesthetics, and ease of content management.
 
-**Core Features (Phase 1-3):**
-- Two catalog pages: Originals and Prints
-- Individual artwork detail pages (price, description, year, dimensions, medium, enlarged image)
-- About page
-- Bilingual support (Spanish default, English)
-- Language switcher
-- Classic gallery aesthetic
-- Static site generation
-- GitHub Pages hosting
-- CI/CD pipeline
+**Status:** Core functionality complete and deployed ✅
+**Live Site:** https://rodrigallardo.github.io/web-portfolio
 
-**Future Features (Phase 4+):**
-- WhatsApp contact button with painting-specific templates
-- Image optimization script for protecting high-res originals
-- Google Analytics integration
+## Completed Features
 
-## Phases
+### ✅ Core Platform (Phases 1-4)
+- **Two Galleries:** Originals and Prints catalogs with grid layouts
+- **Detail Pages:** Individual artwork pages with enlarged images, pricing, and metadata
+- **Bilingual:** Spanish (default) and English with language switcher
+- **About Page:** Artist bio and contact information
+- **Classic Gallery Design:** Neutral colors, serif headings, minimal UI
+- **Responsive:** Mobile-first design
+- **WhatsApp Integration:**
+  - Floating contact button on all pages
+  - Inline "Ask about this painting" button on detail pages
+  - Painting-specific message templates
+- **CI/CD:** Automatic deployment to GitHub Pages on push to main
+- **Documentation:** Comprehensive README with content management guide
+
+## Implementation Phases
 
 ### Phase 1: Project Setup & Configuration ✅
-- [x] Initialize planning files
-- [x] Initialize Astro project with TypeScript
-- [x] Configure Tailwind CSS
-- [x] Set up project structure (folders, configs)
-- [x] Configure for GitHub Pages deployment
-- [x] Create .gitignore for proper file exclusion
-- [x] Initial commit of base setup
+- [x] Initialize planning files (task_plan.md, findings.md, progress.md)
+- [x] Install Node.js and npm
+- [x] Initialize Astro project with TypeScript (strict mode)
+- [x] Configure Tailwind CSS v4
+- [x] Set up project structure (src/content, src/i18n, public/images)
+- [x] Configure for GitHub Pages deployment (base: /web-portfolio)
+- [x] Create .gitignore
+- [x] Initial commit to feature/initial-setup branch
 
 ### Phase 2: CI/CD Pipeline ✅
-- [x] Create GitHub Actions workflow
+- [x] Create GitHub Actions workflow (.github/workflows/deploy.yml)
 - [x] Configure workflow to build on push to main
 - [x] Configure workflow to deploy to GitHub Pages
-- [x] Document deployment process
-- [ ] Test deployment pipeline (requires merge to main)
+- [x] Update README with deployment documentation
+- [x] Merge to main and push to GitHub
+- [x] Test deployment pipeline
 
 ### Phase 3: Core UI & Content Structure ✅
-- [x] Design and implement main layout with navigation
-- [x] Implement i18n system (Spanish/English)
-- [x] Create language switcher component
-- [x] Create Originals gallery page
-- [x] Create Prints gallery page
-- [x] Create About page
-- [x] Create artwork detail page with dynamic routing
-- [x] Set up content structure (JSON schema for artworks)
-- [x] Add sample artworks for testing (originals and prints)
-- [x] Implement responsive design
+- [x] Create Navigation component with language switcher
+- [x] Update main Layout with Google Fonts (Playfair Display + Inter)
+- [x] Implement i18n system (es.json, en.json, i18n utilities)
+- [x] Create Originals gallery page (index.astro)
+- [x] Create Prints gallery page (prints.astro)
+- [x] Create About page (about.astro)
+- [x] Create dynamic artwork detail pages ([id].astro)
+- [x] Set up Astro Content Collections with schema validation
+- [x] Add sample artworks (3 originals, 2 prints with placeholder images)
+- [x] Implement responsive grid layout
 - [x] Apply classic gallery aesthetic styling
+- [x] Create full English routes (/en/*)
 
 ### Phase 4: WhatsApp Integration ✅
-- [x] Create floating contact button component
+- [x] Create WhatsAppButton component (floating green button)
 - [x] Implement WhatsApp deep linking
-- [x] Add painting-specific message templates
-- [x] Add button to all pages via layout
-- [ ] Update with real phone number (currently using test number: 1234567890)
-- [ ] Test on mobile and desktop
+- [x] Add bilingual message templates (general + artwork-specific)
+- [x] Integrate floating button into Layout
+- [x] Add inline "Ask about this painting" button to all detail pages
+- [x] Style buttons to match gallery aesthetic
+- [x] Deploy to production
 
-### Phase 5: Image Optimization (Future)
-- [ ] Create image processing script
-- [ ] Implement resolution downscaling
-- [ ] Set up separate folder for high-res originals (gitignored)
-- [ ] Document image management workflow
+### Phase 5: Image Optimization 🔜
+- [ ] Create image processing script (resize, optimize)
+- [ ] Implement resolution downscaling workflow
+- [ ] Set up high-res-originals/ folder (gitignored)
+- [ ] Add script to package.json
+- [ ] Document image management workflow in README
 
-### Phase 6: Analytics Integration (Future)
-- [ ] Add Google Analytics
-- [ ] Configure tracking for painting page views
+### Phase 6: Google Analytics Integration 🔜
+- [ ] Set up Google Analytics 4 account
+- [ ] Add GA4 tracking script to Layout
+- [ ] Configure custom events for:
+  - Artwork page views
+  - WhatsApp button clicks
+  - Language switches
 - [ ] Set up geographic tracking
 - [ ] Test analytics collection
+- [ ] Document in README
 
-## Decisions
+## Critical TODOs
 
-**Tech Stack:** Astro + TypeScript + Tailwind CSS
-- Rationale: Best balance of ease-of-use, performance, and static site capabilities
-- Astro is purpose-built for content sites and has excellent GitHub Pages support
+### 🔴 High Priority - Production Setup
+- [ ] **Configure GitHub Pages:**
+  - Go to Repository Settings → Pages
+  - Set Source to "GitHub Actions"
+  - Verify deployment works
 
-**Content Format:** JSON files
-- Rationale: Easy to edit, structured, type-safe with TypeScript
-- Can be validated and version-controlled
+- [ ] **Update WhatsApp Phone Number:**
+  - Replace test number (1234567890) in 5 files:
+    - `src/components/WhatsAppButton.astro` (line 12)
+    - `src/pages/originals/[id].astro` (line 20)
+    - `src/pages/prints/[id].astro` (line 20)
+    - `src/pages/en/originals/[id].astro` (line 19)
+    - `src/pages/en/prints/[id].astro` (line 19)
+  - Use international format: e.g., '5491234567890' (no + or spaces)
+  - Commit and push to deploy
+
+- [ ] **Update About Page Content:**
+  - Edit `src/pages/about.astro` (Spanish)
+  - Edit `src/pages/en/about.astro` (English)
+  - Add real artist bio, statement, contact info
+  - Replace placeholder text
+
+- [ ] **Add Real Artwork Content:**
+  - Replace sample artworks in `src/content/originals/`
+  - Replace sample artworks in `src/content/prints/`
+  - Add optimized images to `public/images/`
+  - Follow schema: title, description, price, year, dimensions, medium, image, available
+
+### 🟡 Medium Priority - Configuration
+- [ ] **Set Up Custom Domain:**
+  - Purchase domain (if not already done)
+  - Add CNAME file to public/ folder
+  - Configure DNS settings
+  - Update astro.config.mjs with new domain
+  - Update README with new URL
+
+- [ ] **Update Site Metadata:**
+  - Change site title from "Artist Portfolio" to artist name
+  - Add meta descriptions for SEO
+  - Add Open Graph tags for social sharing
+  - Add artist name to footer copyright
+
+- [ ] **Git Configuration:**
+  - Set up git user name and email:
+    ```bash
+    git config --global user.name "Your Name"
+    git config --global user.email "your.email@example.com"
+    ```
+
+### 🟢 Low Priority - Enhancements
+- [ ] **Test Mobile Experience:**
+  - Test on iOS Safari
+  - Test on Android Chrome
+  - Verify WhatsApp buttons work on mobile
+  - Check responsive design
+
+- [ ] **Add More Artwork:**
+  - Continue adding originals as they're completed
+  - Add prints as they become available
+  - Keep JSON files organized
+
+- [ ] **Content Enhancements:**
+  - Add artist photo to About page
+  - Add exhibition history
+  - Add awards/recognition
+  - Add press mentions
+
+- [ ] **SEO Optimization:**
+  - Add sitemap.xml
+  - Add robots.txt
+  - Optimize image alt text
+  - Add structured data (JSON-LD)
+
+- [ ] **Performance:**
+  - Optimize image loading (lazy loading)
+  - Add image preloading for above-fold content
+  - Minimize CSS/JS if needed
+
+## Future Feature Ideas
+
+### Potential Enhancements
+- [ ] **Newsletter Signup:**
+  - Add email collection for new artwork notifications
+  - Integrate with Mailchimp or similar
+
+- [ ] **Social Media Links:**
+  - Add Instagram, Facebook links to footer
+  - Add social sharing buttons
+
+- [ ] **Search & Filter:**
+  - Add search by title
+  - Filter by year, medium, availability
+  - Sort by price, date
+
+- [ ] **Virtual Exhibition:**
+  - Create "Current Exhibition" section
+  - Highlight featured artworks
+
+- [ ] **Artist Statement:**
+  - Dedicated page for detailed artist statement
+  - Link from About page
+
+- [ ] **Press Kit:**
+  - Downloadable press kit PDF
+  - High-res artist photos
+  - Bio in multiple formats
+
+## Technical Decisions
+
+**Tech Stack:** Astro v5.17 + TypeScript + Tailwind CSS v4
+- **Why Astro:** Purpose-built for content sites, excellent performance, simple to use
+- **Why TypeScript:** Type safety, better IDE support, catches errors early
+- **Why Tailwind:** Utility-first, easy to customize, no CSS expertise needed
+
+**Content Format:** JSON files in Astro Content Collections
+- **Why JSON:** Easy to edit, structured, version-controlled
+- **Why Content Collections:** Type-safe, validated, excellent DX
 
 **Hosting:** GitHub Pages
-- Rationale: Free, reliable, integrates with repository
-- Custom domain support available
+- **Why:** Free, reliable, automatic deployment, custom domain support
 
 **CI/CD:** GitHub Actions
-- Rationale: Native integration, free for public repos, well-documented
+- **Why:** Native integration, free for public repos, simple configuration
 
-## Open Questions
+**Fonts:** Google Fonts
+- **Headings:** Playfair Display (classic serif)
+- **Body:** Inter (modern sans-serif)
 
-- [x] Design aesthetic: Classic gallery style
-- [x] Artwork information: title, price (USD), description, year, dimensions, medium
-- [x] Languages: Spanish (default) + English
-- [x] Separate catalogs: Originals and Prints
-- [x] Additional pages: About page
-- [x] Navigation structure: Originals IS the homepage (land directly on gallery)
-- [x] Design: Classic gallery aesthetic - neutral colors, clean typography, grid layout, ample whitespace
-- [ ] Do you have sample paintings/images to use during development?
+**Design Philosophy:**
+- Classic gallery aesthetic
+- Neutral color palette (grays, whites, blacks)
+- Ample whitespace
+- Minimal UI elements
+- Focus on the artwork
+
+## Project Structure
+
+```
+web-portfolio/
+├── .github/workflows/
+│   └── deploy.yml                 # GitHub Actions CI/CD
+├── public/
+│   └── images/                    # Artwork images (optimized, web-ready)
+├── src/
+│   ├── components/
+│   │   ├── Navigation.astro       # Nav bar with language switcher
+│   │   └── WhatsAppButton.astro   # Floating WhatsApp contact button
+│   ├── content/
+│   │   ├── config.ts              # Content schema validation
+│   │   ├── originals/             # Original artwork JSON files
+│   │   └── prints/                # Print JSON files
+│   ├── i18n/
+│   │   ├── es.json                # Spanish translations
+│   │   ├── en.json                # English translations
+│   │   └── index.ts               # i18n utilities
+│   ├── layouts/
+│   │   └── Layout.astro           # Main page layout
+│   ├── pages/
+│   │   ├── index.astro            # Originals gallery (ES)
+│   │   ├── prints.astro           # Prints gallery (ES)
+│   │   ├── about.astro            # About page (ES)
+│   │   ├── originals/[id].astro   # Artwork detail (ES)
+│   │   ├── prints/[id].astro      # Print detail (ES)
+│   │   └── en/                    # English versions
+│   └── styles/
+│       └── global.css             # Tailwind imports
+├── astro.config.mjs               # Astro config (GitHub Pages setup)
+├── package.json                   # Dependencies
+├── README.md                      # Documentation
+└── [planning files]               # task_plan.md, findings.md, progress.md
+```
+
+## Key Files to Edit
+
+**For content updates:**
+- `src/content/originals/*.json` - Add/edit original artworks
+- `src/content/prints/*.json` - Add/edit prints
+- `src/pages/about.astro` - Update artist bio (Spanish)
+- `src/pages/en/about.astro` - Update artist bio (English)
+- `public/images/` - Add artwork images
+
+**For configuration:**
+- `src/components/WhatsAppButton.astro` - Update phone number
+- `src/pages/*/[id].astro` - Update phone number (4 files)
+- `astro.config.mjs` - Update domain/base URL
+- `src/layouts/Layout.astro` - Update site title, meta tags
 
 ## Notes
 
-- Starting with core functionality (2 catalogs + detail pages + about + i18n + deployment)
-- Additional features will be added incrementally after core is stable
-- User is not strong in frontend, so prioritizing simplicity and good documentation
-- Planning files should be excluded from final site but kept in repo for reference
-- Prints catalog will showcase available prints of original paintings
-- Classic gallery aesthetic: clean, neutral, focused on the artwork
+- All core functionality is complete and deployed
+- Test phone number (1234567890) is currently in use - must be replaced
+- Sample artworks with placeholder images - replace with real content
+- GitHub Pages needs to be configured (one-time setup)
+- Custom domain support is ready but needs DNS configuration
+- Image optimization workflow is planned but not yet implemented
+- Google Analytics integration is planned but not yet implemented
+- Planning files are tracked in git for reference but not deployed to site
