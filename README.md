@@ -11,6 +11,8 @@ A bilingual (Spanish/English) static portfolio website built with Astro, TypeScr
 - **Bilingual Support:** Spanish (default) and English with easy language switching
 - **Two Galleries:** Separate sections for Originals and Prints
 - **Dynamic Detail Pages:** Each artwork has its own detail page with enlarged image
+- **WhatsApp Integration:** Floating contact button + inline "Ask about this painting" buttons
+- **Google Analytics 4:** Track artwork views, WhatsApp clicks, language switches, and navigation
 - **Classic Gallery Design:** Clean, minimal aesthetic with neutral colors
 - **Responsive:** Mobile-first design that works on all devices
 - **Static Site:** No CMS needed - content managed via JSON files
@@ -205,11 +207,75 @@ Edit:
 - **Hosting:** GitHub Pages
 - **CI/CD:** GitHub Actions
 
+## 📊 Analytics Setup (Optional)
+
+Google Analytics 4 is pre-configured but disabled by default. To enable tracking:
+
+### Step 1: Create GA4 Account
+
+1. Go to https://analytics.google.com
+2. Sign in with your Google account
+3. Click "Admin" (gear icon in bottom left)
+4. Under "Property" column, click "Create Property"
+5. Enter property name (e.g., "Artist Portfolio")
+6. Set timezone and currency
+7. Click "Next" → "Create"
+
+### Step 2: Create Data Stream
+
+1. Under "Data Streams", click "Add stream" → "Web"
+2. Enter URL: `https://rodrigallardo.github.io/web-portfolio`
+3. Enter stream name: "GitHub Pages"
+4. Click "Create stream"
+5. **Copy the Measurement ID** (format: `G-XXXXXXXXXX`)
+
+### Step 3: Configure Your Site
+
+1. Create a `.env` file in the project root:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and add your Measurement ID:
+   ```env
+   PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+   ```
+
+3. Restart the dev server:
+   ```bash
+   npm run dev
+   ```
+
+### Step 4: Deploy
+
+Commit the `.env` file (it's safe - it's a public tracking ID):
+```bash
+git add .env
+git commit -m "feat: enable Google Analytics tracking"
+git push origin main
+```
+
+### What Gets Tracked
+
+- **Artwork Views:** Which paintings get the most views
+- **WhatsApp Clicks:** Both floating and inline button engagement
+- **Language Switches:** User language preferences (ES ↔ EN)
+- **Gallery Navigation:** Movement between Originals, Prints, About
+- **Geographic Data:** Automatic country/city tracking (built into GA4)
+
+### Viewing Analytics
+
+1. Go to https://analytics.google.com
+2. Select your property
+3. View real-time data or historical reports
+
+**Note:** GA4 is completely optional. If you don't set it up, the site works perfectly without analytics.
+
 ## 📝 Future Features
 
-- WhatsApp contact button with painting-specific templates
 - Image optimization script for managing high-res originals
-- Google Analytics integration
+- SEO enhancements (sitemap, structured data)
+- Custom domain configuration
 
 ## 📄 License
 

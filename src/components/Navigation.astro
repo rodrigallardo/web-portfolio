@@ -50,6 +50,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
       <div class="flex items-center space-x-2">
         <a
           href={currentPath.replace('/en', '')}
+          data-lang-switch="es"
           class:list={[
             "px-3 py-2 rounded-md text-sm font-medium",
             lang === 'es'
@@ -61,6 +62,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
         </a>
         <a
           href={`/web-portfolio/en${currentPath.replace('/web-portfolio', '').replace('/en', '')}`}
+          data-lang-switch="en"
           class:list={[
             "px-3 py-2 rounded-md text-sm font-medium",
             lang === 'en'

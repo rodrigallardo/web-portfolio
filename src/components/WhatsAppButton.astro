@@ -33,6 +33,7 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
   href={whatsappUrl}
   target="_blank"
   rel="noopener noreferrer"
+  data-artwork-title={artworkTitle || ''}
   class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 z-50 group"
   aria-label={lang === 'es' ? 'Contactar por WhatsApp' : 'Contact via WhatsApp'}
 >

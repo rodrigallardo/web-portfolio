@@ -1,0 +1,147 @@
+---
+/**
+ * Google Analytics 4 Integration Component
+ *
+ * This component adds GA4 tracking with custom events for:
+ * - Artwork page views
+ * - WhatsApp button clicks
+ * - Language switches
+ * - Gallery navigation
+ * - Geographic tracking (automatic)
+ *
+ * To configure:
+ * 1. Create .env file in project root
+ * 2. Add: PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+ * 3. Replace G-XXXXXXXXXX with your actual GA4 Measurement ID
+ */
+
+// Get Measurement ID from environment variable
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || 'G-PLACEHOLDER';
+
+// Only load GA4 in production or if explicitly enabled
+const isProduction = import.meta.env.PROD;
+const isEnabled = measurementId !== 'G-PLACEHOLDER';
+---
+
+{isEnabled && (
+  <>
+    <!-- Google Analytics 4 Script -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    <script define:vars={{ measurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Initialize GA4 with enhanced measurement
+      gtag('config', measurementId, {
+        page_path: window.location.pathname,
+        anonymize_ip: true, // Privacy-friendly
+      });
+    </script>
+
+    <!-- Custom Event Tracking -->
+    <script>
+      // Track artwork page views
+      function trackArtworkView(artworkId, artworkTitle) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'artwork_view', {
+            artwork_id: artworkId,
+            artwork_title: artworkTitle,
+            page_path: window.location.pathname
+          });
+        }
+      }
+
+      // Track WhatsApp button clicks
+      function trackWhatsAppClick(buttonType, artworkTitle = null) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'whatsapp_click', {
+            button_type: buttonType, // 'floating' or 'inline'
+            artwork_title: artworkTitle,
+            page_path: window.location.pathname
+          });
+        }
+      }
+
+      // Track language switches
+      function trackLanguageSwitch(fromLang, toLang) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'language_switch', {
+            from_language: fromLang,
+            to_language: toLang,
+            page_path: window.location.pathname
+          });
+        }
+      }
+
+      // Track gallery navigation
+      function trackGalleryNavigation(section) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'gallery_navigation', {
+            section: section, // 'originals', 'prints', 'about'
+            page_path: window.location.pathname
+          });
+        }
+      }
+
+      // Attach event listeners when DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        // Track artwork views if on detail page
+        const artworkElement = document.querySelector('[data-artwork-id]');
+        if (artworkElement) {
+          const artworkId = artworkElement.getAttribute('data-artwork-id');
+          const artworkTitle = artworkElement.getAttribute('data-artwork-title');
+          trackArtworkView(artworkId, artworkTitle);
+        }
+
+        // Track WhatsApp button clicks
+        document.querySelectorAll('a[href^="https://wa.me"]').forEach(function(button) {
+          button.addEventListener('click', function() {
+            const buttonType = this.classList.contains('fixed') ? 'floating' : 'inline';
+            const artworkTitle = this.getAttribute('data-artwork-title');
+            trackWhatsAppClick(buttonType, artworkTitle);
+          });
+        });
+
+        // Track language switcher clicks
+        document.querySelectorAll('a[data-lang-switch]').forEach(function(link) {
+          link.addEventListener('click', function() {
+            const toLang = this.getAttribute('data-lang-switch');
+            const currentPath = window.location.pathname;
+            const fromLang = currentPath.startsWith('/web-portfolio/en') ? 'en' : 'es';
+            trackLanguageSwitch(fromLang, toLang);
+          });
+        });
+
+        // Track gallery navigation
+        document.querySelectorAll('nav a[href*="/web-portfolio"]').forEach(function(link) {
+          link.addEventListener('click', function() {
+            const href = this.getAttribute('href');
+            let section = 'originals';
+
+            if (href.includes('/prints')) {
+              section = 'prints';
+            } else if (href.includes('/about')) {
+              section = 'about';
+            }
+
+            trackGalleryNavigation(section);
+          });
+        });
+      });
+
+      // Make tracking functions globally available (for manual tracking if needed)
+      window.trackArtworkView = trackArtworkView;
+      window.trackWhatsAppClick = trackWhatsAppClick;
+      window.trackLanguageSwitch = trackLanguageSwitch;
+      window.trackGalleryNavigation = trackGalleryNavigation;
+    </script>
+  </>
+)}
+
+{!isEnabled && (
+  <!-- GA4 Disabled: No Measurement ID configured -->
+  <script>
+    console.info('Google Analytics is disabled. Set PUBLIC_GA_MEASUREMENT_ID in .env to enable tracking.');
+  </script>
+)}

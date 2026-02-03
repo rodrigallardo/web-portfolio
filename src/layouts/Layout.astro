@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Analytics from '../components/Analytics.astro';
 import { getLangFromUrl } from '../i18n';
 
 interface Props {
@@ -25,6 +26,7 @@ const lang = getLangFromUrl(Astro.url);
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+		<Analytics />
 	</head>
 	<body class="min-h-screen bg-gray-50 text-gray-900">
 		<Navigation />

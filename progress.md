@@ -186,3 +186,40 @@
 - Test live site at https://rodrigallardo.github.io/web-portfolio
 
 ---
+
+### Session 8 - 2026-02-03 (New Session)
+**Goal:** Implement Phase 6 - Google Analytics Integration
+
+**Status:** In progress
+
+**Plan:**
+- Set up Google Analytics 4 tracking
+- Add GA4 script to Layout
+- Configure custom events (artwork views, WhatsApp clicks, language switches)
+- Test analytics collection
+- Document in README
+
+**Progress:**
+- Created Analytics.astro component with GA4 tracking
+- Integrated Analytics component into Layout
+- Added data attributes for tracking:
+  - artwork-id and artwork-title on detail pages
+  - lang-switch on language switcher buttons
+  - artwork-title on WhatsApp buttons
+- Implemented custom events:
+  - artwork_view (automatic on detail pages)
+  - whatsapp_click (both floating and inline buttons)
+  - language_switch (ES ↔ EN)
+  - gallery_navigation (Originals, Prints, About)
+- Created .env.example template
+- Added Measurement ID: G-VGTBVLLR7E
+- Updated README with comprehensive GA4 setup guide
+- Tested build successfully
+
+**Blockers:**
+- None
+
+**Completed:**
+- Phase 6: Google Analytics Integration ✅
+
+---

@@ -431,6 +431,42 @@ jobs:
 - Skip to content link
 - Focus management
 
+## Google Analytics 4 Implementation
+
+### Setup Process
+**Goal:** Track visitor behavior, artwork engagement, and geographic distribution
+
+**Measurement ID Format:** `G-XXXXXXXXXX`
+
+**Custom Events to Track:**
+1. **Artwork Page Views** - Which paintings get the most views
+2. **WhatsApp Button Clicks** - Both floating and inline buttons
+3. **Language Switches** - ES ↔ EN preferences
+4. **Gallery Navigation** - Movement between Originals, Prints, About
+5. **Geographic Tracking** - Automatic via GA4 (country, city, region)
+
+**Implementation Approach:**
+- Use environment variable for Measurement ID (easy to update)
+- Add GA4 script to Layout head
+- Implement custom events with `gtag()` function
+- Track events client-side (minimal JavaScript)
+- Privacy-friendly (no PII collection)
+
+**How to Get Your GA4 Measurement ID:**
+1. Go to https://analytics.google.com
+2. Sign in with Google account
+3. Click "Admin" (gear icon in bottom left)
+4. Under "Property" column, click "Create Property"
+5. Enter property name: "Artist Portfolio" or your name
+6. Set timezone and currency
+7. Click "Next" → "Create"
+8. Under "Data Streams", click "Add stream" → "Web"
+9. Enter URL: `https://rodrigallardo.github.io/web-portfolio`
+10. Enter stream name: "GitHub Pages"
+11. Click "Create stream"
+12. Copy the **Measurement ID** (format: G-XXXXXXXXXX)
+13. Use this ID in the implementation below
+
 ## Future Work
 
 ### Phase 5: Image Optimization 🔜
