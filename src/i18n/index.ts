@@ -14,8 +14,14 @@ export const ui = {
 } as const;
 
 export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
-  if (lang in ui) return lang as keyof typeof ui;
+  // Account for base path /web-portfolio
+  const pathname = url.pathname;
+
+  // Check if path contains /en/ or starts with /web-portfolio/en
+  if (pathname.includes('/en/') || pathname.includes('/en')) {
+    return 'en' as keyof typeof ui;
+  }
+
   return defaultLang;
 }
 
