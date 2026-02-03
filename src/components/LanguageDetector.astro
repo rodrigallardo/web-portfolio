@@ -1,0 +1,52 @@
+---
+/**
+ * Language Auto-Detection Component
+ *
+ * Automatically detects user's browser language preference and redirects
+ * to the appropriate language version on first visit.
+ *
+ * How it works:
+ * - Checks navigator.language (browser language preference)
+ * - Spanish speakers (es, es-MX, es-AR, etc.) stay on Spanish pages
+ * - All other languages redirect to English pages
+ * - Respects manual language selection (uses sessionStorage)
+ * - Only runs once per session to avoid redirect loops
+ */
+---
+
+<script>
+  // Only run on first page load, not when user manually switches languages
+  if (!sessionStorage.getItem('language-selected')) {
+    // Get browser language preference
+    const browserLang = navigator.language || navigator.languages?.[0] || 'en';
+    const currentPath = window.location.pathname;
+    const isEnglishPage = currentPath.includes('/en');
+
+    // Check if browser language is Spanish
+    const isSpanishBrowser = browserLang.toLowerCase().startsWith('es');
+
+    // Redirect logic
+    if (isSpanishBrowser && isEnglishPage) {
+      // Spanish speaker on English page → redirect to Spanish
+      const spanishPath = currentPath.replace('/web-portfolio/en', '/web-portfolio');
+      window.location.href = spanishPath;
+    } else if (!isSpanishBrowser && !isEnglishPage) {
+      // Non-Spanish speaker on Spanish page → redirect to English
+      const englishPath = currentPath.replace('/web-portfolio', '/web-portfolio/en');
+      window.location.href = englishPath;
+    }
+
+    // Mark that we've done the auto-detection
+    sessionStorage.setItem('language-auto-detected', 'true');
+  }
+
+  // Track when user manually switches languages
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[data-lang-switch]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        // User manually selected a language, remember this
+        sessionStorage.setItem('language-selected', 'true');
+      });
+    });
+  });
+</script>
