@@ -84,3 +84,86 @@
 - Commit Phase 3 changes
 
 ---
+
+### Session 4 - 2026-02-03 (Continued)
+**Goal:** Complete Phase 2 - CI/CD Pipeline and deploy to GitHub Pages
+
+**Completed:**
+- Created GitHub Actions workflow (.github/workflows/deploy.yml)
+- Configured workflow to build and deploy on push to main
+- Updated comprehensive README with:
+  * Quick start instructions
+  * Content management guide
+  * Deployment documentation
+  * Customization options
+- Committed all Phase 2 and Phase 3 changes
+- Merged feature/initial-setup branch to main
+- Pushed to GitHub (deployment triggered)
+
+**Blockers:**
+- None
+
+**Next Steps:**
+- Configure GitHub Pages settings (one-time setup)
+- Monitor GitHub Actions workflow execution
+- Verify deployment at https://rodrigallardo.github.io/web-portfolio
+- Test live site functionality
+
+---
+
+### Session 5 - 2026-02-03 (Continued)
+**Goal:** Implement WhatsApp contact button (Phase 4)
+
+**Completed:**
+- Created WhatsAppButton.astro component with:
+  * Floating button in bottom-right corner
+  * Green WhatsApp branding
+  * Hover tooltip
+  * Responsive design
+- Implemented WhatsApp deep linking with pre-filled messages
+- Added bilingual message templates (ES/EN)
+- Integrated button into main Layout (appears on all pages)
+- Added artwork-specific messages on detail pages
+  * General message: "I would like to get more information..."
+  * Artwork-specific: "I'm interested in [Artwork Title]..."
+- Updated all detail pages (originals/prints, ES/EN) to pass artwork title
+
+**Blockers:**
+- None
+
+**Next Steps:**
+- Test WhatsApp button locally
+- Replace test phone number with real number
+- Test on mobile device
+- Commit and deploy changes
+
+---
+
+### Session 6 - 2026-02-03 (Continued)
+**Goal:** Add inline "Ask about this painting" button to artwork detail pages
+
+**Completed:**
+- Added inline WhatsApp button to all 4 detail page variations:
+  * src/pages/originals/[id].astro (Spanish)
+  * src/pages/prints/[id].astro (Spanish)
+  * src/pages/en/originals/[id].astro (English)
+  * src/pages/en/prints/[id].astro (English)
+- Button styling matches classic gallery aesthetic:
+  * Full-width gray-900 button
+  * WhatsApp icon with text
+  * Hover effects
+  * Responsive design
+- Button text is bilingual:
+  * Spanish: "Preguntar por esta obra"
+  * English: "Ask about this painting"
+- Opens WhatsApp with same painting-specific message as floating button
+
+**Blockers:**
+- None
+
+**Next Steps:**
+- Test both WhatsApp buttons locally (floating + inline)
+- Verify styling matches page aesthetic
+- Commit and deploy changes
+
+---

@@ -1,13 +1,15 @@
 ---
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import { getLangFromUrl } from '../i18n';
 
 interface Props {
 	title?: string;
+	artworkTitle?: string;
 }
 
-const { title = 'Artist Portfolio' } = Astro.props;
+const { title = 'Artist Portfolio', artworkTitle } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
@@ -34,6 +36,7 @@ const lang = getLangFromUrl(Astro.url);
 				<p>&copy; {new Date().getFullYear()} Artist Portfolio. All rights reserved.</p>
 			</div>
 		</footer>
+		<WhatsAppButton artworkTitle={artworkTitle} />
 	</body>
 </html>
 
