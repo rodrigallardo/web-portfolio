@@ -229,7 +229,16 @@ Google Analytics 4 is pre-configured but disabled by default. To enable tracking
 4. Click "Create stream"
 5. **Copy the Measurement ID** (format: `G-XXXXXXXXXX`)
 
-### Step 3: Configure Your Site
+### Step 3: Configure GitHub Secret (Production)
+
+1. Go to your GitHub repository
+2. Click **Settings** → **Secrets and variables** → **Actions**
+3. Click **New repository secret**
+4. Name: `GA_MEASUREMENT_ID`
+5. Value: `G-XXXXXXXXXX` (your Measurement ID)
+6. Click **Add secret**
+
+### Step 4: Configure Local Development (Optional)
 
 1. Create a `.env` file in the project root:
    ```bash
@@ -246,14 +255,16 @@ Google Analytics 4 is pre-configured but disabled by default. To enable tracking
    npm run dev
    ```
 
-### Step 4: Deploy
+**Note:** The `.env` file is gitignored and only used for local testing.
 
-Commit the `.env` file (it's safe - it's a public tracking ID):
+### Step 5: Deploy
+
+The GitHub secret is automatically used during deployment:
 ```bash
-git add .env
-git commit -m "feat: enable Google Analytics tracking"
 git push origin main
 ```
+
+The GitHub Actions workflow will build with your GA_MEASUREMENT_ID secret.
 
 ### What Gets Tracked
 

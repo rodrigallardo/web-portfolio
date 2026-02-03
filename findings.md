@@ -446,7 +446,9 @@ jobs:
 5. **Geographic Tracking** - Automatic via GA4 (country, city, region)
 
 **Implementation Approach:**
-- Use environment variable for Measurement ID (easy to update)
+- Use GitHub secret for production Measurement ID (GA_MEASUREMENT_ID)
+- Use .env file for local development (PUBLIC_GA_MEASUREMENT_ID)
+- GitHub Actions passes secret as environment variable during build
 - Add GA4 script to Layout head
 - Implement custom events with `gtag()` function
 - Track events client-side (minimal JavaScript)
