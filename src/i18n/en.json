@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "originals": "Originals",
+    "prints": "Prints",
+    "about": "About"
+  },
+  "common": {
+    "price": "Price",
+    "year": "Year",
+    "dimensions": "Dimensions",
+    "medium": "Medium",
+    "available": "Available",
+    "sold": "Sold"
+  }
+}

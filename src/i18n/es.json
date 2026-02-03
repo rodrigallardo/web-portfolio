@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "originals": "Originales",
+    "prints": "Impresiones",
+    "about": "Acerca de"
+  },
+  "common": {
+    "price": "Precio",
+    "year": "Año",
+    "dimensions": "Dimensiones",
+    "medium": "Técnica",
+    "available": "Disponible",
+    "sold": "Vendido"
+  }
+}
