@@ -51,3 +51,11 @@ const lang = getLangFromUrl(Astro.url);
 		font-family: 'Playfair Display', serif;
 	}
 </style>
+
+<script>
+	// Disable right-click to protect artwork images
+	document.addEventListener('contextmenu', (event) => {
+		event.preventDefault();
+		return false;
+	});
+</script>
