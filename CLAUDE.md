@@ -490,6 +490,35 @@ git merge feature/update-about-page
 git push origin main
 ```
 
+### Testing Experimental Features
+
+**Scrollable Gallery Layout (feature/scrollable-gallery-layout):**
+
+An experimental vertical scrollable gallery layout is available in a feature branch. This design was explored but not merged to production.
+
+**Features:**
+- Vertical scroll with snap behavior (one painting per screen)
+- Full aspect ratio images (not cropped to squares)
+- Card-style containers with shadows
+- Side-by-side layout (image | details)
+- Title, price, and availability shown on each card
+
+**To test locally:**
+```bash
+# Switch to experimental branch
+git checkout feature/scrollable-gallery-layout
+
+# Start dev server
+npm run dev
+
+# Visit http://localhost:4321/web-portfolio
+
+# Return to main branch when done
+git checkout main
+```
+
+**Note:** This design was an exploration that wasn't selected for production. The branch is preserved for potential future reference or iteration.
+
 ## Troubleshooting
 
 ### Build Fails
@@ -657,6 +686,10 @@ gh run watch
   - Never hardcode the Measurement ID in source code
   - Use environment variables for configuration
   - Analytics verified working in production
+- **Experimental Features:**
+  - feature/scrollable-gallery-layout contains an alternative gallery design
+  - Not merged to production - preserved for potential future use
+  - User preferred original grid layout
 
 ## Getting Help
 
@@ -673,3 +706,12 @@ gh run watch
 **Last Updated:** 2026-02-03
 **Project Version:** v1.1.0 (All 6 phases complete)
 **Next Phase:** Image Optimization (Phase 5 - optional enhancement)
+
+## Change Log
+
+### 2026-02-03 - Session 9
+- Explored alternative scrollable gallery layout
+- Implemented vertical scroll with full aspect ratio images and card containers
+- User preferred original grid layout
+- Saved experimental design in feature/scrollable-gallery-layout branch
+- Updated planning files and documentation

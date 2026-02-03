@@ -236,3 +236,34 @@
 - Analytics verified working in production with real-time data
 
 ---
+
+### Session 9 - 2026-02-03 (Continued)
+**Goal:** Explore alternative gallery layout design
+
+**Work Completed:**
+- Redesigned all 4 gallery pages (originals/prints, ES/EN) with experimental layout:
+  - Changed from grid to vertical scrollable layout
+  - Display paintings in full aspect ratio (object-contain instead of cropped squares)
+  - Added card-style containers with rounded corners and shadows
+  - Implemented scroll snap for smooth one-painting-at-a-time scrolling
+  - Positioned scrollbar at right edge of screen (using negative margins)
+  - Show title, price, and availability on each card
+  - Side-by-side layout: image on left, details on right
+- User feedback: Not satisfied with the design
+- Saved experimental work in feature/scrollable-gallery-layout branch
+- Switched back to main branch (original grid layout remains in production)
+
+**Decision:**
+- Keep experimental scrollable layout in feature branch for potential future use
+- Continue with original grid layout for now
+- May revisit or explore other design alternatives later
+
+**Blockers:**
+- None
+
+**Next Steps:**
+- Update planning files and CLAUDE.md with session work
+- Consider other design approaches if needed
+- Continue with other features or enhancements
+
+---

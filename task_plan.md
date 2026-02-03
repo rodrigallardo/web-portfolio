@@ -172,9 +172,35 @@ Build a static artist portfolio website showcasing paintings with detail pages. 
   - Add image preloading for above-fold content
   - Minimize CSS/JS if needed
 
+## Experimental Features
+
+### 🧪 Scrollable Gallery Layout (feature/scrollable-gallery-layout)
+**Status:** Implemented but not merged - saved in feature branch for potential future use
+
+**Design:**
+- Vertical scrollable layout instead of grid
+- Paintings displayed in full aspect ratio (not cropped)
+- Card-style containers with rounded corners and shadows
+- Scroll snap for smooth one-painting-at-a-time navigation
+- Side-by-side layout: image on left, details on right
+- Scrollbar positioned at right edge of screen
+
+**Decision:** User preferred original grid layout. Experimental design saved for potential future exploration.
+
+**To test this design:**
+```bash
+git checkout feature/scrollable-gallery-layout
+npm run dev
+```
+
 ## Future Feature Ideas
 
 ### Potential Enhancements
+- [ ] **Gallery Layout Exploration:**
+  - Explore alternative layouts (masonry, carousel, etc.)
+  - Consider hybrid approaches
+  - User testing for preferred experience
+
 - [ ] **Newsletter Signup:**
   - Add email collection for new artwork notifications
   - Integrate with Mailchimp or similar
