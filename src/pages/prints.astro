@@ -11,8 +11,8 @@ const baseUrl = '/web-portfolio';
 ---
 
 <Layout title={`${t('nav.prints')} - Artist Portfolio`}>
-  <div class="space-y-8">
-    <div class="text-center">
+  <div class="space-y-0">
+    <div class="text-center pt-12 pb-4">
       <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.prints')}</h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         {lang === 'es'
@@ -21,27 +21,25 @@ const baseUrl = '/web-portfolio';
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-      {prints.map((artwork) => (
-        <a
-          href={`${baseUrl}/prints/${artwork.id}`}
-          class="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
-        >
-          <div class="aspect-square bg-gray-200 overflow-hidden">
-            <img
-              src={artwork.data.image}
-              alt={artwork.data.titleEs}
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="p-6">
-            <h2 class="text-2xl font-semibold text-gray-900 mb-2">
+    {prints.map((artwork) => (
+      <a
+        href={`${baseUrl}/prints/${artwork.id}`}
+        class="block min-h-[50vh] md:min-h-[80vh] flex items-center justify-center p-4 md:p-8 hover:bg-gray-50 transition-colors"
+      >
+        <div class="max-w-3xl w-full">
+          <img
+            src={artwork.data.image}
+            alt={artwork.data.titleEs}
+            class="w-full h-auto max-h-[60vh] object-contain mb-4"
+          />
+          <div class="text-center space-y-2">
+            <h2 class="text-xl md:text-3xl font-bold text-gray-900">
               {artwork.data.titleEs}
             </h2>
-            <div class="flex justify-between items-center text-sm text-gray-600">
-              <span>{artwork.data.price || ''}</span>
+            <div class="flex justify-center items-center gap-4 text-gray-600">
+              {artwork.data.price && <span class="text-lg font-semibold">{artwork.data.price}</span>}
               <span class:list={[
-                "px-2 py-1 rounded text-xs font-medium",
+                "px-3 py-1 text-sm font-medium",
                 artwork.data.available
                   ? "bg-green-100 text-green-800"
                   : "bg-gray-100 text-gray-800"
@@ -50,8 +48,8 @@ const baseUrl = '/web-portfolio';
               </span>
             </div>
           </div>
-        </a>
-      ))}
-    </div>
+        </div>
+      </a>
+    ))}
   </div>
 </Layout>
