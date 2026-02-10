@@ -30,16 +30,16 @@ const baseUrl = '/web-portfolio';
           <div class="aspect-square bg-gray-200 overflow-hidden">
             <img
               src={artwork.data.image}
-              alt={artwork.data.title}
+              alt={artwork.data.titleEs}
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>
           <div class="p-6">
             <h2 class="text-2xl font-semibold text-gray-900 mb-2">
-              {artwork.data.title}
+              {artwork.data.titleEs}
             </h2>
             <div class="flex justify-between items-center text-sm text-gray-600">
-              <span>{artwork.data.price}</span>
+              <span>{artwork.data.price || ''}</span>
               <span class:list={[
                 "px-2 py-1 rounded text-xs font-medium",
                 artwork.data.available
