@@ -63,7 +63,10 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
 
         <div class="space-y-6 max-w-3xl">
           <div>
-            <h1 class="text-4xl font-bold text-gray-900 mb-2">{title}</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+            <p class="text-base text-gray-700 leading-relaxed mb-4">
+              {description}
+            </p>
             {artwork.data.price ? (
               <p class="text-3xl font-semibold text-gray-900">{artwork.data.price}</p>
             ) : (
@@ -114,13 +117,6 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
                 </dd>
               </div>
             </dl>
-          </div>
-
-          <div class="border-t border-gray-200 pt-6">
-            <h2 class="text-sm font-medium text-gray-500 mb-2">Description</h2>
-            <p class="text-base text-gray-700 leading-relaxed">
-              {description}
-            </p>
           </div>
 
           <div class="border-t border-gray-200 pt-6">
@@ -157,7 +153,10 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
 
         <div class="space-y-6">
           <div>
-            <h1 class="text-4xl font-bold text-gray-900 mb-2">{title}</h1>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+            <p class="text-base text-gray-700 leading-relaxed mb-4">
+              {description}
+            </p>
             {artwork.data.price ? (
               <p class="text-3xl font-semibold text-gray-900">{artwork.data.price}</p>
             ) : (
@@ -208,13 +207,6 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
                 </dd>
               </div>
             </dl>
-          </div>
-
-          <div class="border-t border-gray-200 pt-6">
-            <h2 class="text-sm font-medium text-gray-500 mb-2">Description</h2>
-            <p class="text-base text-gray-700 leading-relaxed">
-              {description}
-            </p>
           </div>
 
           <div class="border-t border-gray-200 pt-6">
