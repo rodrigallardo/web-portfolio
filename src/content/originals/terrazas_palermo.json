@@ -1,0 +1,11 @@
+{
+  "titleEs": "Terrazas de Palermo a la Noche",
+  "titleEn": "Palermo Rooftops at Night",
+  "descriptionEs": "Una vista nocturna de las terrazas del barrio de Palermo.",
+  "descriptionEn": "A night view of the rooftops in the Palermo neighborhood.",
+  "price": "$100",
+  "year": 2025,
+  "dimensionsCm": "70 x 50",
+  "image": "/web-portfolio/images/terrazas_palermo.jpeg",
+  "available": true
+}
