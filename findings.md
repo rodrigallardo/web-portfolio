@@ -153,9 +153,12 @@ Successfully built and deployed a bilingual artist portfolio website with:
 - Professional typography
 
 **Typography:**
-- Headings: Playfair Display (serif, classic)
-- Body: Inter (sans-serif, modern)
-- Both from Google Fonts
+- All text: Cormorant Garamond (serif, elegant)
+- Headings: weight 700, letter-spacing 0.02em
+- Body: weight 500, size 1.25rem, letter-spacing 0.01em
+- Descriptions: text-lg for improved readability
+- Navigation: text-sm (mobile), text-base (desktop)
+- From Google Fonts (specifically designed for art and luxury brands)
 
 **Colors:**
 - Background: Gray-50 (#F9FAFB)
@@ -166,10 +169,17 @@ Successfully built and deployed a bilingual artist portfolio website with:
 - Sold badge: Gray-100/Gray-800
 
 **Layout:**
-- Gallery: 1/2/3 column responsive grid
-- Detail: Two-column (image | info)
+- Gallery: Vertical scrollable full-screen sections
+  - One painting per viewport (min-h-[50vh] mobile, min-h-[60vh] desktop)
+  - Centered display with minimal spacing (space-y-0)
+  - Responsive padding (p-4 mobile, p-6 desktop)
+  - Hover effect: bg-gray-50
+- Detail: Orientation-aware responsive layout
+  - Landscape: Full-width image with info below
+  - Portrait: Side-by-side (image | info) on desktop, stacked on mobile
+  - Responsive titles (text-2xl mobile, text-4xl desktop)
 - Mobile-first responsive design
-- Max-width: 1280px (7xl)
+- Max-width: 1280px (7xl) for overall layout, 768px (3xl) for gallery images
 
 ## Implemented Features
 
@@ -565,6 +575,76 @@ The Measurement ID is stored as a GitHub repository secret to keep it out of the
 - README: User documentation
 - This file: Technical documentation
 
+## Recent Updates (2026-02-10)
+
+### Gallery Redesign
+**Rationale:** Improved focus on individual artworks
+
+**Before:**
+- Card-based grid layout
+- Multiple artworks visible simultaneously
+- Rounded borders and shadows
+- Compact presentation
+
+**After:**
+- Scrollable full-screen sections
+- One artwork per viewport
+- Minimal spacing and no borders
+- Breathing room for each piece
+
+**Benefits:**
+- Better showcases individual artworks
+- More gallery-like experience
+- Easier mobile navigation
+- Reduced visual clutter
+
+### Typography Standardization
+**Rationale:** Professional, cohesive brand identity
+
+**Before:**
+- Playfair Display (headings) + Inter (body)
+- Two different font families
+- Standard sizing
+
+**After:**
+- Cormorant Garamond throughout
+- Single elegant serif font
+- Larger body text (1.25rem) for readability
+- Bolder headings (weight 700) for hierarchy
+- Larger descriptions (text-lg) on detail pages
+
+**Benefits:**
+- Unified aesthetic
+- Professional art portfolio feel
+- Better readability
+- Reduced font loading
+
+### Responsive Improvements
+**Mobile Optimizations:**
+- Reduced viewport heights (80vh → 60vh desktop, 50vh mobile)
+- Smaller padding on mobile (p-4 vs p-6)
+- Responsive typography (text-sm → text-base, text-xl → text-3xl)
+- Navbar spacing adjustments for Spanish text
+- Tighter language switcher buttons on mobile
+
+**Impact:**
+- Better mobile experience
+- Reduced whitespace issues
+- No "squashed" navbar on small screens
+- Consistent spacing across device sizes
+
+### New Artworks Added
+1. **Valizas Reflejo** (80 x 60 cm landscape)
+2. **Edward Hopper Study** (60 x 80 cm portrait)
+3. **Terrazas Palermo** (70 x 50 cm landscape, priced at $100)
+
+### Technical Improvements
+- Orientation detection for artwork layouts (landscape vs portrait)
+- Bilingual content properties (titleEs/titleEn, descriptionEs/descriptionEn)
+- Optional descriptions and pricing
+- Dimension conversion (cm to inches for English pages)
+- Improved navbar responsive classes
+
 ## Conclusion
 
 Successfully delivered a production-ready artist portfolio website with:
@@ -572,7 +652,9 @@ Successfully delivered a production-ready artist portfolio website with:
 - Bilingual support (ES/EN)
 - WhatsApp contact integration
 - Automatic deployment (CI/CD)
-- Classic gallery design
+- Scrollable gallery design optimized for showcasing artwork
+- Professional typography (Cormorant Garamond)
+- Fully responsive mobile experience
 - Comprehensive documentation
 
-**Next Steps:** Update with real content, configure GitHub Pages, deploy to production.
+**Next Steps:** Add more artworks with real images, update WhatsApp phone number, deploy to production.

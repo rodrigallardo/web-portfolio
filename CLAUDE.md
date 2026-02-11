@@ -138,16 +138,24 @@ Artworks are stored as JSON files in `src/content/originals/` or `src/content/pr
 
 ```typescript
 {
-  title: string;          // Artwork title
-  description: string;    // Detailed description
-  price: string;          // Display price (e.g., "$500")
-  year: number;           // Year created
-  dimensions: string;     // Size (e.g., "24 x 36 inches")
-  medium: string;         // Medium (e.g., "Oil on canvas")
-  image: string;          // Path to image (e.g., "/images/artwork.jpg")
-  available: boolean;     // Availability status
+  titleEs: string;           // Artwork title (Spanish)
+  titleEn: string;           // Artwork title (English)
+  descriptionEs?: string;    // Detailed description (Spanish, optional)
+  descriptionEn?: string;    // Detailed description (English, optional)
+  price?: string;            // Display price (e.g., "$100", optional)
+  year: number;              // Year created
+  dimensionsCm: string;      // Size in cm (e.g., "80 x 60")
+  image: string;             // Path to image (e.g., "/web-portfolio/images/artwork.jpg")
+  available: boolean;        // Availability status
 }
 ```
+
+**Key Points:**
+- Bilingual titles (titleEs/titleEn) are required
+- Descriptions are optional (some artworks may not have descriptions)
+- Price is optional (shows "Ask for Price" button if missing)
+- Dimensions use centimeters (automatically converted to inches for English pages)
+- Image paths must include the base URL prefix: `/web-portfolio/images/`
 
 ## Configuration
 
@@ -389,10 +397,10 @@ npm run preview
 
 ### Documentation Files
 - `README.md` - User-facing documentation (includes GA4 setup guide)
-- `task_plan.md` - Planning, TODOs, roadmap
 - `findings.md` - Technical documentation
-- `progress.md` - Session logs
 - `CLAUDE.md` - This file (AI assistant guide)
+
+**Note:** Planning files (task_plan.md, progress.md) are regenerated as needed for active work sessions
 
 ### Environment & Configuration Files
 - `.env.example` - Template for local GA4 configuration
@@ -490,34 +498,25 @@ git merge feature/update-about-page
 git push origin main
 ```
 
-### Testing Experimental Features
+### Current Gallery Design
 
-**Scrollable Gallery Layout (feature/scrollable-gallery-layout):**
+**Scrollable Gallery Layout (Production):**
 
-An experimental vertical scrollable gallery layout is available in a feature branch. This design was explored but not merged to production.
+The gallery uses a vertical scrollable layout optimized for showcasing individual artworks.
 
 **Features:**
-- Vertical scroll with snap behavior (one painting per screen)
-- Full aspect ratio images (not cropped to squares)
-- Card-style containers with shadows
-- Side-by-side layout (image | details)
-- Title, price, and availability shown on each card
+- Full-screen scrollable sections (one painting per viewport)
+- Responsive sizing: 50vh (mobile), 60vh (desktop)
+- Minimal spacing between artworks (space-y-0)
+- Centered display with hover effects
+- Title, price, and availability shown below each image
+- Responsive typography (text-xl mobile, text-3xl desktop)
 
-**To test locally:**
-```bash
-# Switch to experimental branch
-git checkout feature/scrollable-gallery-layout
-
-# Start dev server
-npm run dev
-
-# Visit http://localhost:4321/web-portfolio
-
-# Return to main branch when done
-git checkout main
-```
-
-**Note:** This design was an exploration that wasn't selected for production. The branch is preserved for potential future reference or iteration.
+**Design Philosophy:**
+- Let artwork breathe without distractions
+- Focus viewer attention on one piece at a time
+- Easy scrolling through the collection
+- Mobile-optimized for smaller screens
 
 ## Troubleshooting
 
@@ -671,25 +670,30 @@ gh run watch
 
 ## Notes for AI Assistants
 
-- Planning files (task_plan.md, findings.md, progress.md) contain complete project history
-- Always check task_plan.md for current priorities and TODOs
+- `findings.md` contains complete technical documentation
+- Planning files (task_plan.md, progress.md) are created as needed for active sessions
 - Follow the feature branch workflow strictly
 - Use conventional commits for all changes
 - Test locally before pushing to main
 - Monitor deployments with GitHub CLI
 - Update documentation when making changes
-- Keep the classic gallery aesthetic consistent
 - Respect the bilingual structure (ES default, EN mirror)
 - WhatsApp phone number is test value (1234567890) - needs replacement
+- **Current Gallery Design:**
+  - Scrollable full-screen layout (one painting per viewport)
+  - Responsive sizing: 50vh (mobile) to 60vh (desktop)
+  - Typography: Cormorant Garamond serif font throughout
+  - Minimal spacing between artworks
 - **Google Analytics:**
   - GA4 Measurement ID stored in GitHub secret (github-pages environment)
   - Never hardcode the Measurement ID in source code
   - Use environment variables for configuration
   - Analytics verified working in production
-- **Experimental Features:**
-  - feature/scrollable-gallery-layout contains an alternative gallery design
-  - Not merged to production - preserved for potential future use
-  - User preferred original grid layout
+- **Content Schema:**
+  - Use titleEs/titleEn for bilingual titles
+  - Descriptions and price are optional
+  - Dimensions in centimeters (dimensionsCm)
+  - Image paths must include /web-portfolio/images/ prefix
 
 ## Getting Help
 
@@ -703,11 +707,30 @@ gh run watch
 
 ---
 
-**Last Updated:** 2026-02-03
-**Project Version:** v1.1.0 (All 6 phases complete)
-**Next Phase:** Image Optimization (Phase 5 - optional enhancement)
+**Last Updated:** 2026-02-10
+**Project Version:** v1.2.0 (Gallery redesign + typography improvements)
+**Next Phase:** Image Optimization (optional enhancement)
 
 ## Change Log
+
+### 2026-02-10 - Session 10
+**Gallery Redesign & Typography Improvements:**
+- Added 3 new artworks: Valizas Reflejo, Edward Hopper Study, Terrazas Palermo
+- Redesigned gallery from card grid to scrollable full-screen layout
+- Implemented responsive artwork sizing (50vh mobile, 60vh desktop)
+- Standardized typography to Cormorant Garamond serif font
+- Improved navbar responsiveness for smaller devices
+- Enhanced mobile layout with reduced spacing and appropriate text sizing
+- Fixed gallery card titles to use correct bilingual properties (titleEs/titleEn)
+- Commits:
+  - feat: add responsive orientation-aware layout for artwork detail pages
+  - refactor: move description under title without caption
+  - feat: move price to metadata section with smaller button
+  - fix: restore artwork titles in gallery cards
+  - feat: add responsive layout improvements for mobile displays
+  - refactor: reduce spacing between artworks on larger devices
+  - feat: standardize typography with Cormorant Garamond serif font
+  - fix: improve navbar layout for smaller devices
 
 ### 2026-02-03 - Session 9
 - Explored alternative scrollable gallery layout
