@@ -20,25 +20,25 @@ const baseUrl = '/web-portfolio/en';
     {originals.map((artwork) => (
       <a
         href={`${baseUrl}/originals/${artwork.id}`}
-        class="block min-h-[50vh] md:min-h-[60vh] flex items-center justify-center p-4 md:p-6 hover:bg-gray-50 transition-colors"
+        class="group block min-h-[50vh] md:min-h-[60vh] flex items-center justify-center p-4 md:p-6 transition-all duration-500 ease-out hover:bg-gray-100/40"
       >
         <div class="max-w-3xl w-full">
           <img
             src={artwork.data.image}
             alt={artwork.data.titleEn}
-            class="w-full h-auto max-h-[60vh] object-contain mb-4"
+            class="w-full h-auto max-h-[60vh] object-contain mb-4 transition-all duration-500 ease-out group-hover:scale-[1.01]"
           />
-          <div class="text-center space-y-2">
+          <div class="text-center space-y-2 transition-opacity duration-300 group-hover:opacity-90">
             <h2 class="text-xl md:text-3xl font-bold text-gray-900">
               {artwork.data.titleEn}
             </h2>
             <div class="flex justify-center items-center gap-4 text-gray-600">
               {artwork.data.price && <span class="text-lg font-semibold">{artwork.data.price}</span>}
               <span class:list={[
-                "px-3 py-1 text-sm font-medium",
+                "px-3 py-1 text-sm font-medium transition-all duration-300",
                 artwork.data.available
-                  ? "bg-green-100 text-green-800"
-                  : "bg-gray-100 text-gray-800"
+                  ? "bg-green-100 text-green-800 group-hover:bg-green-200"
+                  : "bg-gray-100 text-gray-800 group-hover:bg-gray-200"
               ]}>
                 {artwork.data.available ? t('common.available') : t('common.sold')}
               </span>
