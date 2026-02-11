@@ -15,7 +15,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
         <a
           href={`${baseUrl}/`}
           class:list={[
-            "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
+            "inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium",
             currentPath === `${baseUrl}/` || currentPath === `${baseUrl}`
               ? "border-gray-900 text-gray-900"
               : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -26,7 +26,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
         <a
           href={`${baseUrl}/prints`}
           class:list={[
-            "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
+            "inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium",
             currentPath.includes('/prints')
               ? "border-gray-900 text-gray-900"
               : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -37,7 +37,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
         <a
           href={`${baseUrl}/about`}
           class:list={[
-            "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium",
+            "inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium",
             currentPath.includes('/about')
               ? "border-gray-900 text-gray-900"
               : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
@@ -52,7 +52,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
           href={currentPath.replace('/web-portfolio/en', '/web-portfolio')}
           data-lang-switch="es"
           class:list={[
-            "px-3 py-2 rounded-md text-sm font-medium",
+            "px-3 py-2 rounded-md text-base font-medium",
             lang === 'es'
               ? "bg-gray-900 text-white"
               : "text-gray-500 hover:text-gray-700"
@@ -67,7 +67,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
           }
           data-lang-switch="en"
           class:list={[
-            "px-3 py-2 rounded-md text-sm font-medium",
+            "px-3 py-2 rounded-md text-base font-medium",
             lang === 'en'
               ? "bg-gray-900 text-white"
               : "text-gray-500 hover:text-gray-700"
