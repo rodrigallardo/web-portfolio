@@ -645,6 +645,224 @@ The Measurement ID is stored as a GitHub repository secret to keep it out of the
 - Dimension conversion (cm to inches for English pages)
 - Improved navbar responsive classes
 
+## UI Redesign Research (2026-02-11)
+
+### Research Goal
+Explore creative UI patterns to make the portfolio feel less generic and more unique while maintaining:
+- Neutral color palette
+- Professional aesthetic
+- Artwork as primary focus
+- Not overloaded with elements
+
+### Design Patterns from Artist Portfolios
+
+#### 1. Navigation Innovations
+
+**Minimal/Invisible Navigation:**
+- **Jennifer Xiao (Wix)** - No header/footer at all, extreme minimalism letting visuals command attention
+- **Nathalie Lete (Wix)** - Hand-crafted graphics and text work as navigation, artwork itself becomes interactive elements
+- **Kim Song Ri** - Exclusively capitals and grayscale, text reduced to bare essentials
+
+**Unique Header Approaches:**
+- **Pierrick Calvez** - Massive but simple header with clean navigation
+- **MA Quilts** - Large text, white space, catchy background graphics; hamburger menu opens right sidebar
+- **Jeffrey Ellis** - Minimalist header with social icons integrated into navigation
+
+#### 2. Layout Innovations
+
+**Full-Screen & Immersive:**
+- **Ray Hart** - Full-screen image slider dominates layout with text overlay and sticky header
+- **Alec Marin** - Works presented "edge to edge" with no intermediary text, studio-wall directness
+
+**Asymmetric & Creative:**
+- **Alberto Oviedo** - Uses asymmetry, bold colors and typography, engaging scrolling
+- **Arte Proyecto 70** - Split design with dark tones on left, light tones on right
+
+**Grid Variations:**
+- **Karin van Etten** - Systematic columns organized by category (abstract, portraiture, animals)
+- Simple grids allowing works to breathe with consistent framing
+
+#### 3. Interactive Elements
+
+**Hover Effects & Animations:**
+- **Benjamin Tousley** - Subtle hover effects changing background color
+- **Jeffrey Ellis** - Hover animation as user-controlled interaction
+- **Rina Maimon** - Collage-like home page with hover effects
+- **Sean Halpin** - Interactive eye following mouse cursor, catchy animation
+
+**Parallax & Motion:**
+- **Alex Fisher** - Creative hero section with parallax effects and floating header
+- Modern portfolios merging motion, typographic flair, dynamic animations
+
+#### 4. Typography as Design Element
+
+**Bold Typography:**
+- **Alberto Oviedo** - Bold typography paired with minimalist design
+- **MA Quilts** - Large text as focal point, not just navigation
+- **Mindy Nguyen** - Text mixed with GIFs replacing typical hero imagery
+
+**Typographic Severity:**
+- **Kim Song Ri** - All capitals, extreme typographic restraint as design statement
+
+#### 5. Color & Visual Restraint
+
+**Monochromatic Approaches:**
+- White backgrounds as default
+- Grayscale elements (Kim Song Ri)
+- Neutral palettes with vibrant artwork creating contrast
+
+**Strategic Color Use:**
+- **Gina Kirlew** - Minimalist web design paired with vibrant artwork
+- Let artwork provide the color, keep UI neutral
+
+#### 6. Content Presentation
+
+**Image-First:**
+- Large, high-quality displays dominating screen space
+- Works shown at full aspect ratio without cropping
+- Minimal text, maximum visual impact
+
+**Alternative Hero Sections:**
+- **Mindy Nguyen** - Text/GIFs instead of static hero image
+- **Alex Fisher** - Creative hero with parallax and floating elements
+- Center animations with hover effects
+
+#### 7. Footer & Contact Design
+
+**Non-Traditional Footers:**
+- **Jennifer Xiao** - No footer at all
+- **MA Quilts** - Non-traditional footer design
+- **Gina Kirlew** - Three-icon minimalist footer
+- Social links relegated to footer or hidden
+
+### Design Principles Identified
+
+**Core Philosophy:**
+> "Sites work best when they become almost invisible. The canvas takes over, the site disappears, and that's exactly the point."
+
+**Key Principles:**
+1. **Radical Simplification** - Remove everything not essential
+2. **Artwork Hierarchy** - Let artwork drive user experience, avoid design "tricks"
+3. **Visual Restraint** - White space, consistent framing, minimal text
+4. **Strategic Animation** - Never overwhelming, always purposeful
+5. **Invisible Infrastructure** - Navigation nearly disappears to prioritize artwork
+
+### What Makes Portfolios Feel Unique vs Generic
+
+**Unique:**
+- No header/footer (unconventional structure)
+- Artwork as navigation (interactive elements)
+- Asymmetric layouts (breaking the grid)
+- Bold typographic choices (all caps, massive headers)
+- Custom animations (not template defaults)
+- Personal touches (hand-crafted graphics, cartoon self-presentation)
+- Unexpected interactions (mouse-following elements, hover color changes)
+
+**Generic:**
+- Standard navbar at top
+- Card grids with rounded corners and shadows
+- Template hover effects (fade, scale)
+- Default typography pairings
+- Predictable layouts
+- Same structure on every page
+
+### Oil Painter-Specific Research
+
+**Research Goal:** Focus specifically on oil painter portfolios (vs digital artists, illustrators, photographers)
+
+#### Key Differences for Oil Painting Presentation
+
+**Image Quality Critical:**
+- Oil paintings have texture, brushstrokes, material depth
+- Need highest-quality imagery to capture these details
+- Crisp photos that show scale, texture, and color depth
+- No blurry or compressed images that undercut professionalism
+
+**Whitespace & Framing:**
+- Generous whitespace lets textures and brushstrokes breathe
+- Neutral backgrounds (white/beige) create gallery-like backdrop
+- Similar to physical galleries: functional, austere, let art speak
+
+**Layout Approaches:**
+- Grid with consistent framing (Karin van Etten)
+- Full-bleed edge-to-edge images (Alec Marin)
+- One painting per viewport with ample breathing room
+- Masonry or grid layouts for overviews
+
+#### Specific Oil Painter Examples
+
+**Alec Marin:**
+- Raw and expressive, mirrors painting style
+- Full-bleed images with no interface elements
+- Contact email tucked in bottom corner only
+- "Dead simple" - prioritizes artwork exclusively
+- Edge-to-edge presentation
+
+**Karin van Etten:**
+- Grid of works, all in same square frame
+- Systematic, library-like layout
+- No design tricks, just paintings laid out to browse
+- Site doesn't try to impress, lets work speak
+- Organized by category (abstract, portraiture, animals)
+
+**Kim Song Ri:**
+- Extreme minimalism: white background, gray text, all capitals
+- Only most necessary elements present
+- Website becomes almost invisible
+- Art remains the only thing that speaks
+
+**Other Notable Painters:**
+- **Marie-Claude Lacroix** - Less than 20 pieces, muted tone palette
+- **Julia Maiuri** - Oil on canvas, simple selection, grey/blue/pink
+- **Caroline Denervaud** - Gray and beige palette with white space
+- **Deborah Gregson** - London-based, portraits/still life/landscapes
+
+#### Design Principles for Oil Painters
+
+**"No Tricks" Philosophy:**
+- Sites should be functional and austere
+- Designed to "get out of the way" like physical galleries
+- Art portfolio is not about web design, it's about the art
+- Keep things simple and focused on paintings
+
+**Navigation:**
+- Clear but minimal
+- Organized by theme, medium, period (not all at once)
+- 10 or fewer featured projects on homepage
+- Off-canvas menus or minimal top nav
+
+**Footer Practices:**
+- Educational sites may include resources
+- Pure artist sites often omit footers entirely
+- Or minimal footer with just social links/contact
+- Cleaner presentation without footer
+
+**Responsive Considerations:**
+- Must work across all devices
+- Consistent viewing experience
+- High-resolution images scale properly
+- Mobile-first but desktop showcases details
+
+### Sources
+
+Research compiled from:
+- [Colorlib - 20 Best Artist Portfolio Websites (2026)](https://colorlib.com/wp/artist-portfolio-websites/)
+- [Pixpa - 40+ Best Artist Portfolio Websites](https://www.pixpa.com/blog/artist-portfolio-websites)
+- [Really Good Designs - 22 Minimalist Portfolio Examples](https://reallygooddesigns.com/minimalist-portfolio-website/)
+- [Minimalio - Painter Portfolio Websites](https://minimalio.org/painter-portfolio-websites-minimalist-examples/)
+- [Minimalio - Dead Simple Portfolio Websites](https://minimalio.org/dead-simple-portfolio-websites/)
+- [WebFX - 30 Minimalist Portfolio Designs](https://www.webfx.com/blog/web-design/minimalist-portfolio-website/)
+- [Siteinspire - Minimal Portfolio Websites](https://www.siteinspire.com/websites/categories/minimal/portfolio)
+- [HTMLburger - 14 Minimalist Portfolio Designs](https://htmlburger.com/blog/minimalist-portfolio-website/)
+- [Format - 18 Art Portfolio Examples for Painters](https://www.format.com/magazine/galleries/art/art-portfolio-website-examples-painters)
+- [Ucraft - 20 Brilliant Art Portfolio Examples](https://www.ucraft.com/blog/i/20-brilliant-artist-portfolio-designs)
+- [Alvarotrigo - 21+ Best Artist Portfolio Examples](https://alvarotrigo.com/blog/artist-portfolio-websites/)
+- [EZZL.art - 15 Artist Portfolio Website Samples For Painters](https://ezzl.art/blog/15-artist-portfolio-website-samples-for-painters)
+- [Framer - 20 Artist Website Examples for 2026](https://www.framer.com/blog/artist-website-examples/)
+- [Sitebuilder Report - Artist Websites: 40+ Inspiring Examples](https://www.sitebuilderreport.com/inspiration/artist-websites)
+- [Colorlib - 21 Best Art Gallery Websites](https://colorlib.com/wp/art-gallery-websites/)
+- [Webflow - 6 Best Art Gallery Website Templates](https://webflow.com/list/art-gallery)
+
 ## Conclusion
 
 Successfully delivered a production-ready artist portfolio website with:
