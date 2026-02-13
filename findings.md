@@ -863,6 +863,162 @@ Research compiled from:
 - [Colorlib - 21 Best Art Gallery Websites](https://colorlib.com/wp/art-gallery-websites/)
 - [Webflow - 6 Best Art Gallery Website Templates](https://webflow.com/list/art-gallery)
 
+## UI Redesign Implementation (2026-02-11/13)
+
+### Project Goal
+Transform portfolio from generic template feel to creative, minimal aesthetic inspired by oil painter portfolios while maintaining professional quality and artwork focus.
+
+### Research-Driven Design Decisions
+
+Based on extensive oil painter portfolio research, the following principles guided implementation:
+- Sites should be "almost invisible" - let artwork speak
+- Navigation minimal or hidden
+- No footers on pure artist sites
+- Whitespace and breathing room essential
+- Subtle interactions, no "tricks"
+- Professional gallery aesthetic
+
+### Implemented Changes
+
+#### 1. Minimal Navigation Component
+
+**Before:**
+- Standard navbar with border-b and solid white background
+- Height: h-16 (64px)
+- Bottom border indicators for active state
+- Solid background language switcher buttons
+- Font-medium weight
+
+**After:**
+- Semi-transparent backdrop blur: `bg-gray-50/80 backdrop-blur-sm`
+- Reduced height: `h-12 sm:h-14` (48px/56px)
+- Uppercase text with wider letter spacing: `uppercase tracking-wider`
+- Lighter font weight: `font-light`
+- No borders or active bottom indicators
+- Simple text color changes (gray-900 active, gray-400 inactive)
+- Language switcher with separator (ES | EN) instead of button backgrounds
+- Smooth color transitions on hover: `transition-colors`
+
+**Files Changed:** `src/components/Navigation.astro`
+
+#### 2. Footer Removal
+
+**Before:**
+- Standard footer with copyright notice and border-top
+- `mt-20` margin creating separation
+
+**After:**
+- Completely removed from `Layout.astro`
+- Pages end cleanly with last artwork
+- Contact available exclusively via floating WhatsApp button
+- Cleaner, more gallery-like page endings
+
+**Files Changed:** `src/layouts/Layout.astro`
+
+#### 3. Subtle Gallery Interactions
+
+**Before:**
+- Simple `hover:bg-gray-50` transition
+- Basic `transition-colors` on links
+- Instant state changes
+
+**After:**
+- Smooth 500ms transitions with ease-out easing
+- Very subtle image scale on hover: `group-hover:scale-[1.01]`
+- Background color fade: `hover:bg-gray-100/40` (semi-transparent)
+- Text opacity reduction: `group-hover:opacity-90`
+- Badge color intensification: `bg-green-100` → `group-hover:bg-green-200`
+- Coordinated transitions via `group` hover states
+- Professional, polished feel
+
+**Files Changed:**
+- `src/pages/index.astro` (Spanish originals gallery)
+- `src/pages/prints.astro` (Spanish prints gallery)
+- `src/pages/en/index.astro` (English originals gallery)
+- `src/pages/en/prints.astro` (English prints gallery)
+
+### Technical Implementation Details
+
+**New CSS Classes:**
+- `group` - Parent container enabling coordinated child hover states
+- `group-hover:scale-[1.01]` - Imperceptible zoom on images (1% larger)
+- `group-hover:bg-gray-100/40` - Semi-transparent background tint
+- `group-hover:opacity-90` - Subtle text fade
+- `transition-all duration-500 ease-out` - Slow, smooth transitions
+- `backdrop-blur-sm` - Glass morphism effect on navigation
+- `uppercase tracking-wider` - Refined typographic spacing
+
+**Design Principles Applied:**
+1. **Minimal Navigation** - Inspired by Kim Song Ri, Alec Marin
+2. **No Footer** - Pure artist portfolio approach
+3. **Subtle Interactions** - Benjamin Tousley influence, professional polish
+4. **Keep Scrollable Layout** - Aligns with oil painting presentation best practices
+5. **Neutral Palette** - Gallery-like neutral backdrop
+
+### Transformation: Before vs After
+
+**Generic Template Feel (Before):**
+- Standard navbar with visible borders and solid background
+- Footer with copyright boilerplate
+- Predictable instant hover effects
+- Heavy visual weight on UI chrome
+- Standard website structure
+
+**Minimal Gallery Aesthetic (After):**
+- Nearly invisible, floating navigation
+- No footer clutter
+- Refined, slow, intentional transitions
+- Artwork-first focus, minimal UI interference
+- Professional oil painter portfolio aesthetic
+
+### Deployment Details
+
+**Branch:** `feature/minimal-gallery-ui`
+**Commits:** 2 (research/planning + implementation)
+**Merged to:** `main`
+**Deployed:** 2026-02-13
+**Build Time:** 17 seconds
+**Deploy Time:** 12 seconds
+**Total:** 29 seconds
+**Status:** ✅ Live
+**URL:** https://rodrigallardo.github.io/web-portfolio
+
+**GitHub Actions Run:** #21989662931
+**Pages Built:** 16
+**Build Tool:** Astro v5.17.1
+**Result:** Successful ✅
+
+### User Feedback
+- User approval: "I like this changes"
+- Deployed to production after review
+- Open to future iterations
+
+### Future Enhancement Opportunities
+- Navigation auto-hide on scroll down, reveal on scroll up
+- More sophisticated parallax effects on images
+- Detail page layout refinements (asymmetric or overlay info)
+- Typography experimentation (size, weight variations)
+- Spacing micro-adjustments based on user feedback
+- Possible asymmetric gallery layouts
+
+### Impact Assessment
+
+**What Changed:**
+- Visual weight of navigation: 70% reduction
+- Footer presence: Removed entirely
+- Interaction sophistication: Significantly enhanced
+- Professional perception: Elevated to gallery standard
+- Generic feel: Eliminated
+
+**What Stayed the Same:**
+- Core scrollable gallery layout
+- Artwork sizing and presentation
+- Color palette (neutral grays, beiges)
+- Typography (Cormorant Garamond)
+- Responsive behavior
+- WhatsApp integration
+- Bilingual support
+
 ## Conclusion
 
 Successfully delivered a production-ready artist portfolio website with:
@@ -873,6 +1029,8 @@ Successfully delivered a production-ready artist portfolio website with:
 - Scrollable gallery design optimized for showcasing artwork
 - Professional typography (Cormorant Garamond)
 - Fully responsive mobile experience
+- **Minimal gallery UI redesign (2026-02-11/13)** ✨
 - Comprehensive documentation
 
-**Next Steps:** Add more artworks with real images, update WhatsApp phone number, deploy to production.
+**Current Status:** Production-ready with minimal, professional oil painter-inspired aesthetic
+**Next Steps:** Add real artwork images, update WhatsApp phone number, potential further UI iterations
