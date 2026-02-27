@@ -28,11 +28,11 @@
     // Redirect logic
     if (isSpanishBrowser && isEnglishPage) {
       // Spanish speaker on English page → redirect to Spanish
-      const spanishPath = currentPath.replace('/web-portfolio/en', '/web-portfolio');
+      const spanishPath = currentPath.replace('/en', '');
       window.location.href = spanishPath;
     } else if (!isSpanishBrowser && !isEnglishPage) {
       // Non-Spanish speaker on Spanish page → redirect to English
-      const englishPath = currentPath.replace('/web-portfolio', '/web-portfolio/en');
+      const englishPath = '/en' + currentPath;
       window.location.href = englishPath;
     }
 

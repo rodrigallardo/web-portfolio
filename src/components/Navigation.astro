@@ -5,7 +5,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const currentPath = Astro.url.pathname;
-const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
+const baseUrl = lang === 'es' ? '' : '/en';
 ---
 
 <nav class="bg-gray-50/80 backdrop-blur-sm">
@@ -49,7 +49,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
 
       <div class="flex items-center space-x-1">
         <a
-          href={currentPath.replace('/web-portfolio/en', '/web-portfolio')}
+          href={currentPath.replace('/en', '')}
           data-lang-switch="es"
           class:list={[
             "px-2 py-1 text-xs sm:text-sm font-light uppercase tracking-wide transition-colors",
@@ -64,7 +64,7 @@ const baseUrl = lang === 'es' ? '/web-portfolio' : '/web-portfolio/en';
         <a
           href={currentPath.includes('/en')
             ? currentPath
-            : currentPath.replace('/web-portfolio', '/web-portfolio/en')
+            : '/en' + currentPath
           }
           data-lang-switch="en"
           class:list={[

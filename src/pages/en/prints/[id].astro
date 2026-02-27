@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { artwork } = Astro.props;
 const t = useTranslations('en');
-const baseUrl = '/web-portfolio/en';
+const baseUrl = '/en';
 
 // Get language-specific content
 const title = artwork.data.titleEn;

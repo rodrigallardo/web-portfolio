@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const originals = await getCollection('originals');
-const baseUrl = '/web-portfolio';
+const baseUrl = '';
 ---
 
 <Layout title={`${t('nav.originals')} - Artist Portfolio`}>

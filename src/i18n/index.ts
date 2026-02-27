@@ -14,10 +14,9 @@ export const ui = {
 } as const;
 
 export function getLangFromUrl(url: URL) {
-  // Account for base path /web-portfolio
   const pathname = url.pathname;
 
-  // Check if path contains /en/ or starts with /web-portfolio/en
+  // Check if path contains /en/ or starts with /en
   if (pathname.includes('/en/') || pathname.includes('/en')) {
     return 'en' as keyof typeof ui;
   }
