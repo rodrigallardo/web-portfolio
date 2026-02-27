@@ -1019,6 +1019,195 @@ Based on extensive oil painter portfolio research, the following principles guid
 - WhatsApp integration
 - Bilingual support
 
+## Custom Domain Implementation (2026-02-27)
+
+### Project Goal
+Configure custom domain `rodrigallardo.art` to replace the GitHub Pages default URL, providing a professional branded experience.
+
+### Implementation Details
+
+**Domain Provider:** Squarespace
+**Domain:** rodrigallardo.art
+**Previous URL:** https://rodrigallardo.github.io/web-portfolio
+**New URL:** https://rodrigallardo.art
+
+### Code Changes
+
+#### 1. Astro Configuration
+**File:** `astro.config.mjs`
+
+**Before:**
+```javascript
+{
+  site: 'https://rodrigallardo.github.io',
+  base: '/web-portfolio'
+}
+```
+
+**After:**
+```javascript
+{
+  site: 'https://rodrigallardo.art',
+  base: '/'
+}
+```
+
+**Impact:** All generated URLs now use root path instead of `/web-portfolio` subdirectory.
+
+#### 2. CNAME File
+**File:** `public/CNAME`
+
+Created with content:
+```
+rodrigallardo.art
+```
+
+**Purpose:** Tells GitHub Pages which custom domain to serve the site on.
+
+#### 3. URL Path Updates
+
+Updated all hardcoded paths across 20 files:
+
+**Page Components:**
+- Spanish pages: `baseUrl = '/web-portfolio'` → `baseUrl = ''`
+- English pages: `baseUrl = '/web-portfolio/en'` → `baseUrl = '/en'`
+
+**Navigation Component:**
+- Language switcher: `currentPath.replace('/web-portfolio/en', '/web-portfolio')` → `currentPath.replace('/en', '')`
+- English redirect: `currentPath.replace('/web-portfolio', '/web-portfolio/en')` → `'/en' + currentPath`
+
+**Language Detector:**
+- Spanish redirect: `currentPath.replace('/web-portfolio/en', '/web-portfolio')` → `currentPath.replace('/en', '')`
+- English redirect: `currentPath.replace('/web-portfolio', '/web-portfolio/en')` → `'/en' + currentPath`
+
+**Analytics:**
+- Language detection: `currentPath.startsWith('/web-portfolio/en')` → `currentPath.startsWith('/en')`
+- Navigation selector: `nav a[href*="/web-portfolio"]` → `nav a`
+
+**Asset Paths:**
+- Favicons: `/web-portfolio/favicon.svg` → `/favicon.svg`
+- Images in JSON: `/web-portfolio/images/` → `/images/`
+
+### DNS Configuration
+
+**GitHub Pages Settings:**
+- Custom domain: `rodrigallardo.art`
+- Enforce HTTPS: Enabled
+- DNS check: Passed
+
+**Squarespace DNS Records:**
+
+**A Records (Apex Domain):**
+```
+Type    Host    Value                TTL
+A       @       185.199.108.153     3600
+A       @       185.199.109.153     3600
+A       @       185.199.110.153     3600
+A       @       185.199.111.153     3600
+```
+
+**CNAME Record (www Subdomain):**
+```
+Type     Host    Value                        TTL
+CNAME    www     rodrigallardo.github.io     3600
+```
+
+### Deployment Process
+
+**Timeline:**
+1. Code changes: 20 files modified
+2. Build tested locally: ✅ 16 pages in 1.20s
+3. Feature branch created: `feature/custom-domain-setup`
+4. Committed and merged to main
+5. Deployed via GitHub Actions: 28s total
+6. GitHub Pages custom domain configured
+7. Squarespace DNS configured
+8. DNS propagated: < 30 minutes
+9. HTTPS auto-enabled by GitHub
+10. SSL certificate provisioned
+
+**Total Time:** < 1 hour from start to HTTPS-enabled custom domain
+
+### Technical Benefits
+
+**SEO Improvements:**
+- Branded domain name (rodrigallardo.art vs rodrigallardo.github.io)
+- Cleaner URLs (/ vs /web-portfolio/)
+- HTTPS enabled (ranking factor)
+
+**User Experience:**
+- Professional branded URL
+- Easier to remember and share
+- No subdirectory confusion
+- Automatic www redirect
+
+**Backward Compatibility:**
+- Old GitHub Pages URL still works
+- No broken links
+- Gradual transition possible
+
+### Files Modified
+
+**Configuration:**
+- astro.config.mjs
+
+**New Files:**
+- public/CNAME
+- CUSTOM_DOMAIN_SETUP.md (272-line setup guide)
+
+**Components:**
+- src/components/Navigation.astro
+- src/components/LanguageDetector.astro
+- src/components/Analytics.astro
+- src/layouts/Layout.astro
+
+**Utilities:**
+- src/i18n/index.ts
+
+**Pages (8 files):**
+- src/pages/index.astro
+- src/pages/prints.astro
+- src/pages/originals/[id].astro
+- src/pages/prints/[id].astro
+- src/pages/en/index.astro
+- src/pages/en/prints.astro
+- src/pages/en/originals/[id].astro
+- src/pages/en/prints/[id].astro
+
+**Content (5 files):**
+- src/content/originals/valizas_reflejo.json
+- src/content/originals/edward_hopper_study.json
+- src/content/originals/terrazas_palermo.json
+- src/content/prints/sample-print-1.json
+- src/content/prints/sample-print-2.json
+
+### Verification
+
+**Tests Performed:**
+- ✅ https://rodrigallardo.art loads correctly
+- ✅ https://www.rodrigallardo.art redirects to apex
+- ✅ HTTPS enabled with valid SSL certificate
+- ✅ All images load correctly
+- ✅ Navigation works (all links)
+- ✅ Language switching works (ES ↔ EN)
+- ✅ WhatsApp buttons work
+- ✅ Google Analytics tracking works
+- ✅ Old GitHub Pages URL still functional
+
+### Documentation
+
+Created comprehensive setup guide: **CUSTOM_DOMAIN_SETUP.md**
+
+**Includes:**
+- GitHub Pages configuration steps
+- Squarespace DNS setup instructions
+- DNS verification procedures
+- Troubleshooting common issues
+- Expected timeline
+- Post-setup checklist
+
+**Purpose:** Allows user to replicate or modify DNS configuration without developer assistance.
+
 ## Conclusion
 
 Successfully delivered a production-ready artist portfolio website with:
@@ -1030,7 +1219,9 @@ Successfully delivered a production-ready artist portfolio website with:
 - Professional typography (Cormorant Garamond)
 - Fully responsive mobile experience
 - **Minimal gallery UI redesign (2026-02-11/13)** ✨
+- **Custom domain with HTTPS (2026-02-27)** 🌐
 - Comprehensive documentation
 
-**Current Status:** Production-ready with minimal, professional oil painter-inspired aesthetic
+**Current Status:** Production-ready with custom domain (https://rodrigallardo.art)
+**Live URL:** https://rodrigallardo.art
 **Next Steps:** Add real artwork images, update WhatsApp phone number, potential further UI iterations

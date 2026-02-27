@@ -1,87 +1,88 @@
-# Task Plan: UI Redesign - Add Personality & Creativity
+# Task Plan: Custom Domain Setup - rodrigallardo.art
 
 ## Goal
-Redesign the portfolio UI to feel less generic and more creative while maintaining the neutral color palette, professional aesthetic, and focus on artworks.
+Configure custom domain `rodrigallardo.art` for the portfolio website, replacing the GitHub Pages default URL.
 
 ## Current Phase
-Phase 6 - Complete ✅
+Complete ✅
 
 ## Phases
 
-### Phase 1: Research & Inspiration
-- [x] Research independent artist portfolio websites
-- [x] Identify creative UI patterns that maintain professionalism
-- [x] Document design inspiration and patterns in findings.md
-- [x] Analyze what makes portfolios feel unique vs generic
+### Phase 1: Code Configuration
+- [x] Update Astro config (site URL and base path)
+- [x] Create CNAME file in public directory
+- [x] Update all baseUrl variables across pages
+- [x] Update favicon paths
+- [x] Update image paths in JSON content files
+- [x] Update Navigation component
+- [x] Update LanguageDetector redirects
+- [x] Update Analytics tracking
+- [x] Update i18n utility
 - **Status:** complete
 
-### Phase 2: Design Exploration
-- [x] Define new UI approach and design decisions
-- [x] Plan navbar redesign (if needed)
-- [x] Plan gallery layout changes
-- [x] Plan detail page layout changes
-- [x] Document design decisions with rationale
+### Phase 2: Testing & Documentation
+- [x] Test build locally
+- [x] Verify CNAME file in dist
+- [x] Create comprehensive setup guide (CUSTOM_DOMAIN_SETUP.md)
+- [x] Document GitHub configuration steps
+- [x] Document Squarespace DNS configuration
+- [x] Document troubleshooting procedures
 - **Status:** complete
 
-### Phase 3: Implementation - Core Layout
-- [x] Implement new navbar design
-- [x] Implement new gallery layout
-- [x] Test responsive behavior
-- [x] Verify paintings remain the focus
+### Phase 3: Deployment
+- [x] Create feature branch (feature/custom-domain-setup)
+- [x] Commit all changes
+- [x] Merge to main
+- [x] Push to GitHub
+- [x] Monitor deployment (28s total)
 - **Status:** complete
 
-### Phase 4: Implementation - Detail Pages
-- [x] Detail pages maintained current design (no changes needed)
-- [x] Footer removed from detail pages via Layout.astro
-- [x] Navigation updated on detail pages
-- [x] Test on both originals and prints
-- [x] Test bilingual versions (ES/EN)
+### Phase 4: DNS & GitHub Configuration
+- [x] User configured GitHub Pages custom domain
+- [x] User configured Squarespace DNS (A records + CNAME)
+- [x] DNS propagated successfully
+- [x] HTTPS enabled automatically
+- [x] Site live at https://rodrigallardo.art
 - **Status:** complete
-
-### Phase 5: Refinement & Polish
-- [x] Review overall aesthetic
-- [x] Fine-tune spacing, typography, interactions
-- [x] Test on mobile and desktop
-- [x] Verify professional feel maintained
-- **Status:** complete
-
-### Phase 6: Testing & Delivery
-- [x] Test locally (npm run dev)
-- [x] Test build (npm run build)
-- [x] Create feature branch (feature/minimal-gallery-ui)
-- [x] Commit and deploy
-- [x] Monitor deployment (successful in 29s)
-- **Status:** complete
-
-## Key Questions
-1. What UI patterns make artist portfolios feel unique and creative?
-2. How can we add personality without distracting from the artwork?
-3. What navbar designs feel more artistic than generic?
-4. How can layout/spacing/interactions add character?
-5. Should we explore asymmetric layouts or unconventional navigation?
 
 ## Decisions Made
 | Decision | Rationale |
 |----------|-----------|
-| Research before designing | Need inspiration from successful artist portfolios to avoid generic solutions |
-| Focus on oil painter portfolios | Oil paintings need different presentation than digital art (texture, brushstrokes, materiality) |
-| Simplified navigation | User preference + research shows best oil painter sites have minimal/invisible navigation |
-| No footer | User preference + research shows pure artist sites often omit footers entirely |
-| Keep scrollable layout | Current layout works well, matches successful oil painter presentation styles |
-| Subtle interactions only | User preference + "no tricks" philosophy from oil painter research |
-| Skip bold typography | User uncertain + oil painter sites prioritize art over typographic statements |
+| Use apex domain (not www) | Cleaner, more professional |
+| Remove /web-portfolio base path | Custom domain uses root path |
+| Keep both URLs working | GitHub Pages URL still accessible for compatibility |
+| Use A records + CNAME | Standard GitHub Pages DNS setup |
+| Enable HTTPS | Security and SEO best practice |
 
 ## Errors Encountered
 | Error | Attempt | Resolution |
 |-------|---------|------------|
-|       | 1       |            |
+| None | - | Smooth deployment |
+
+## Key Questions
+1. Which domain to use? → rodrigallardo.art (purchased from Squarespace)
+2. Remove GitHub Pages URL? → No, keep both working
+3. www subdomain? → Yes, redirect to apex domain
+4. HTTPS? → Yes, enabled automatically
 
 ## Notes
-- Keep neutral color palette (beiges, whites, blacks)
-- Paintings must remain the main focus
-- Professional feel is essential
-- Avoid overloading with elements
-- This is experimental - we can iterate
-- Update phase status as you progress: pending → in_progress → complete
-- Re-read this plan before major decisions
-- Log ALL errors
+- All 20 files updated (pages, components, content)
+- CNAME file automatically deployed to GitHub Pages
+- DNS propagated faster than expected
+- HTTPS provisioned automatically by GitHub
+- Old URL (rodrigallardo.github.io/web-portfolio) still works
+- New URL (rodrigallardo.art) is primary
+
+## Files Modified
+1. astro.config.mjs - Site URL and base path
+2. public/CNAME - Custom domain declaration
+3. src/components/Navigation.astro - baseUrl updates
+4. src/components/LanguageDetector.astro - Redirect paths
+5. src/components/Analytics.astro - Tracking paths
+6. src/layouts/Layout.astro - Favicon paths
+7. src/i18n/index.ts - Comments update
+8. src/pages/*.astro (8 files) - baseUrl variables
+9. src/content/**/*.json (5 files) - Image paths
+
+## Result
+✅ **Success!** Site now live at https://rodrigallardo.art with HTTPS enabled.

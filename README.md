@@ -4,7 +4,9 @@ A bilingual (Spanish/English) static portfolio website built with Astro, TypeScr
 
 ## 🌐 Live Site
 
-**Production:** https://rodrigallardo.github.io/web-portfolio
+**Production:** https://rodrigallardo.art
+
+(Also accessible at: https://rodrigallardo.github.io/web-portfolio)
 
 ## ✨ Features
 
@@ -33,7 +35,7 @@ npm install
 # Start development server
 npm run dev
 
-# View at http://localhost:4321/web-portfolio
+# View at http://localhost:4321
 ```
 
 ### Build for Production

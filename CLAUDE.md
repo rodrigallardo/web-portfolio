@@ -630,7 +630,8 @@ gh api repos/rodrigallardo/web-portfolio/deployments
 
 ## Quick Reference: URLs
 
-- **Live Site:** https://rodrigallardo.github.io/web-portfolio
+- **Live Site (Custom Domain):** https://rodrigallardo.art
+- **Live Site (GitHub Pages):** https://rodrigallardo.github.io/web-portfolio (still works)
 - **Repository:** https://github.com/rodrigallardo/web-portfolio
 - **Actions:** https://github.com/rodrigallardo/web-portfolio/actions
 - **Settings:** https://github.com/rodrigallardo/web-portfolio/settings
@@ -711,11 +712,38 @@ gh run watch
 
 ---
 
-**Last Updated:** 2026-02-13
-**Project Version:** v1.3.0 (Minimal gallery UI redesign)
-**Next Phase:** Further UI iterations or content updates (optional)
+**Last Updated:** 2026-02-27
+**Project Version:** v1.4.0 (Custom domain deployment)
+**Next Phase:** Content updates or additional features
 
 ## Change Log
+
+### 2026-02-27 - Session 12
+**Custom Domain Configuration:**
+- Purchased custom domain: rodrigallardo.art from Squarespace
+- Updated all code for custom domain deployment:
+  - Changed site URL in astro.config.mjs
+  - Removed /web-portfolio base path (now uses root /)
+  - Created CNAME file for GitHub Pages
+  - Updated 20 files with path changes
+  - Updated all baseUrl variables across pages
+  - Updated Navigation, LanguageDetector, Analytics components
+  - Updated image paths in JSON content files
+- Created comprehensive setup guide (CUSTOM_DOMAIN_SETUP.md):
+  - GitHub Pages configuration steps
+  - Squarespace DNS setup instructions (A records + CNAME)
+  - DNS verification and troubleshooting
+  - 272 lines of detailed documentation
+- Configured GitHub Pages custom domain setting
+- Configured Squarespace DNS records (4 A records + www CNAME)
+- DNS propagated successfully (< 30 minutes)
+- HTTPS enabled automatically by GitHub
+- Site now live at https://rodrigallardo.art
+- Old GitHub Pages URL still accessible for compatibility
+- Total deployment time: 28 seconds
+- Commits:
+  - feat: configure custom domain rodrigallardo.art
+  - docs: add comprehensive custom domain setup guide
 
 ### 2026-02-13 - Session 11
 **Minimal Gallery UI Redesign:**
