@@ -679,11 +679,15 @@ gh run watch
 - Update documentation when making changes
 - Respect the bilingual structure (ES default, EN mirror)
 - WhatsApp phone number is test value (1234567890) - needs replacement
-- **Current Gallery Design:**
+- **Current Gallery Design (v1.3.0):**
   - Scrollable full-screen layout (one painting per viewport)
   - Responsive sizing: 50vh (mobile) to 60vh (desktop)
   - Typography: Cormorant Garamond serif font throughout
   - Minimal spacing between artworks
+  - Minimal navigation with backdrop blur
+  - No footer (removed for cleaner aesthetic)
+  - Subtle interactions (500ms transitions, 1.01 scale on hover)
+  - Oil painter portfolio-inspired aesthetic
 - **Google Analytics:**
   - GA4 Measurement ID stored in GitHub secret (github-pages environment)
   - Never hardcode the Measurement ID in source code
@@ -707,11 +711,42 @@ gh run watch
 
 ---
 
-**Last Updated:** 2026-02-10
-**Project Version:** v1.2.0 (Gallery redesign + typography improvements)
-**Next Phase:** Image Optimization (optional enhancement)
+**Last Updated:** 2026-02-13
+**Project Version:** v1.3.0 (Minimal gallery UI redesign)
+**Next Phase:** Further UI iterations or content updates (optional)
 
 ## Change Log
+
+### 2026-02-13 - Session 11
+**Minimal Gallery UI Redesign:**
+- Conducted extensive research on oil painter portfolio websites
+- Researched 15+ independent artist portfolios for design inspiration
+- Documented design patterns in findings.md (navigation, layout, interactions, typography)
+- Identified oil painter-specific presentation needs (texture, whitespace, "invisible" design)
+- Implemented minimal navigation design:
+  - Removed borders and solid backgrounds
+  - Added backdrop blur effect (bg-gray-50/80)
+  - Reduced height from h-16 to h-12/h-14
+  - Changed to uppercase with wider letter spacing
+  - Lighter font weight (font-light)
+  - Simplified language switcher (ES | EN separator)
+- Removed footer completely from all pages
+  - Pages end cleanly with artwork
+  - Contact via floating WhatsApp button only
+- Added subtle interactions to all gallery pages:
+  - Smooth 500ms transitions with ease-out easing
+  - Very subtle image scale on hover (1.01)
+  - Background color fade on hover (gray-100/40)
+  - Text opacity changes
+  - Badge color intensification
+- Updated all 4 gallery pages (ES/EN originals/prints)
+- Created feature branch: feature/minimal-gallery-ui
+- Tested and deployed successfully (build: 17s, deploy: 12s, total: 29s)
+- User feedback: "I like this changes" - approved for production
+- Commits:
+  - docs: add UI redesign research and planning files
+  - feat: implement minimal gallery UI redesign
+  - docs: update planning files with completed UI redesign
 
 ### 2026-02-10 - Session 10
 **Gallery Redesign & Typography Improvements:**

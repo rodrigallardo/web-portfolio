@@ -13,7 +13,7 @@ A bilingual (Spanish/English) static portfolio website built with Astro, TypeScr
 - **Dynamic Detail Pages:** Each artwork has its own detail page with enlarged image
 - **WhatsApp Integration:** Floating contact button + inline "Ask about this painting" buttons
 - **Google Analytics 4:** Track artwork views, WhatsApp clicks, language switches, and navigation
-- **Classic Gallery Design:** Clean, minimal aesthetic with neutral colors
+- **Minimal Gallery Design:** Ultra-minimal navigation, no footer, subtle interactions - inspired by professional oil painter portfolios
 - **Responsive:** Mobile-first design that works on all devices
 - **Static Site:** No CMS needed - content managed via JSON files
 - **Auto-Deploy:** Push to main branch automatically deploys to GitHub Pages
