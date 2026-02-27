@@ -11,7 +11,7 @@ interface Props {
 	artworkTitle?: string;
 }
 
-const { title = 'Artist Portfolio', artworkTitle } = Astro.props;
+const { title = 'Rodrigo Gallardo', artworkTitle } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
@@ -21,7 +21,6 @@ const lang = getLangFromUrl(Astro.url);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
