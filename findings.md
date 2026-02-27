@@ -1208,6 +1208,93 @@ Created comprehensive setup guide: **CUSTOM_DOMAIN_SETUP.md**
 
 **Purpose:** Allows user to replicate or modify DNS configuration without developer assistance.
 
+## WhatsApp Phone Number Integration (2026-02-27)
+
+### Project Goal
+Centralize WhatsApp phone number configuration and update from test number to real Uruguay phone number.
+
+### Problem Statement
+WhatsApp phone number was hardcoded in 5 different files (1234567890 test number), making updates difficult and error-prone.
+
+### Solution: Configuration Centralization
+
+**Created:** `src/config.ts`
+```typescript
+export const WHATSAPP_PHONE_NUMBER = '598098182712';
+export const SITE_NAME = 'Rodrigo Gallardo';
+export const SITE_URL = 'https://rodrigallardo.art';
+```
+
+**Benefits:**
+- Single source of truth
+- Easy to update (change in one place)
+- Type-safe TypeScript export
+- Follows Astro project conventions
+- Scalable for future configuration needs
+
+### Implementation
+
+**Files Updated (6 total):**
+
+1. **src/config.ts** (created)
+   - Centralized configuration file
+   - Phone number constant
+   - Site metadata
+
+2. **src/components/WhatsAppButton.astro**
+   - Added import from config
+   - Replaced hardcoded '1234567890'
+
+3. **src/pages/originals/[id].astro**
+   - Added config import
+   - Uses WHATSAPP_PHONE_NUMBER
+
+4. **src/pages/prints/[id].astro**
+   - Added config import
+   - Uses WHATSAPP_PHONE_NUMBER
+
+5. **src/pages/en/originals/[id].astro**
+   - Added config import
+   - Uses WHATSAPP_PHONE_NUMBER
+
+6. **src/pages/en/prints/[id].astro**
+   - Added config import
+   - Uses WHATSAPP_PHONE_NUMBER
+
+### Phone Number Format
+
+**Uruguay Number:** +598 098182712
+**WhatsApp URL Format:** 598098182712 (no spaces, dashes, or + symbol)
+**WhatsApp Link:** https://wa.me/598098182712
+
+### Deployment
+
+**Build Time:** 18s
+**Deploy Time:** 11s
+**Total:** 29s
+**Verification:** wa.me/598098182712 in generated HTML ✓
+
+### Impact
+
+**Before:**
+- Phone number in 5 files
+- Test number (1234567890)
+- Error-prone updates
+
+**After:**
+- Phone number in 1 file
+- Real Uruguay number
+- Single point of update
+
+### Future Maintenance
+
+To update phone number, only change src/config.ts:
+```typescript
+export const WHATSAPP_PHONE_NUMBER = 'new-number';
+```
+
+All components automatically use the updated number.
+
 ## Conclusion
 
 Successfully delivered a production-ready artist portfolio website with:

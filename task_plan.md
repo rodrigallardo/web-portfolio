@@ -1,88 +1,72 @@
-# Task Plan: Custom Domain Setup - rodrigallardo.art
+# Task Plan: WhatsApp Phone Number Integration
 
 ## Goal
-Configure custom domain `rodrigallardo.art` for the portfolio website, replacing the GitHub Pages default URL.
+Centralize WhatsApp phone number configuration and update to real Uruguay phone number (+598 098182712).
 
 ## Current Phase
 Complete ✅
 
 ## Phases
 
-### Phase 1: Code Configuration
-- [x] Update Astro config (site URL and base path)
-- [x] Create CNAME file in public directory
-- [x] Update all baseUrl variables across pages
-- [x] Update favicon paths
-- [x] Update image paths in JSON content files
-- [x] Update Navigation component
-- [x] Update LanguageDetector redirects
-- [x] Update Analytics tracking
-- [x] Update i18n utility
+### Phase 1: Configuration Centralization
+- [x] Create centralized config file (src/config.ts)
+- [x] Add WHATSAPP_PHONE_NUMBER constant
+- [x] Add site metadata constants
+- [x] Document configuration structure
 - **Status:** complete
 
-### Phase 2: Testing & Documentation
+### Phase 2: Component Updates
+- [x] Update WhatsAppButton component to use config
+- [x] Update Spanish originals detail page
+- [x] Update Spanish prints detail page
+- [x] Update English originals detail page
+- [x] Update English prints detail page
+- [x] Remove all hardcoded phone numbers
+- **Status:** complete
+
+### Phase 3: Testing & Deployment
 - [x] Test build locally
-- [x] Verify CNAME file in dist
-- [x] Create comprehensive setup guide (CUSTOM_DOMAIN_SETUP.md)
-- [x] Document GitHub configuration steps
-- [x] Document Squarespace DNS configuration
-- [x] Document troubleshooting procedures
-- **Status:** complete
-
-### Phase 3: Deployment
-- [x] Create feature branch (feature/custom-domain-setup)
-- [x] Commit all changes
+- [x] Verify WhatsApp links in built HTML
+- [x] Commit changes to feature branch
 - [x] Merge to main
-- [x] Push to GitHub
-- [x] Monitor deployment (28s total)
-- **Status:** complete
-
-### Phase 4: DNS & GitHub Configuration
-- [x] User configured GitHub Pages custom domain
-- [x] User configured Squarespace DNS (A records + CNAME)
-- [x] DNS propagated successfully
-- [x] HTTPS enabled automatically
-- [x] Site live at https://rodrigallardo.art
+- [x] Push and deploy
+- [x] Monitor deployment (29s total)
 - **Status:** complete
 
 ## Decisions Made
 | Decision | Rationale |
 |----------|-----------|
-| Use apex domain (not www) | Cleaner, more professional |
-| Remove /web-portfolio base path | Custom domain uses root path |
-| Keep both URLs working | GitHub Pages URL still accessible for compatibility |
-| Use A records + CNAME | Standard GitHub Pages DNS setup |
-| Enable HTTPS | Security and SEO best practice |
+| Centralize in config.ts | Single source of truth, easy updates |
+| Format: no spaces/dashes | WhatsApp URL format requirement |
+| Include country code | International format (598 for Uruguay) |
+| Keep SITE_NAME and SITE_URL | Future scalability |
+
+## Key Questions
+1. Where to centralize? → src/config.ts (follows Astro conventions)
+2. What format? → Country code + number, no symbols (598098182712)
+3. Update all files? → Yes, remove all hardcoded instances
+4. Export as constant? → Yes, for TypeScript type safety
+
+## Files Modified
+1. src/config.ts (created) - Centralized configuration
+2. src/components/WhatsAppButton.astro - Floating button
+3. src/pages/originals/[id].astro - Spanish originals detail
+4. src/pages/prints/[id].astro - Spanish prints detail
+5. src/pages/en/originals/[id].astro - English originals detail
+6. src/pages/en/prints/[id].astro - English prints detail
 
 ## Errors Encountered
 | Error | Attempt | Resolution |
 |-------|---------|------------|
-| None | - | Smooth deployment |
-
-## Key Questions
-1. Which domain to use? → rodrigallardo.art (purchased from Squarespace)
-2. Remove GitHub Pages URL? → No, keep both working
-3. www subdomain? → Yes, redirect to apex domain
-4. HTTPS? → Yes, enabled automatically
+| None | - | Smooth implementation |
 
 ## Notes
-- All 20 files updated (pages, components, content)
-- CNAME file automatically deployed to GitHub Pages
-- DNS propagated faster than expected
-- HTTPS provisioned automatically by GitHub
-- Old URL (rodrigallardo.github.io/web-portfolio) still works
-- New URL (rodrigallardo.art) is primary
-
-## Files Modified
-1. astro.config.mjs - Site URL and base path
-2. public/CNAME - Custom domain declaration
-3. src/components/Navigation.astro - baseUrl updates
-4. src/components/LanguageDetector.astro - Redirect paths
-5. src/components/Analytics.astro - Tracking paths
-6. src/layouts/Layout.astro - Favicon paths
-7. src/i18n/index.ts - Comments update
-8. src/pages/*.astro (8 files) - baseUrl variables
-9. src/content/**/*.json (5 files) - Image paths
+- Phone number format: 598098182712 (Uruguay +598 098182712)
+- Old test number (1234567890) removed from all 5 files
+- WhatsApp URL format: https://wa.me/{number}?text={message}
+- Config file allows easy future updates
+- Build tested successfully
+- All WhatsApp buttons now functional with real number
 
 ## Result
-✅ **Success!** Site now live at https://rodrigallardo.art with HTTPS enabled.
+✅ **Success!** WhatsApp integration now uses Uruguay phone number, centralized in config file.

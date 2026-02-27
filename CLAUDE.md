@@ -679,7 +679,7 @@ gh run watch
 - Monitor deployments with GitHub CLI
 - Update documentation when making changes
 - Respect the bilingual structure (ES default, EN mirror)
-- WhatsApp phone number is test value (1234567890) - needs replacement
+- WhatsApp phone number configured in src/config.ts (Uruguay: +598 098182712)
 - **Current Gallery Design (v1.3.0):**
   - Scrollable full-screen layout (one painting per viewport)
   - Responsive sizing: 50vh (mobile) to 60vh (desktop)
@@ -719,7 +719,9 @@ gh run watch
 ## Change Log
 
 ### 2026-02-27 - Session 12
-**Custom Domain Configuration:**
+**Custom Domain Configuration + WhatsApp Integration:**
+
+*Part 1: Custom Domain*
 - Purchased custom domain: rodrigallardo.art from Squarespace
 - Updated all code for custom domain deployment:
   - Changed site URL in astro.config.mjs
@@ -744,6 +746,23 @@ gh run watch
 - Commits:
   - feat: configure custom domain rodrigallardo.art
   - docs: add comprehensive custom domain setup guide
+
+*Part 2: WhatsApp Phone Number*
+- Centralized WhatsApp phone number configuration
+- Created src/config.ts for site-wide settings:
+  - WHATSAPP_PHONE_NUMBER constant
+  - SITE_NAME and SITE_URL constants
+  - Future-proof configuration structure
+- Updated 6 files to use centralized config:
+  - WhatsAppButton component (floating button)
+  - All 4 detail pages (ES/EN originals/prints)
+  - Removed hardcoded test number (1234567890)
+- Updated to real Uruguay phone number: +598 098182712
+- WhatsApp number now managed in single location
+- Build tested successfully, deployed in 29s
+- All WhatsApp buttons functional with real number
+- Commits:
+  - feat: centralize WhatsApp phone number and update to Uruguay number
 
 ### 2026-02-13 - Session 11
 **Minimal Gallery UI Redesign:**
