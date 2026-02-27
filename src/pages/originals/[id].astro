@@ -21,6 +21,10 @@ const baseUrl = '';
 const title = artwork.data.titleEs;
 const description = artwork.data.descriptionEs;
 
+// SEO meta description
+const metaDescription = description ||
+  `${title} - Obra original de Rodrigo Gallardo. ${artwork.data.dimensionsCm} cm, ${artwork.data.year}. ${artwork.data.available ? 'Disponible para compra.' : 'Vendida.'}`;
+
 // WhatsApp configuration
 const phoneNumber = WHATSAPP_PHONE_NUMBER;
 const message = `Hola, estoy interesado en la obra "${title}". Me gustaría obtener más información.`;
@@ -35,7 +39,12 @@ const [width, height] = artwork.data.dimensionsCm.split('x').map(d => parseInt(d
 const isLandscape = width > height;
 ---
 
-<Layout title={`${title} - Rodrigo Gallardo`} artworkTitle={title}>
+<Layout
+  title={title}
+  description={metaDescription}
+  image={artwork.data.image}
+  artworkTitle={title}
+>
   <div data-artwork-id={artwork.id} data-artwork-title={title} class="max-w-5xl mx-auto">
     <a
       href={`${baseUrl}/`}

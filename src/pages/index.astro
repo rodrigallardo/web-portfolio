@@ -10,7 +10,10 @@ const originals = await getCollection('originals');
 const baseUrl = '';
 ---
 
-<Layout title={`${t('nav.originals')} - Rodrigo Gallardo`}>
+<Layout
+  title={t('nav.originals')}
+  description="Explora la colección de obras originales de Rodrigo Gallardo, artista uruguayo especializado en pintura al óleo. Pinturas únicas con técnicas tradicionales."
+>
   <div class="space-y-0">
     <div class="text-center pt-12 pb-4">
       <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.originals')}</h1>

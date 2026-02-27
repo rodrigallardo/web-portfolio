@@ -8,7 +8,10 @@ const prints = await getCollection('prints');
 const baseUrl = '/en';
 ---
 
-<Layout title={`${t('nav.prints')} - Rodrigo Gallardo`}>
+<Layout
+  title={t('nav.prints')}
+  description="Discover high-quality prints of Rodrigo Gallardo's original artworks. Professional reproductions of oil paintings."
+>
   <div class="space-y-0">
     <div class="text-center pt-12 pb-4">
       <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.prints')}</h1>

@@ -4,14 +4,22 @@ import Navigation from '../components/Navigation.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Analytics from '../components/Analytics.astro';
 import LanguageDetector from '../components/LanguageDetector.astro';
+import SEO from '../components/SEO.astro';
 import { getLangFromUrl } from '../i18n';
 
 interface Props {
 	title?: string;
+	description?: string;
+	image?: string;
 	artworkTitle?: string;
 }
 
-const { title = 'Rodrigo Gallardo', artworkTitle } = Astro.props;
+const {
+	title = 'Rodrigo Gallardo',
+	description = 'Artista uruguayo especializado en pintura al óleo. Descubre obras originales e impresiones de alta calidad.',
+	image,
+	artworkTitle
+} = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
@@ -22,7 +30,12 @@ const lang = getLangFromUrl(Astro.url);
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO
+			title={title}
+			description={description}
+			image={image}
+			lang={lang}
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">

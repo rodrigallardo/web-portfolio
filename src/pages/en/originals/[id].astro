@@ -37,9 +37,18 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mess
 // Price inquiry message (when price is not listed)
 const priceInquiryMessage = `Hello, I would like to know the price of the artwork "${title}".`;
 const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(priceInquiryMessage)}`;
+
+// SEO meta description
+const metaDescription = description ||
+  `${title} - Original artwork by Rodrigo Gallardo. ${dimensionsInches}, ${artwork.data.year}. ${artwork.data.available ? 'Available for purchase.' : 'Sold.'}`;
 ---
 
-<Layout title={`${title} - Rodrigo Gallardo`} artworkTitle={title}>
+<Layout
+  title={title}
+  description={metaDescription}
+  image={artwork.data.image}
+  artworkTitle={title}
+>
   <div data-artwork-id={artwork.id} data-artwork-title={title} class="max-w-5xl mx-auto">
     <a
       href={`${baseUrl}/`}

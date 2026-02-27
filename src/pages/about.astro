@@ -6,7 +6,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout title={`${t('nav.about')} - Rodrigo Gallardo`}>
+<Layout
+  title={t('nav.about')}
+  description="Conoce a Rodrigo Gallardo, artista uruguayo apasionado por la pintura al óleo. Explora su trayectoria artística y visión creativa."
+>
   <div class="max-w-3xl mx-auto space-y-8">
     <div class="text-center">
       <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.about')}</h1>

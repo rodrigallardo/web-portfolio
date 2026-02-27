@@ -10,7 +10,10 @@ const prints = await getCollection('prints');
 const baseUrl = '';
 ---
 
-<Layout title={`${t('nav.prints')} - Rodrigo Gallardo`}>
+<Layout
+  title={t('nav.prints')}
+  description="Descubre impresiones de alta calidad de las obras originales de Rodrigo Gallardo. Reproducciones profesionales de pinturas al óleo."
+>
   <div class="space-y-0">
     <div class="text-center pt-12 pb-4">
       <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.prints')}</h1>
