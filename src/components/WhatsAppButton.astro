@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n';
+import { WHATSAPP_PHONE_NUMBER } from '../config';
 
 interface Props {
   artworkTitle?: string;
@@ -9,8 +10,8 @@ const { artworkTitle } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Test phone number in international format (no + or spaces in URL)
-const phoneNumber = '1234567890';
+// WhatsApp phone number from centralized config
+const phoneNumber = WHATSAPP_PHONE_NUMBER;
 
 // Create WhatsApp message
 let message = '';

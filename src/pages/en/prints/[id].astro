@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations } from '../../../i18n';
+import { WHATSAPP_PHONE_NUMBER } from '../../../config';
 
 export async function getStaticPaths() {
   const prints = await getCollection('prints');
@@ -29,7 +30,7 @@ const dimensionsInches = `${widthInches} x ${heightInches} inches`;
 const isLandscape = widthCm > heightCm;
 
 // WhatsApp configuration
-const phoneNumber = '1234567890';
+const phoneNumber = WHATSAPP_PHONE_NUMBER;
 const message = `Hello, I'm interested in the artwork "${title}". I would like to get more information.`;
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

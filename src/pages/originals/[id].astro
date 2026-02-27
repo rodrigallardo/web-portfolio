@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations, getLangFromUrl } from '../../i18n';
+import { WHATSAPP_PHONE_NUMBER } from '../../config';
 
 export async function getStaticPaths() {
   const originals = await getCollection('originals');
@@ -21,7 +22,7 @@ const title = artwork.data.titleEs;
 const description = artwork.data.descriptionEs;
 
 // WhatsApp configuration
-const phoneNumber = '1234567890';
+const phoneNumber = WHATSAPP_PHONE_NUMBER;
 const message = `Hola, estoy interesado en la obra "${title}". Me gustaría obtener más información.`;
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
