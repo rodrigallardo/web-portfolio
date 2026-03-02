@@ -3,6 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations, getLangFromUrl } from '../../i18n';
 import { WHATSAPP_PHONE_NUMBER } from '../../config';
+import ArtworkSchema from '../../components/ArtworkSchema.astro';
+import BreadcrumbSchema from '../../components/BreadcrumbSchema.astro';
 
 export async function getStaticPaths() {
   const originals = await getCollection('originals');
@@ -37,6 +39,13 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
 // Determine orientation from dimensions (format: "width x height")
 const [width, height] = artwork.data.dimensionsCm.split('x').map(d => parseInt(d.trim()));
 const isLandscape = width > height;
+
+// Breadcrumb navigation
+const breadcrumbs = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Originales', url: '/' },
+  { name: title, url: `/originals/${artwork.id}` }
+];
 ---
 
 <Layout
@@ -45,6 +54,8 @@ const isLandscape = width > height;
   image={artwork.data.image}
   artworkTitle={title}
 >
+  <ArtworkSchema artwork={artwork} lang="es" isOriginal={true} />
+  <BreadcrumbSchema items={breadcrumbs} />
   <div data-artwork-id={artwork.id} data-artwork-title={title} class="max-w-5xl mx-auto">
     <a
       href={`${baseUrl}/`}

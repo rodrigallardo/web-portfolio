@@ -1,0 +1,46 @@
+---
+/**
+ * Person/Artist Schema for About Page
+ * Tells search engines about Rodrigo Gallardo as an artist
+ */
+import { SITE_URL, SITE_NAME } from '../config';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rodrigo Gallardo",
+  "alternateName": "Rodrigo Gallardo Negrín",
+  "jobTitle": lang === 'es' ? "Artista y Pintor" : "Artist and Painter",
+  "description": lang === 'es'
+    ? "Pintor de Montevideo, Uruguay, especializado en pintura al óleo. Ingeniero de software e IA apasionado por el arte."
+    : "Painter from Montevideo, Uruguay, specializing in oil painting. Software and AI engineer passionate about art.",
+  "url": `${SITE_URL}${lang === 'en' ? '/en' : ''}/about`,
+  "image": `${SITE_URL}/images/me.png`,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Montevideo",
+    "addressCountry": "UY"
+  },
+  "nationality": {
+    "@type": "Country",
+    "name": "Uruguay"
+  },
+  "knowsAbout": [
+    "Oil Painting",
+    "Visual Arts",
+    "Fine Arts"
+  ],
+  "email": "rodrigo.gallardo.negrin@gmail.com",
+  "sameAs": [
+    SITE_URL
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

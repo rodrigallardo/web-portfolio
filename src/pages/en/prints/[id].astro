@@ -3,6 +3,8 @@ import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { useTranslations } from '../../../i18n';
 import { WHATSAPP_PHONE_NUMBER } from '../../../config';
+import ArtworkSchema from '../../../components/ArtworkSchema.astro';
+import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
 
 export async function getStaticPaths() {
   const prints = await getCollection('prints');
@@ -41,6 +43,13 @@ const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
 // SEO meta description
 const metaDescription = description ||
   `${title} - High-quality print by Rodrigo Gallardo. ${dimensionsInches}. ${artwork.data.available ? 'Available for purchase.' : 'Sold out.'}`;
+
+// Breadcrumb navigation
+const breadcrumbs = [
+  { name: 'Home', url: '/en/' },
+  { name: 'Prints', url: '/en/prints' },
+  { name: title, url: `/en/prints/${artwork.id}` }
+];
 ---
 
 <Layout
@@ -49,6 +58,8 @@ const metaDescription = description ||
   image={artwork.data.image}
   artworkTitle={title}
 >
+  <ArtworkSchema artwork={artwork} lang="en" isOriginal={false} />
+  <BreadcrumbSchema items={breadcrumbs} />
   <div data-artwork-id={artwork.id} data-artwork-title={title} class="max-w-5xl mx-auto">
     <a
       href={`${baseUrl}/prints`}

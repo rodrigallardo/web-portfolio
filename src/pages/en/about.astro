@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { useTranslations } from '../../i18n';
 import { WHATSAPP_PHONE_NUMBER } from '../../config';
+import PersonSchema from '../../components/PersonSchema.astro';
 
 const t = useTranslations('en');
 const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}`;
@@ -11,6 +12,7 @@ const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}`;
   title={t('nav.about')}
   description="Rodrigo Gallardo, from Montevideo, Uruguay. Software and AI engineer passionate about art and oil painting."
 >
+  <PersonSchema lang="en" />
   <div class="max-w-5xl mx-auto space-y-8">
     <div class="text-center">
       <h1 class="text-5xl font-bold text-gray-900 mb-12">{t('nav.about')}</h1>

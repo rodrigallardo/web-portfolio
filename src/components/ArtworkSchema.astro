@@ -1,0 +1,77 @@
+---
+/**
+ * VisualArtwork Schema for Artwork Detail Pages
+ * Tells search engines about individual artworks with rich metadata
+ */
+import { SITE_URL } from '../config';
+
+interface Props {
+  artwork: any;
+  lang: 'es' | 'en';
+  isOriginal: boolean;
+}
+
+const { artwork, lang, isOriginal } = Astro.props;
+
+// Get language-specific content
+const title = lang === 'es' ? artwork.data.titleEs : artwork.data.titleEn;
+const description = lang === 'es' ? artwork.data.descriptionEs : artwork.data.descriptionEn;
+
+// Parse dimensions
+const [width, height] = artwork.data.dimensionsCm.split('x').map((d: string) => parseFloat(d.trim()));
+
+// Construct full image URL
+const imageUrl = artwork.data.image.startsWith('http')
+  ? artwork.data.image
+  : `${SITE_URL}${artwork.data.image}`;
+
+// Base schema
+const schema: any = {
+  "@context": "https://schema.org",
+  "@type": "VisualArtwork",
+  "name": title,
+  "creator": {
+    "@type": "Person",
+    "name": "Rodrigo Gallardo",
+    "url": `${SITE_URL}${lang === 'en' ? '/en' : ''}/about`
+  },
+  "image": imageUrl,
+  "artMedium": lang === 'es' ? "Óleo sobre lienzo" : "Oil on canvas",
+  "artform": lang === 'es' ? "Pintura" : "Painting",
+  "dateCreated": artwork.data.year.toString(),
+  "width": {
+    "@type": "QuantitativeValue",
+    "value": width,
+    "unitCode": "CMT"
+  },
+  "height": {
+    "@type": "QuantitativeValue",
+    "value": height,
+    "unitCode": "CMT"
+  },
+  "artworkSurface": lang === 'es' ? "Lienzo" : "Canvas"
+};
+
+// Add description if available
+if (description) {
+  schema.description = description;
+}
+
+// Add price and availability if artwork has a price
+if (artwork.data.price) {
+  schema.offers = {
+    "@type": "Offer",
+    "price": artwork.data.price.replace(/[^0-9.]/g, ''), // Extract numeric value
+    "priceCurrency": "USD",
+    "availability": artwork.data.available
+      ? "https://schema.org/InStock"
+      : "https://schema.org/SoldOut",
+    "url": `${SITE_URL}${lang === 'en' ? '/en' : ''}/${isOriginal ? 'originals' : 'prints'}/${artwork.id}`
+  };
+}
+
+// Add category
+schema.genre = lang === 'es' ? "Arte Contemporáneo" : "Contemporary Art";
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
