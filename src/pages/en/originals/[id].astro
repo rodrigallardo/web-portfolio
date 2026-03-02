@@ -85,6 +85,8 @@ const breadcrumbs = [
         <div class="space-y-6 max-w-3xl">
         <div>
           <h1 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">{title}</h1>
+          {artwork.data.available && (
+          <>
           {artwork.data.price ? (
             <p class="text-3xl font-semibold text-gray-900">{artwork.data.price}</p>
           ) : (
@@ -104,6 +106,8 @@ const breadcrumbs = [
               </svg>
               {t('common.askPrice')}
             </a>
+          )}
+          </>
           )}
         </div>
 
@@ -144,6 +148,7 @@ const breadcrumbs = [
           </p>
         </div>
 
+        {artwork.data.available && (
         <div class="border-t border-gray-200 pt-6">
           <a
             href={whatsappUrl}
@@ -163,6 +168,7 @@ const breadcrumbs = [
             Ask about this artwork
           </a>
         </div>
+        )}
         </div>
       </div>
     ) : (
@@ -211,6 +217,7 @@ const breadcrumbs = [
                   </span>
                 </dd>
               </div>
+              {artwork.data.available && (
               <div>
                 <dt class="text-sm font-medium text-gray-500">Price</dt>
                 <dd>
@@ -236,9 +243,11 @@ const breadcrumbs = [
                   )}
                 </dd>
               </div>
+              )}
             </dl>
           </div>
 
+          {artwork.data.available && (
           <div class="border-t border-gray-200 pt-6">
             <a
               href={whatsappUrl}
@@ -258,6 +267,7 @@ const breadcrumbs = [
               Ask about this artwork
             </a>
           </div>
+          )}
         </div>
       </div>
     )}

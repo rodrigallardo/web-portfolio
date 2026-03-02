@@ -117,6 +117,7 @@ const breadcrumbs = [
                   </span>
                 </dd>
               </div>
+              {artwork.data.available && (
               <div>
                 <dt class="text-sm font-medium text-gray-500">Price</dt>
                 <dd>
@@ -142,9 +143,11 @@ const breadcrumbs = [
                   )}
                 </dd>
               </div>
+              )}
             </dl>
           </div>
 
+          {artwork.data.available && (
           <div class="border-t border-gray-200 pt-6">
             <a
               href={whatsappUrl}
@@ -164,6 +167,7 @@ const breadcrumbs = [
               Ask about this print
             </a>
           </div>
+          )}
         </div>
       </div>
     ) : (
@@ -212,6 +216,7 @@ const breadcrumbs = [
                   </span>
                 </dd>
               </div>
+              {artwork.data.available && (
               <div>
                 <dt class="text-sm font-medium text-gray-500">Price</dt>
                 <dd>
@@ -237,9 +242,11 @@ const breadcrumbs = [
                   )}
                 </dd>
               </div>
+              )}
             </dl>
           </div>
 
+          {artwork.data.available && (
           <div class="border-t border-gray-200 pt-6">
             <a
               href={whatsappUrl}
@@ -259,6 +266,7 @@ const breadcrumbs = [
               Ask about this print
             </a>
           </div>
+          )}
         </div>
       </div>
     )}
