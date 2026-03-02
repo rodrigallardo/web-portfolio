@@ -6,5 +6,6 @@
   "year": 2025,
   "dimensionsCm": "60 x 80",
   "image": "/images/terrazas_palermo.jpeg",
-  "available": true
+  "available": true,
+  "price": "$100"
 }
