@@ -1295,6 +1295,87 @@ export const WHATSAPP_PHONE_NUMBER = 'new-number';
 
 All components automatically use the updated number.
 
+## SEO Meta Description Strategy (2026-03-02)
+
+### Purpose & Placement
+
+**Where Meta Descriptions Appear:**
+1. **Google Search Results** - The text snippet below the page title
+2. **Social Media Shares** - Preview text on Facebook, LinkedIn, Twitter, WhatsApp
+3. **Browser Previews** - Some browsers show in link previews
+4. **NOT on Page Itself** - Only in HTML `<head>` section
+
+**Technical Implementation:**
+- Passed to `SEO.astro` component via `description` prop
+- Rendered in three places:
+  - `<meta name="description">` for search engines
+  - `<meta property="og:description">` for Open Graph (Facebook, LinkedIn, WhatsApp)
+  - `<meta name="twitter:description">` for Twitter Card
+
+### Tone Evolution
+
+**Initial Approach (Professional/Expert):**
+- "artista uruguayo especializado en pintura al óleo"
+- "Uruguayan artist specializing in oil painting"
+- "alta calidad" / "high-quality"
+- "profesionales" / "professional"
+- "apasionado" / "passionate"
+- "Ingeniero de software e IA"
+
+**Updated Approach (Humble/Authentic):**
+- "artista uruguayo que trabaja con pintura al óleo"
+- "Uruguayan artist working with oil painting"
+- Removed qualifiers like "alta calidad", "profesionales"
+- "interesado" / "interested" instead of "apasionado" / "passionate"
+- "Ingeniero de software" (removed "e IA")
+
+**Philosophy:**
+- Focus on work itself, not claimed expertise
+- Remove superlatives and self-promotion
+- More modest, authentic voice
+- Let artwork speak rather than descriptions
+
+### Files Structure
+
+Each page type has its own description:
+
+**Homepage/Originals:**
+- Spanish: Focus on original artworks, oil painting, traditional techniques
+- English: Same content, translated naturally
+
+**Prints:**
+- Spanish: Simple statement about reproductions
+- English: Parallel structure
+
+**About:**
+- Spanish: Location, profession, interest in art
+- English: Mirrored content
+
+**Artwork Detail Pages:**
+- Dynamic: Generated from artwork title + description
+- Format: "[Title] - [First sentence of description]"
+
+### SEO Best Practices Applied
+
+1. **Length:** 120-155 characters (optimal for search results)
+2. **Uniqueness:** Each page has unique description
+3. **Accuracy:** Describes actual page content
+4. **Bilingual:** Full support for ES/EN with natural translations
+5. **No Clickbait:** Honest, straightforward descriptions
+6. **Keyword Inclusion:** Natural mention of "oil painting", "artworks", location
+
+### Impact on Rankings
+
+**Not Direct Ranking Factor:**
+- Google doesn't use meta descriptions for ranking
+- Included for user experience in search results
+
+**Indirect SEO Benefits:**
+- Better click-through rate (CTR) from search results
+- Social media previews encourage shares
+- Professional presentation builds trust
+- Accurate descriptions reduce bounce rate
+
 ## Conclusion
 
 Successfully delivered a production-ready artist portfolio website with:
