@@ -1,6 +1,86 @@
 # Progress Log
 
-## Session: 2026-03-02
+## Session: 2026-03-02 (Continued)
+
+### SEO Phase 2: Structured Data (JSON-LD)
+
+**Goal:** Add invisible structured data to help search engines understand and display site content with rich results.
+
+---
+
+### Structured Data Implementation
+- **Status:** Complete ✅
+- **Started:** 2026-03-02
+- **Completed:** 2026-03-02
+
+**Actions taken:**
+- Created feature branch: feature/structured-data-seo
+- Implemented three schema components:
+
+  **1. PersonSchema.astro:**
+  - Person/Artist schema for About pages
+  - Includes: name, job title, description
+  - Location: Montevideo, Uruguay
+  - Email contact: rodrigo.gallardo.negrin@gmail.com
+  - Knowledge areas: Oil Painting, Visual Arts, Fine Arts
+  - Bilingual support (ES/EN)
+
+  **2. ArtworkSchema.astro:**
+  - VisualArtwork schema for all artwork detail pages
+  - Dynamic data from content collections
+  - Includes: name, creator, image, art medium
+  - Dimensions (QuantitativeValue with CMT units)
+  - Date created, artform, genre
+  - Price and availability (Offer schema)
+  - InStock/SoldOut status when price available
+  - Bilingual descriptions (ES/EN)
+
+  **3. BreadcrumbSchema.astro:**
+  - BreadcrumbList schema for navigation
+  - Shows path: Home → Gallery → Artwork Name
+  - Position-based navigation items
+  - Full URLs for each breadcrumb
+
+- Added schemas to pages:
+  - src/pages/about.astro (Person schema)
+  - src/pages/en/about.astro (Person schema)
+  - src/pages/originals/[id].astro (Artwork + Breadcrumb)
+  - src/pages/prints/[id].astro (Artwork + Breadcrumb)
+  - src/pages/en/originals/[id].astro (Artwork + Breadcrumb)
+  - src/pages/en/prints/[id].astro (Artwork + Breadcrumb)
+
+**Technical details:**
+- All schemas use JSON-LD format (application/ld+json)
+- Completely invisible to users (no UI changes)
+- Follows Schema.org specifications
+- Dynamic content from Astro content collections
+- Proper type definitions for TypeScript
+- Build verified successful (16 pages in 1.39s)
+
+**Files created:**
+- src/components/PersonSchema.astro (46 lines)
+- src/components/ArtworkSchema.astro (77 lines)
+- src/components/BreadcrumbSchema.astro (31 lines)
+
+**Files modified:**
+- 6 page files (2 About pages + 4 artwork detail pages)
+
+**Deployment:**
+- Merged to main
+- Deployed successfully
+- Build: 16 pages
+- Total deployment time: 26s
+- Live on https://rodrigallardo.art
+
+**Verification:**
+- Tested Person schema in built HTML ✓
+- Tested VisualArtwork schema in built HTML ✓
+- Tested BreadcrumbList schema in built HTML ✓
+- All schemas properly formatted and invisible to users ✓
+
+---
+
+## Session: 2026-03-02 (Earlier)
 
 ### Branding & About Page Updates
 
@@ -165,8 +245,11 @@
 | About photo (mobile) | Small screen | Photo after greeting | Correct position | ✅ |
 | WhatsApp link | About page | Uruguay number | 598098182712 | ✅ |
 | Email link | About page | rodrigo.gallardo.negrin@gmail.com | Working | ✅ |
-| Build | npm run build | Success | 16 pages | ✅ |
-| Deployment | git push | Auto-deploy | 27s total | ✅ |
+| Person schema | About page HTML | JSON-LD schema | Present & valid | ✅ |
+| VisualArtwork schema | Artwork pages | JSON-LD schema | Present & valid | ✅ |
+| Breadcrumb schema | Artwork pages | JSON-LD schema | Present & valid | ✅ |
+| Build | npm run build | Success | 16 pages in 1.39s | ✅ |
+| Deployment | git push | Auto-deploy | 26s total | ✅ |
 | Google Analytics | Live site | Data tracking | Working correctly | ✅ |
 
 ## Error Log
@@ -181,12 +264,31 @@
 
 | Question | Answer |
 |----------|--------|
-| Where am I? | Branding & About page complete ✅ |
-| Where am I going? | Content updates & future enhancements |
-| What's the goal? | Professional artist portfolio with personal touch |
-| What have I learned? | Favicon caching, responsive image placement, authentic bio writing |
-| What have I done? | Custom branding, personalized About page, verified Analytics |
+| Where am I? | SEO Phase 2 complete, all major features deployed ✅ |
+| Where am I going? | Testing & verification, content updates |
+| What's the goal? | Professional artist portfolio with SEO optimization |
+| What have I learned? | JSON-LD schemas, invisible SEO metadata, Schema.org specs |
+| What have I done? | Branding, About page, Structured Data - all deployed |
 
 ---
 
-*Session complete - site ready for content updates and ongoing development*
+## Next Steps
+
+1. **Test structured data:**
+   - Use Google Rich Results Test: https://search.google.com/test/rich-results
+   - Test About page: https://rodrigallardo.art/about
+   - Test artwork page: https://rodrigallardo.art/originals/terrazas_palermo
+
+2. **Remaining SEO (Phase 4 & 5):**
+   - Image optimization (lazy loading, WebP)
+   - Google Lighthouse testing
+   - Submit sitemap to Google Search Console
+
+3. **Content updates:**
+   - Replace sample print artworks
+   - Add more original artworks
+   - Create default OG image
+
+---
+
+*Session complete - structured data deployed, ready for testing and content updates*
