@@ -10,15 +10,23 @@ const baseUrl = lang === 'es' ? '' : '/en';
 
 <nav class="bg-gray-50/80 backdrop-blur-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-12 sm:h-14">
-      <div class="flex space-x-6 sm:space-x-10">
+    <div class="flex justify-between items-center h-16 sm:h-18">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href={`${baseUrl}/`} class="flex items-center">
+          <img src="/images/firma_no_bkg.png" alt="Rodrigo Gallardo" class="h-12 sm:h-14 w-auto" />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex md:items-center md:space-x-8">
         <a
           href={`${baseUrl}/`}
           class:list={[
-            "inline-flex items-center text-xs sm:text-sm uppercase tracking-wider font-light transition-colors",
+            "inline-flex items-center text-sm uppercase tracking-wider transition-colors",
             currentPath === `${baseUrl}/` || currentPath === `${baseUrl}`
-              ? "text-gray-900"
-              : "text-gray-400 hover:text-gray-700"
+              ? "text-gray-900 font-medium"
+              : "text-gray-600 hover:text-gray-900 font-light"
           ]}
         >
           {t('nav.originals')}
@@ -26,10 +34,10 @@ const baseUrl = lang === 'es' ? '' : '/en';
         <a
           href={`${baseUrl}/prints`}
           class:list={[
-            "inline-flex items-center text-xs sm:text-sm uppercase tracking-wider font-light transition-colors",
+            "inline-flex items-center text-sm uppercase tracking-wider transition-colors",
             currentPath.includes('/prints')
-              ? "text-gray-900"
-              : "text-gray-400 hover:text-gray-700"
+              ? "text-gray-900 font-medium"
+              : "text-gray-600 hover:text-gray-900 font-light"
           ]}
         >
           {t('nav.prints')}
@@ -37,25 +45,26 @@ const baseUrl = lang === 'es' ? '' : '/en';
         <a
           href={`${baseUrl}/about`}
           class:list={[
-            "inline-flex items-center text-xs sm:text-sm uppercase tracking-wider font-light transition-colors",
+            "inline-flex items-center text-sm uppercase tracking-wider transition-colors",
             currentPath.includes('/about')
-              ? "text-gray-900"
-              : "text-gray-400 hover:text-gray-700"
+              ? "text-gray-900 font-medium"
+              : "text-gray-600 hover:text-gray-900 font-light"
           ]}
         >
           {t('nav.about')}
         </a>
       </div>
 
-      <div class="flex items-center space-x-1">
+      <!-- Desktop Language Switcher -->
+      <div class="hidden md:flex md:items-center md:space-x-1">
         <a
           href={currentPath.replace('/en', '')}
           data-lang-switch="es"
           class:list={[
-            "px-2 py-1 text-xs sm:text-sm font-light uppercase tracking-wide transition-colors",
+            "px-2 py-1 text-sm font-light uppercase tracking-wide transition-colors",
             lang === 'es'
               ? "text-gray-900"
-              : "text-gray-400 hover:text-gray-700"
+              : "text-gray-600 hover:text-gray-900"
           ]}
         >
           ES
@@ -68,10 +77,96 @@ const baseUrl = lang === 'es' ? '' : '/en';
           }
           data-lang-switch="en"
           class:list={[
-            "px-2 py-1 text-xs sm:text-sm font-light uppercase tracking-wide transition-colors",
+            "px-2 py-1 text-sm font-light uppercase tracking-wide transition-colors",
             lang === 'en'
               ? "text-gray-900"
-              : "text-gray-400 hover:text-gray-700"
+              : "text-gray-600 hover:text-gray-900"
+          ]}
+        >
+          EN
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          id="mobile-menu-button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open menu</span>
+          <!-- Hamburger icon -->
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        href={`${baseUrl}/`}
+        class:list={[
+          "block px-3 py-2 rounded-md text-base uppercase tracking-wider transition-colors",
+          currentPath === `${baseUrl}/` || currentPath === `${baseUrl}`
+            ? "text-gray-900 bg-gray-100 font-medium"
+            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-light"
+        ]}
+      >
+        {t('nav.originals')}
+      </a>
+      <a
+        href={`${baseUrl}/prints`}
+        class:list={[
+          "block px-3 py-2 rounded-md text-base uppercase tracking-wider transition-colors",
+          currentPath.includes('/prints')
+            ? "text-gray-900 bg-gray-100 font-medium"
+            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-light"
+        ]}
+      >
+        {t('nav.prints')}
+      </a>
+      <a
+        href={`${baseUrl}/about`}
+        class:list={[
+          "block px-3 py-2 rounded-md text-base uppercase tracking-wider transition-colors",
+          currentPath.includes('/about')
+            ? "text-gray-900 bg-gray-100 font-medium"
+            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-light"
+        ]}
+      >
+        {t('nav.about')}
+      </a>
+
+      <!-- Language Switcher in Mobile Menu -->
+      <div class="pt-4 pb-2 border-t border-gray-200 flex items-center justify-center space-x-2">
+        <a
+          href={currentPath.replace('/en', '')}
+          data-lang-switch="es"
+          class:list={[
+            "px-4 py-2 rounded-md text-sm font-light uppercase tracking-wide transition-colors",
+            lang === 'es'
+              ? "text-gray-900 bg-gray-100"
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          ]}
+        >
+          ES
+        </a>
+        <a
+          href={currentPath.includes('/en')
+            ? currentPath
+            : '/en' + currentPath
+          }
+          data-lang-switch="en"
+          class:list={[
+            "px-4 py-2 rounded-md text-sm font-light uppercase tracking-wide transition-colors",
+            lang === 'en'
+              ? "text-gray-900 bg-gray-100"
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
           ]}
         >
           EN
@@ -80,3 +175,35 @@ const baseUrl = lang === 'es' ? '' : '/en';
     </div>
   </div>
 </nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+      mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    // Close menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  }
+</script>

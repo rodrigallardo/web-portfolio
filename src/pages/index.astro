@@ -25,11 +25,12 @@ const baseUrl = '';
     </div>
 
     {originals.map((artwork) => (
-      <a
-        href={`${baseUrl}/originals/${artwork.id}`}
-        class="group block min-h-[50vh] md:min-h-[60vh] flex items-center justify-center p-4 md:p-6 transition-all duration-500 ease-out hover:bg-gray-100/40"
-      >
-        <div class="max-w-3xl w-full">
+      <div class="flex justify-center py-8">
+        <a
+          href={`${baseUrl}/originals/${artwork.id}`}
+          class="group block transition-all duration-500 ease-out hover:bg-gray-100/40 p-4 rounded-lg"
+        >
+        <div class="max-w-2xl">
           <img
             src={artwork.data.image}
             alt={artwork.data.titleEs}
@@ -52,7 +53,8 @@ const baseUrl = '';
             </div>
           </div>
         </div>
-      </a>
+        </a>
+      </div>
     ))}
   </div>
 </Layout>
