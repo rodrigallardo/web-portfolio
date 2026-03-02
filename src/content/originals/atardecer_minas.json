@@ -6,5 +6,6 @@
   "year": 2024,
   "dimensionsCm": "50 x 40",
   "image": "/images/atardecer_minas.jpeg",
-  "available": true
+  "available": true,
+  "order": 6
 }

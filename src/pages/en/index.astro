@@ -4,7 +4,11 @@ import { getCollection } from 'astro:content';
 import { useTranslations } from '../../i18n';
 
 const t = useTranslations('en');
-const originals = await getCollection('originals');
+const originals = (await getCollection('originals')).sort((a, b) => {
+  const orderA = a.data.order ?? 999;
+  const orderB = b.data.order ?? 999;
+  return orderA - orderB;
+});
 const baseUrl = '/en';
 ---
 
@@ -21,7 +25,7 @@ const baseUrl = '/en';
     </div>
 
     {originals.map((artwork) => (
-      <div class="flex justify-center py-8">
+      <div class="flex justify-center py-4">
         <a
           href={`${baseUrl}/originals/${artwork.id}`}
           class="group block transition-all duration-500 ease-out hover:bg-gray-100/40 p-4 rounded-lg"

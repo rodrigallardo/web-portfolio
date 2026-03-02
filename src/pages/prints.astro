@@ -6,7 +6,11 @@ import { useTranslations, getLangFromUrl } from '../i18n';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const prints = await getCollection('prints');
+const prints = (await getCollection('prints')).sort((a, b) => {
+  const orderA = a.data.order ?? 999;
+  const orderB = b.data.order ?? 999;
+  return orderA - orderB;
+});
 const baseUrl = '';
 ---
 
@@ -25,7 +29,7 @@ const baseUrl = '';
     </div>
 
     {prints.map((artwork) => (
-      <div class="flex justify-center py-8">
+      <div class="flex justify-center py-4">
         <a
           href={`${baseUrl}/prints/${artwork.id}`}
           class="group block transition-all duration-500 ease-out hover:bg-gray-100/40 p-4 rounded-lg"

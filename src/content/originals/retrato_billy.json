@@ -6,5 +6,6 @@
   "year": 2026,
   "dimensionsCm": "50 x 60",
   "image": "/images/retrato_billy.jpeg",
-  "available": false
+  "available": false,
+  "order": 2
 }

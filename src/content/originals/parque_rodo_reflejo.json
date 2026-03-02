@@ -6,5 +6,6 @@
   "year": 2025,
   "dimensionsCm": "80 x 60",
   "image": "/images/parque_rodo_reflejo.jpeg",
-  "available": true
+  "available": true,
+  "order": 4
 }

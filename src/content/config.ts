@@ -10,6 +10,7 @@ const artworkSchema = z.object({
   dimensionsCm: z.string(), // Format: "60 x 80" (width x height in cm)
   image: z.string(),
   available: z.boolean().default(true),
+  order: z.number().optional(), // Display order (lower numbers first)
 });
 
 const originals = defineCollection({

@@ -6,5 +6,6 @@
   "year": 2025,
   "dimensionsCm": "35 x 45",
   "image": "/images/edward_hopper_study.jpeg",
-  "available": true
+  "available": true,
+  "order": 1
 }

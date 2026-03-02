@@ -6,5 +6,6 @@
   "year": 2025,
   "dimensionsCm": "60 x 40",
   "image": "/images/valizas_reflejo.jpeg",
-  "available": true
+  "available": true,
+  "order": 5
 }
