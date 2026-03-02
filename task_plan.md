@@ -5,7 +5,39 @@ All major features complete ✅ - Ready for content updates and future enhanceme
 
 ## Completed Sessions
 
-### Session 2026-03-02: Branding & About Page
+### Session 2026-03-02 (Part 3): Navigation & Gallery UX
+**Status:** Complete ✅
+
+#### Content Updates
+- [x] Add 3 new original artworks (retrato_billy, parque_rodo_reflejo, atardecer_minas)
+- [x] Fix English translations for new artwork descriptions
+- [x] Create print versions of terrazas_palermo and valizas_reflejo
+- [x] Replace all sample artworks with real content
+- **Result:** 6 original artworks, 2 prints, all with proper bilingual content
+
+#### Navigation Redesign
+- [x] Replace favicon with transparent background version (firma_no_bkg.png)
+- [x] Add artist logo to navigation bar (48px mobile, 56px desktop)
+- [x] Implement mobile dropdown menu with hamburger icon
+- [x] Auto-close menu when clicking outside or on links
+- [x] Darken navigation text for better readability (gray-400 → gray-600)
+- [x] Make active page bold (font-medium) for clear indication
+- [x] Desktop: logo left, links center, language switcher right
+- **Result:** Professional branding with mobile-friendly navigation
+
+#### Gallery & Detail Page Improvements
+- [x] Fix landscape painting dimensions (swap width x height)
+- [x] Landscape paintings now display full-width with info below
+- [x] Hide price section when artwork unavailable
+- [x] Hide "Ask about" button when artwork unavailable
+- [x] Reduce clickable area to wrap tightly around images
+- [x] Increase portrait painting display size (max-w-2xl/672px)
+- [x] Reduce spacing between paintings (py-8 → py-4)
+- [x] Add controllable order field to content schema
+- [x] Set custom display order for all artworks
+- **Result:** Tighter UX, consistent ordering, better layout for all orientations
+
+### Session 2026-03-02 (Part 2): Branding & About Page
 **Status:** Complete ✅
 
 #### Part 1: Branding Updates
@@ -94,9 +126,10 @@ All major features complete ✅ - Ready for content updates and future enhanceme
 - **Effort:** Low
 
 ### Content Updates
-- [ ] Replace sample print artworks with real prints
-- [ ] Add more original artworks as created
+- [x] Replace sample print artworks with real prints ✅
+- [x] Add new original artworks (6 total) ✅
 - [ ] Create default Open Graph image (og-default.jpg)
+- [ ] Add more artworks as created (ongoing)
 - **Priority:** High (user-driven)
 
 ## Google Analytics Status

@@ -47,8 +47,17 @@
 - [ ] Consider adding reviews/testimonials schema
 - [ ] Optimize page load speed (currently good)
 
+## Content Updates (Session 2026-03-02)
+- [x] Added 6 original artworks (all real content, no samples)
+- [x] Added 2 print artworks
+- [x] Implemented controllable display order with `order` field
+- [x] Fixed all landscape painting dimensions
+- [x] Improved gallery UX (tighter clickable areas, better spacing)
+- [x] Enhanced navigation with logo and mobile menu
+
 ## Notes
 - Sitemap automatically generated at: https://rodrigallardo.art/sitemap-index.xml
 - robots.txt configured to allow all crawlers
 - hreflang tags implemented for ES/EN language alternates
 - Canonical URLs configured for all pages
+- Artwork order controlled via `order` field in JSON files
