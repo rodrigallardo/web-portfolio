@@ -2,6 +2,7 @@
   "nav": {
     "originals": "Originales",
     "prints": "Impresiones",
+    "studies": "Estudios",
     "about": "Acerca de mí"
   },
   "common": {
@@ -12,6 +13,11 @@
     "mediumValue": "Óleo sobre lienzo",
     "available": "Disponible",
     "sold": "Vendido",
-    "askPrice": "Consultar precio"
+    "askPrice": "Consultar precio",
+    "notForSale": "No está en venta"
+  },
+  "studies": {
+    "intro": "Estudios y copias de artistas que admiro, junto con pinturas originales realizadas como práctica y aprendizaje.",
+    "originalArtist": "Artista original"
   }
 }

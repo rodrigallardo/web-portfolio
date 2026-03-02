@@ -3,9 +3,11 @@
   "titleEn": "Edward Hopper Portrait (Study)",
   "descriptionEs": "Estudio realizado de la obra del famoso pintor estadounidense Edward Hopper.",
   "descriptionEn": "Study based on the work of the famous American painter Edward Hopper.",
+  "studyType": "copy",
+  "originalArtist": "Edward Hopper",
   "year": 2025,
   "dimensionsCm": "35 x 45",
   "image": "/images/edward_hopper_study.jpeg",
-  "available": true,
+  "available": false,
   "order": 1
 }

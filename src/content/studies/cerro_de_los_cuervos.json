@@ -1,0 +1,12 @@
+{
+  "titleEs": "Cerro de los Cuervos (Estudio)",
+  "titleEn": "Cerro de los Cuervos (Study)",
+  "descriptionEs": "Estudio realizado en la Laguna de los Cuervos, Lavalleja.",
+  "descriptionEn": "Study done at Laguna de los Cuervos (Crow's Lake), Lavalleja.",
+  "studyType": "original",
+  "year": 2024,
+  "dimensionsCm": "40 x 30",
+  "image": "/images/cerro_de_los_cuervos.jpeg",
+  "available": true,
+  "order": 2
+}

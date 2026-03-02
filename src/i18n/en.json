@@ -2,6 +2,7 @@
   "nav": {
     "originals": "Originals",
     "prints": "Prints",
+    "studies": "Studies",
     "about": "About me"
   },
   "common": {
@@ -12,6 +13,11 @@
     "mediumValue": "Oil on canvas",
     "available": "Available",
     "sold": "Sold",
-    "askPrice": "Ask price"
+    "askPrice": "Ask price",
+    "notForSale": "Not for sale"
+  },
+  "studies": {
+    "intro": "Studies and copies of artists I admire, along with original paintings created for practice and learning.",
+    "originalArtist": "Original artist"
   }
 }

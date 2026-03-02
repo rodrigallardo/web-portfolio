@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations } from '../../i18n';
+
+const t = useTranslations('en');
+const studies = (await getCollection('studies')).sort((a, b) => {
+  const orderA = a.data.order ?? 999;
+  const orderB = b.data.order ?? 999;
+  return orderA - orderB;
+});
+const baseUrl = '/en';
+---
+
+<Layout
+  title={t('nav.studies')}
+  description="Studies and copies of admired artists, along with original practice paintings by Rodrigo Gallardo."
+>
+  <div class="space-y-0">
+    <div class="text-center pt-12 pb-4">
+      <h1 class="text-5xl font-bold text-gray-900 mb-4">{t('nav.studies')}</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {t('studies.intro')}
+      </p>
+    </div>
+
+    {studies.map((artwork) => (
+      <div class="flex justify-center py-4">
+        <a
+          href={`${baseUrl}/studies/${artwork.id}`}
+          class="group block transition-all duration-500 ease-out hover:bg-gray-100/40 p-4 rounded-lg"
+        >
+          <div class="max-w-2xl">
+          <img
+            src={artwork.data.image}
+            alt={artwork.data.titleEn}
+            class="w-full h-auto max-h-[60vh] object-contain mb-4 transition-all duration-500 ease-out group-hover:scale-[1.01]"
+          />
+          <div class="text-center space-y-2 transition-opacity duration-300 group-hover:opacity-90">
+            <h2 class="text-xl md:text-3xl font-bold text-gray-900">
+              {artwork.data.titleEn}
+            </h2>
+            <div class="flex justify-center items-center gap-4 text-gray-600">
+              {artwork.data.studyType === 'original' && artwork.data.price && (
+                <span class="text-lg font-semibold">{artwork.data.price}</span>
+              )}
+              {artwork.data.studyType === 'copy' ? (
+                <span class="px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800 group-hover:bg-gray-200">
+                  {t('common.notForSale')}
+                </span>
+              ) : (
+                <span class:list={[
+                  "px-3 py-1 text-sm font-medium transition-all duration-300",
+                  artwork.data.available
+                    ? "bg-green-100 text-green-800 group-hover:bg-green-200"
+                    : "bg-gray-100 text-gray-800 group-hover:bg-gray-200"
+                ]}>
+                  {artwork.data.available ? t('common.available') : t('common.sold')}
+                </span>
+              )}
+            </div>
+          </div>
+          </div>
+        </a>
+      </div>
+    ))}
+  </div>
+</Layout>
