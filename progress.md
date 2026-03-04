@@ -167,6 +167,30 @@ studySchema = {
 - **Deploy:** 45s total
 - **Result:** Current prices live on site
 
+**3. Mobile Menu Overlay Fix**
+- **Issue:** Mobile dropdown menu pushed page content down when opened
+- **Problem:** Menu in normal document flow, created layout shift
+- **Fix:** Changed menu to absolute positioning with overlay
+- **Changes:**
+  - Added `absolute top-full left-0 right-0` to mobile menu
+  - Added `relative` to parent nav element
+  - Added `z-50` for proper layering
+  - Enhanced background: `bg-gray-50/95 backdrop-blur-sm`
+  - Added `shadow-lg` for depth
+- **Files:** src/components/Navigation.astro
+- **Deploy:** 37s total
+- **Result:** Mobile menu now overlays content without layout shift
+
+**4. Navbar-to-Header Padding Reduction**
+- **Issue:** Too much vertical spacing between navbar and page headers
+- **User request:** "Remove some of that padding" → "Make it a little bit shorter. what about pt-6?"
+- **Fix:** Reduced padding from `pt-12` (48px) to `pt-6` (24px)
+- **Files updated (8 total):**
+  - Spanish: index.astro, prints.astro, studies.astro, about.astro
+  - English: en/index.astro, en/prints.astro, en/studies.astro, en/about.astro
+- **Deploy:** 36s total
+- **Result:** Tighter, more compact layout with better vertical space usage
+
 ---
 
 ## Session: 2026-03-02 (Part 4)

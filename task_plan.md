@@ -54,10 +54,12 @@ All major features complete ✅ - Ready for content updates and future enhanceme
 - [x] common.notForSale (ES/EN)
 - **Result:** Complete bilingual support
 
-#### Minor Fixes
+#### UI/UX Fixes & Refinements
 - [x] Fix About page title alignment (add pt-12 padding)
 - [x] Update print prices (Valizas Reflejo, Terrazas Palermo)
-- **Result:** All page titles aligned, current prices live
+- [x] Fix mobile menu to overlay instead of shifting content
+- [x] Reduce padding between navbar and page headers (pt-12 → pt-6)
+- **Result:** Tighter layout, better mobile UX, consistent spacing
 
 **Build Stats:**
 - Pages built: 26 (was 22)

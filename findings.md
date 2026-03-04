@@ -1527,6 +1527,94 @@ Schema supports:
 4. **Conditional UI** - studyType field enables smart UI decisions
 5. **Documentation** - Clear intro text sets user expectations
 
+## UI/UX Refinements (2026-03-03/04)
+
+### Mobile Menu Overlay Fix
+
+**Problem:**
+Mobile dropdown menu was in the normal document flow, causing page content to shift down when menu opened. This created a jarring user experience on mobile devices.
+
+**Solution:**
+Changed mobile menu from static positioning to absolute overlay.
+
+**Technical implementation:**
+```css
+/* Before */
+<div id="mobile-menu" class="hidden md:hidden">
+
+/* After */
+<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-gray-50/95 backdrop-blur-sm shadow-lg z-50">
+```
+
+**Key changes:**
+- `absolute` positioning removes menu from document flow
+- `top-full` positions menu directly below navbar
+- `left-0 right-0` makes menu full-width
+- `z-50` ensures menu appears above content
+- `bg-gray-50/95 backdrop-blur-sm` creates elegant semi-transparent overlay
+- `shadow-lg` adds depth for better visual separation
+
+**Parent nav adjustment:**
+- Added `relative` to nav element for absolute positioning context
+
+**Result:**
+- Menu overlays content instead of pushing it down
+- No layout shift when opening/closing menu
+- Smooth backdrop blur effect
+- Better mobile UX
+
+### Navbar-to-Header Spacing Optimization
+
+**Problem:**
+Too much vertical spacing between navigation bar and page headers (titles) on all pages, both desktop and mobile.
+
+**User feedback:**
+"There's a little bit too much padding between the nav bar and the page header... remove some of that padding"
+→ "Make it a little bit shorter. what about pt-6?"
+
+**Solution:**
+Reduced top padding from `pt-12` (48px) to `pt-6` (24px) across all pages.
+
+**Files updated:**
+```
+Spanish pages (4):
+- src/pages/index.astro (Originals)
+- src/pages/prints.astro
+- src/pages/studies.astro
+- src/pages/about.astro
+
+English pages (4):
+- src/pages/en/index.astro
+- src/pages/en/prints.astro
+- src/pages/en/studies.astro
+- src/pages/en/about.astro
+```
+
+**Change:**
+```html
+<!-- Before -->
+<div class="text-center pt-12 pb-4">
+
+<!-- After -->
+<div class="text-center pt-6 pb-4">
+```
+
+**Result:**
+- Reduced vertical spacing by 50% (48px → 24px)
+- Tighter, more compact layout
+- Better use of vertical screen space
+- Consistent spacing across all pages
+- More professional appearance
+
+### Design Philosophy
+
+These refinements follow the minimal gallery aesthetic:
+- **Less is more** - Reduce unnecessary spacing
+- **Content first** - Maximize space for artwork
+- **Smooth interactions** - Overlay menu instead of jarring shifts
+- **Consistency** - Same spacing across all pages
+- **Mobile-friendly** - Better experience on smaller screens
+
 ## SEO Meta Description Strategy (2026-03-02)
 
 ### Purpose & Placement
