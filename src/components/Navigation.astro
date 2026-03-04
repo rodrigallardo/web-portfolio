@@ -8,7 +8,7 @@ const currentPath = Astro.url.pathname;
 const baseUrl = lang === 'es' ? '' : '/en';
 ---
 
-<nav class="bg-gray-50/80 backdrop-blur-sm">
+<nav class="bg-gray-50/80 backdrop-blur-sm relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16 sm:h-18">
       <!-- Logo -->
@@ -117,7 +117,7 @@ const baseUrl = lang === 'es' ? '' : '/en';
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden">
+  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-gray-50/95 backdrop-blur-sm shadow-lg z-50">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <a
         href={`${baseUrl}/`}
