@@ -1,222 +1,222 @@
-# Task Plan: Web Portfolio Development
+# Task Plan: Painting Perspective Correction Tool
 
 ## Current Status
-All major features complete ✅ - Ready for content updates and future enhancements
+Planning phase - Experimental image processing tool (separate from web portfolio)
 
-## Completed Sessions
+## Project Overview
 
-### Session 2026-03-02/03 (Part 5): Studies Section Implementation
-**Status:** Complete ✅
+**Goal:** Build a web-based tool to automatically correct perspective distortions in painting photographs
 
-#### Research & Design Decision
-- [x] Research artist portfolio best practices for categorizing studies/copies
-- [x] Evaluate separate tab vs filter approach
-- [x] Decision: Separate "Studies" navigation tab (based on UX research)
-- **Research findings:** 4-7 tabs ideal, separate pages > filters, studies show artistic development
-- **Result:** Research-backed decision for clean, discoverable design
+**Context:** This is an experimental feature unrelated to the main web portfolio. It's a standalone utility to speed up photo post-processing for artwork images before uploading to the website.
 
-#### Studies Content Collection
-- [x] Create studies collection with new schema
-- [x] Add studyType field ('copy' or 'original')
-- [x] Add originalArtist field for copies (e.g., "Edward Hopper")
-- [x] Implement conditional pricing logic (copies not for sale)
-- [x] Move Edward Hopper study from originals to studies
-- **Result:** Type-safe studies collection with smart pricing
+**Branch:** `feature/painting-perspective-correction` (isolated from main portfolio)
 
-#### Navigation Updates
-- [x] Add "Estudios" / "Studies" tab to navigation
-- [x] New order: Originales | Impresiones | Estudios | Acerca de mí
-- [x] Update desktop and mobile navigation components
-- [x] Stays within 4-7 tab best practice
-- **Result:** Clean navigation with 4 content tabs
+## Problem Statement
 
-#### Pages Created
-- [x] Spanish studies gallery page (/studies)
-- [x] Spanish studies detail pages (/studies/[id])
-- [x] English studies gallery page (/en/studies)
-- [x] English studies detail pages (/en/studies/[id])
-- [x] Intro text explaining both copies and original practice work
-- **Result:** 4 new pages, full bilingual support
+### Photography Challenges
+- Camera not perfectly perpendicular to painting center
+- Lens distortion effects
+- Resulting image distortions:
+  - Straight lines appear curved
+  - Trapezoidal shapes instead of rectangles
+  - Warped dimensions
 
-#### Features Implemented
-- [x] Display "Original artist" field for copies
-- [x] Show "Not for sale" badge for copies
-- [x] Allow pricing for original studies
-- [x] WhatsApp contact only for available originals
-- [x] Same scrollable gallery layout as other sections
-- [x] Inch/cm conversions for English pages
-- **Result:** Smart conditional UI based on study type
+### Current Workflow Pain Points
+- Manual correction is time-consuming
+- Inconsistent results
+- Need faster, automated solution
 
-#### Translations Added
-- [x] nav.studies (ES/EN)
-- [x] studies.intro (ES/EN)
-- [x] studies.originalArtist (ES/EN)
-- [x] common.notForSale (ES/EN)
-- **Result:** Complete bilingual support
+## Technical Requirements
 
-#### UI/UX Fixes & Refinements
-- [x] Fix About page title alignment (add pt-12 padding)
-- [x] Update print prices (Valizas Reflejo, Terrazas Palermo)
-- [x] Fix mobile menu to overlay instead of shifting content
-- [x] Reduce padding between navbar and page headers (pt-12 → pt-6)
-- **Result:** Tighter layout, better mobile UX, consistent spacing
+### 1. Image Processing Algorithm
+- **Automatic border detection**
+  - Detect painting edges (may be curved due to distortion)
+  - Assumptions:
+    - Paintings on black mantle
+    - White wall background
+    - Centered in frame
+- **Perspective correction**
+  - Transform borders to perfect rectangle
+  - Minimize transformation to avoid corrupting painting
+  - Preserve texture and detail quality
+- **Smart cropping**
+  - Crop to corrected rectangle
+  - Remove background
+- **Frame handling**
+  - Detect multiple border sets (framed paintings)
+  - Select outermost border to preserve frame
 
-**Build Stats:**
-- Pages built: 26 (was 22)
-- Files modified: 11
-- Files created: 7
-- Deploy time: 37s
+### 2. User Interface Requirements
+- **Deployment:** Local web server (localhost only)
+- **Core workflow:**
+  1. Upload image from local files
+  2. Process with algorithm (automatic)
+  3. Preview corrected result
+  4. Save to local files if satisfactory
+- **Tuneable parameters:**
+  - Expose algorithm parameters for fine-tuning
+  - UI controls to adjust if automatic detection fails
+  - Real-time preview of parameter changes
 
-### Session 2026-03-02 (Part 4): Humble SEO Descriptions
-**Status:** Complete ✅
+## Phases
 
-#### SEO Meta Description Updates
-- [x] Make description text more humble and modest
-- [x] Update Spanish home page (index.astro)
-- [x] Update Spanish prints page
-- [x] Update Spanish about page
-- [x] Update English home page
-- [x] Update English prints page
-- [x] Update English about page
-- **Changes:** Removed "especializado"/"specializing", "alta calidad"/"high-quality", "profesionales"/"professional", "apasionado"/"passionate" + "e IA"/"and AI"
-- **New tone:** More modest, focus on work rather than expertise
-- **Result:** 6 files updated, SEO descriptions now humble and authentic
+### Phase 1: Research & Planning ⏳
+**Status:** In Progress
+**Started:** 2026-03-04
 
-### Session 2026-03-02 (Part 3): Navigation & Gallery UX
-**Status:** Complete ✅
+**Tasks:**
+- [ ] Research classical computer vision algorithms for edge detection
+- [ ] Research perspective transformation techniques (OpenCV, scikit-image, etc.)
+- [ ] Evaluate Python vs Node.js for image processing
+- [ ] Research border detection algorithms (Canny, Hough, contour detection)
+- [ ] Design algorithm pipeline architecture
+- [ ] Choose tech stack (backend + frontend)
+- [ ] Document findings in findings.md
 
-#### Content Updates
-- [x] Add 3 new original artworks (retrato_billy, parque_rodo_reflejo, atardecer_minas)
-- [x] Fix English translations for new artwork descriptions
-- [x] Create print versions of terrazas_palermo and valizas_reflejo
-- [x] Replace all sample artworks with real content
-- **Result:** 6 original artworks, 2 prints, all with proper bilingual content
+**Key Questions:**
+- Which library provides best edge detection for paintings?
+- How to handle curved edges vs straight edges?
+- What parameters need to be tunable?
+- Best approach for frame detection?
 
-#### Navigation Redesign
-- [x] Replace favicon with transparent background version (firma_no_bkg.png)
-- [x] Add artist logo to navigation bar (48px mobile, 56px desktop)
-- [x] Implement mobile dropdown menu with hamburger icon
-- [x] Auto-close menu when clicking outside or on links
-- [x] Darken navigation text for better readability (gray-400 → gray-600)
-- [x] Make active page bold (font-medium) for clear indication
-- [x] Desktop: logo left, links center, language switcher right
-- **Result:** Professional branding with mobile-friendly navigation
+### Phase 2: Tech Stack Selection 📋
+**Status:** Pending
 
-#### Gallery & Detail Page Improvements
-- [x] Fix landscape painting dimensions (swap width x height)
-- [x] Landscape paintings now display full-width with info below
-- [x] Hide price section when artwork unavailable
-- [x] Hide "Ask about" button when artwork unavailable
-- [x] Reduce clickable area to wrap tightly around images
-- [x] Increase portrait painting display size (max-w-2xl/672px)
-- [x] Reduce spacing between paintings (py-8 → py-4)
-- [x] Add controllable order field to content schema
-- [x] Set custom display order for all artworks
-- **Result:** Tighter UX, consistent ordering, better layout for all orientations
+**Tasks:**
+- [ ] Choose backend language/framework
+- [ ] Choose computer vision library
+- [ ] Choose frontend framework (React, Vue, vanilla JS?)
+- [ ] Choose build/bundling tools
+- [ ] Document rationale for each choice
 
-### Session 2026-03-02 (Part 2): Branding & About Page
-**Status:** Complete ✅
+**Candidates:**
+- Backend: Python (OpenCV, scikit-image, PIL) vs Node.js (sharp, opencv4nodejs)
+- Frontend: React/Vue vs Vanilla HTML/JS
+- Local server: Flask/FastAPI vs Express
 
-#### Part 1: Branding Updates
-- [x] Create custom "RG" favicon (dark gray background, white serif text)
-- [x] Update all page titles from "Artist Portfolio" to "Rodrigo Gallardo"
-- [x] Remove old Astro favicon.ico
-- [x] Update 11 page files (Spanish + English)
-- **Result:** Professional, personalized branding across all pages
+### Phase 3: Core Algorithm Implementation 🔧
+**Status:** Pending
 
-#### Part 2: About Page Personalization
-- [x] Update navigation: "Acerca de mí" / "About me"
-- [x] Add personal photo (public/images/me.png, 2.5MB)
-- [x] Write authentic, personal bio
-- [x] Mention Montevideo, Uruguay
-- [x] Highlight software/AI engineering + art passion
-- [x] Create responsive layout (text left, photo right on desktop)
-- [x] Mobile: photo after first paragraph
-- [x] Add WhatsApp + email contact info
-- [x] Translate to English
-- **Result:** Genuine, welcoming About page with personal touch
+**Tasks:**
+- [ ] Implement border detection
+- [ ] Implement perspective transformation
+- [ ] Implement cropping
+- [ ] Implement frame detection (outermost border selection)
+- [ ] Test with sample painting photos
+- [ ] Tune default parameters
+- [ ] Handle edge cases (poor lighting, angled photos, etc.)
 
-### Session 2026-03-02 (Continued): SEO Phase 2 - Structured Data
-**Status:** Complete ✅
+**Success Criteria:**
+- Algorithm successfully detects borders in 80%+ of test images
+- Perspective correction produces rectangular output
+- No visible warping or corruption of painting details
 
-#### Structured Data (JSON-LD) Implementation
-- [x] Create PersonSchema.astro component for About pages
-- [x] Create ArtworkSchema.astro component for artwork detail pages
-- [x] Create BreadcrumbSchema.astro component for navigation
-- [x] Add Person schema with artist info (Montevideo, Uruguay)
-- [x] Add VisualArtwork schema with dimensions, price, availability
-- [x] Add breadcrumb navigation for all artwork pages
-- [x] Bilingual support (ES/EN)
-- [x] Test build and verify schemas in HTML
-- **Result:** Rich results in Google search, better artwork discovery
+### Phase 4: Web UI Development 🎨
+**Status:** Pending
 
-### Session 2026-02-27: SEO Implementation
-**Status:** Complete ✅
+**Tasks:**
+- [ ] Create file upload interface
+- [ ] Implement image preview (before/after)
+- [ ] Add parameter adjustment controls
+- [ ] Add save/download functionality
+- [ ] Style UI (minimal, functional)
+- [ ] Handle errors gracefully
+- [ ] Add loading states
 
-#### Phase 1: Meta Tags & Open Graph
-- [x] Create SEO.astro component
-- [x] Add meta descriptions to all 11 pages
-- [x] Implement Open Graph tags (Facebook, LinkedIn sharing)
-- [x] Add Twitter Card tags
-- [x] Configure canonical URLs
-- [x] Add hreflang tags for ES/EN
-- [x] Pass artwork images as og:image
-- **Result:** Professional social media sharing with previews
+**UI Components:**
+- File input (drag-drop + browse)
+- Before/after image display (side-by-side or toggle)
+- Parameter sliders/inputs
+- Save button
+- Status/error messages
 
-#### Phase 3: Sitemap & Robots.txt
-- [x] Install @astrojs/sitemap integration
-- [x] Generate XML sitemap (16 pages)
-- [x] Create robots.txt
-- [x] Configure sitemap URL
-- **Result:** Better search engine discovery
+### Phase 5: Integration & Testing 🧪
+**Status:** Pending
 
-### Previous Sessions: Core Platform
-- [x] Custom domain (rodrigallardo.art)
-- [x] WhatsApp integration (Uruguay number)
-- [x] Google Analytics 4 tracking
-- [x] Bilingual support (ES/EN)
-- [x] Minimal gallery UI redesign
-- [x] Responsive design
-- [x] CI/CD deployment
+**Tasks:**
+- [ ] Connect frontend to backend API
+- [ ] Test full workflow end-to-end
+- [ ] Test with various painting photos
+- [ ] Test with framed vs unframed paintings
+- [ ] Test edge cases (poor quality, extreme angles)
+- [ ] Optimize processing speed
+- [ ] Document usage instructions
 
-## Pending Work (Future Enhancements)
+**Test Cases:**
+- Portrait orientation paintings
+- Landscape orientation paintings
+- Framed paintings (multiple borders)
+- Unframed paintings
+- Various lighting conditions
+- Different camera angles
 
-### SEO - Phase 2: Structured Data ✅ COMPLETE
-- [x] Add Person/Artist schema for about page
-- [x] Add VisualArtwork schema for artwork detail pages
-- [x] Add BreadcrumbList schema
-- [ ] Test with Google Rich Results Test (user action)
-- **Status:** Complete - deployed to production
+### Phase 6: Documentation & Deployment 📚
+**Status:** Pending
 
-### SEO - Phase 4: Image Optimization (TODO.md)
-- [ ] Add lazy loading to images
-- [ ] Consider WebP format
-- [ ] Verify all alt text
-- **Priority:** Low
-- **Effort:** Low
+**Tasks:**
+- [ ] Write README for the tool
+- [ ] Document algorithm parameters
+- [ ] Create usage guide with screenshots
+- [ ] Add troubleshooting section
+- [ ] Setup instructions for localhost deployment
+- [ ] Future improvements list
 
-### SEO - Phase 5: Testing (TODO.md)
-- [ ] Google Lighthouse test
-- [ ] Social media debuggers verification
-- [ ] Submit sitemap to Google Search Console
-- **Priority:** Medium
-- **Effort:** Low
+## Design Decisions
 
-### Content Updates
-- [x] Replace sample print artworks with real prints ✅
-- [x] Add new original artworks (6 total) ✅
-- [ ] Create default Open Graph image (og-default.jpg)
-- [ ] Add more artworks as created (ongoing)
-- **Priority:** High (user-driven)
+### To Be Decided:
+- [ ] Python vs Node.js backend?
+- [ ] Which edge detection algorithm? (Canny, Sobel, etc.)
+- [ ] How to distinguish frame from painting edge?
+- [ ] Parameter exposure strategy (which to expose, which to hardcode)
+- [ ] Image format handling (JPEG, PNG, TIFF, etc.)
 
-## Google Analytics Status
-- ✅ Configured for custom domain (rodrigallardo.art)
-- ✅ Tracking verified and working correctly
-- ✅ Enhanced measurement enabled
-- ✅ Custom events: artwork views, WhatsApp clicks, language switches
+## Constraints & Considerations
+
+### Technical Constraints:
+- Local deployment only (no cloud/hosting needed)
+- Must handle high-resolution images (artwork photos)
+- Processing time should be reasonable (<10 seconds)
+- Output quality must preserve painting details
+
+### User Experience:
+- Simple, intuitive interface
+- Fast feedback (preview quickly)
+- Easy to iterate (adjust parameters, re-process)
+- Clear error messages
+
+### Future Extensibility:
+- Batch processing multiple images?
+- Save preset parameter configurations?
+- Export processing history/settings?
+
+## Success Criteria
+
+**Minimum Viable Product (MVP):**
+- ✅ Automatically detects painting borders
+- ✅ Corrects perspective to rectangle
+- ✅ Crops to final image
+- ✅ Simple web UI for upload/preview/save
+- ✅ Works on localhost
+
+**Nice to Have:**
+- Parameter tuning UI
+- Batch processing
+- Preset configurations
+- Processing history
 
 ## Notes
-- Site: https://rodrigallardo.art
-- Repository: https://github.com/rodrigallardo/web-portfolio
-- All features deployed and production-ready
-- Future work documented in TODO.md
+
+- Keep isolated in feature branch (unrelated to main portfolio)
+- Experimental - okay if not perfect
+- Primary goal: speed up workflow, not production-ready tool
+- Can iterate based on real-world usage
+
+## Errors Encountered
+
+| Error | Attempt | Resolution |
+|-------|---------|------------|
+| (none yet) | - | - |
+
+---
+
+**Next Step:** Begin Phase 1 research on computer vision algorithms and tech stack options

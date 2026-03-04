@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painting Perspective Corrector</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖼️ Painting Perspective Corrector</h1>
+            <p class="subtitle">Automatic perspective correction for artwork photographs</p>
+        </header>
+
+        <main>
+            <!-- File Upload Section -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="upload-text">Drag & drop a painting photo here</p>
+                    <p class="upload-subtext">or click to browse (RAW, JPEG, PNG supported)</p>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/jpg,.cr2,.cr3,.nef,.arw,.raf,.orf,.rw2,.dng,.raw" hidden>
+                </div>
+            </section>
+
+            <!-- Parameters Section -->
+            <section class="parameters-section" id="parametersSection" style="display: none;">
+                <h2>Adjust Parameters (Optional)</h2>
+                <p class="help-text">Default values work well for most images. Adjust only if automatic detection fails.</p>
+
+                <div class="parameter-grid">
+                    <div class="parameter">
+                        <label for="whiteThreshold">
+                            White Wall Threshold: <span id="whiteThresholdValue">140</span>
+                        </label>
+                        <input type="range" id="whiteThreshold" min="100" max="240" value="140" step="5">
+                        <small>Brightness for detecting white wall background</small>
+                    </div>
+
+                    <div class="parameter">
+                        <label for="blackThreshold">
+                            Black Mantle Threshold: <span id="blackThresholdValue">30</span>
+                        </label>
+                        <input type="range" id="blackThreshold" min="5" max="100" value="30" step="5">
+                        <small>Brightness for detecting black mantle (lower = only darkest blacks)</small>
+                    </div>
+
+                    <div class="parameter">
+                        <label for="morphKernel">
+                            Morphology Kernel: <span id="morphKernelValue">15</span>
+                        </label>
+                        <input type="range" id="morphKernel" min="5" max="35" value="15" step="2">
+                        <small>Larger kernels fill bigger gaps</small>
+                    </div>
+
+                    <div class="parameter">
+                        <label for="morphIterations">
+                            Morphology Iterations: <span id="morphIterationsValue">3</span>
+                        </label>
+                        <input type="range" id="morphIterations" min="1" max="7" value="3" step="1">
+                        <small>More iterations = stronger smoothing</small>
+                    </div>
+
+                    <div class="parameter">
+                        <label for="erosion">
+                            Erosion Iterations: <span id="erosionValue">3</span>
+                        </label>
+                        <input type="range" id="erosion" min="1" max="10" value="3" step="1">
+                        <small>Higher = better edge separation (may lose detail)</small>
+                    </div>
+
+                    <div class="parameter">
+                        <label for="epsilon">
+                            Corner Precision: <span id="epsilonValue">0.005</span>
+                        </label>
+                        <input type="range" id="epsilon" min="0.001" max="0.020" value="0.005" step="0.001">
+                        <small>Lower = more precise corners</small>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="debugBtn" class="btn btn-secondary">
+                        🔍 Show Debug Masks
+                    </button>
+                    <button id="visualizeBtn" class="btn btn-secondary">
+                        👁️ Visualize Detection
+                    </button>
+                    <button id="processBtn" class="btn btn-primary">
+                        ✨ Correct Perspective
+                    </button>
+                </div>
+            </section>
+
+            <!-- Debug Section -->
+            <section class="debug-section" id="debugSection" style="display: none;">
+                <h2>Debug Visualization</h2>
+                <p class="help-text">Adjust parameters above and this view will update in real-time</p>
+
+                <div class="debug-grid">
+                    <div class="debug-item">
+                        <h4>1. White Mask</h4>
+                        <img id="whiteMask" alt="White mask">
+                        <small>Threshold: <span id="whiteDebug">140</span></small>
+                    </div>
+                    <div class="debug-item">
+                        <h4>2. Black Mask</h4>
+                        <img id="blackMask" alt="Black mask">
+                        <small>Threshold: <span id="blackDebug">30</span></small>
+                    </div>
+                    <div class="debug-item">
+                        <h4>3. Combined</h4>
+                        <img id="combinedMask" alt="Combined mask">
+                        <small>White + Black</small>
+                    </div>
+                    <div class="debug-item">
+                        <h4>4. Inverted</h4>
+                        <img id="invertedMask" alt="Inverted mask">
+                        <small>Painting region</small>
+                    </div>
+                    <div class="debug-item">
+                        <h4>5. Clean</h4>
+                        <img id="cleanMask" alt="Clean mask">
+                        <small>Morphology</small>
+                    </div>
+                    <div class="debug-item">
+                        <h4>6. Eroded</h4>
+                        <img id="erodedMask" alt="Eroded mask">
+                        <small>Iter: <span id="erosionDebug">3</span></small>
+                    </div>
+                    <div class="debug-item full-width">
+                        <h4>7. Corner Detection</h4>
+                        <img id="detectionMask" alt="Corner detection">
+                        <small>Final result</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section class="preview-section" id="previewSection" style="display: none;">
+                <h2>Results</h2>
+
+                <div class="preview-grid">
+                    <div class="preview-item">
+                        <h3>Original</h3>
+                        <div class="image-container">
+                            <img id="originalImage" alt="Original image">
+                        </div>
+                    </div>
+
+                    <div class="preview-item">
+                        <h3>Corrected</h3>
+                        <div class="image-container">
+                            <img id="correctedImage" alt="Corrected image">
+                            <div class="loading-spinner" id="loadingSpinner">
+                                <div class="spinner"></div>
+                                <p>Processing...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-info" id="resultInfo" style="display: none;">
+                    <p class="status-message" id="statusMessage"></p>
+                    <p class="dimensions" id="dimensions"></p>
+                </div>
+
+                <div class="button-group">
+                    <button id="downloadBtn" class="btn btn-success" style="display: none;">
+                        💾 Download Corrected Image
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary">
+                        🔄 Process Another Image
+                    </button>
+                </div>
+            </section>
+
+            <!-- Status Messages -->
+            <div class="status-bar" id="statusBar" style="display: none;">
+                <p id="statusText"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p class="info-text">
+                <strong>Quality Preservation:</strong> This tool uses maximum quality settings (LANCZOS4 interpolation)
+                to preserve your painting's original resolution and detail.
+            </p>
+            <p class="info-text">
+                <strong>Privacy:</strong> All processing happens locally on your machine. Images are not uploaded to any cloud service.
+            </p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
