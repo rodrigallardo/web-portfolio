@@ -11,11 +11,12 @@
 
 Successfully built and deployed a bilingual artist portfolio website with:
 - Static site generation (Astro + TypeScript + Tailwind CSS)
-- Two artwork galleries (Originals and Prints)
+- Three artwork galleries (Originals, Prints, and Studies)
 - Bilingual support (Spanish default, English)
 - WhatsApp contact integration
 - Automatic CI/CD deployment via GitHub Actions
 - Classic gallery aesthetic optimized for showcasing artwork
+- Smart pricing logic for studies (copies vs original practice work)
 
 ## Tech Stack (Implemented)
 
@@ -1294,6 +1295,237 @@ export const WHATSAPP_PHONE_NUMBER = 'new-number';
 ```
 
 All components automatically use the updated number.
+
+## Studies Section Implementation (2026-03-02/03)
+
+### Project Goal
+Create a dedicated section for practice paintings and copies of admired artists, separate from the main Originals gallery.
+
+### Problem Statement
+- Artist has paintings that are studies/practice work
+- Some are copies of famous artists (e.g., Edward Hopper)
+- Some are original paintings made for practice
+- Copies should not be for sale
+- Original studies can potentially be for sale
+- Needed clear categorization without cluttering navigation
+
+### Research Process
+
+**Question:** Separate navigation tab vs filter on Originals page?
+
+**Research conducted:**
+1. Artist portfolio categorization best practices (15+ sources)
+2. Oil painter website navigation structures
+3. UX research on filtering vs separate pages
+4. Navigation tab limits (4-7 tabs recommended)
+
+**Key findings:**
+- Separate pages preferred over filters for different work types
+- 4-7 navigation tabs is ideal (was at 3, adding 1 = 4)
+- Studies show artistic development (valuable to include)
+- Filtering adds UI complexity and reduces discoverability
+- Artist portfolios favor simple, direct navigation
+
+**Sources:**
+- [Artist Run Website - Portfolio Organization](https://www.artistrunwebsite.com/)
+- [Contemporary Art Issue - Professional Portfolio](https://www.contemporaryartissue.com/)
+- [Sitebuilder Report - Art Portfolios](https://www.sitebuillerreport.com/)
+
+### Design Decision
+
+**Chosen approach:** Separate "Studies" navigation tab
+
+**Rationale:**
+- Fits within 4-7 tab best practice
+- Clear conceptual separation
+- Better discoverability than filters
+- Maintains minimal aesthetic
+- Follows research recommendations
+- Allows for detailed intro explanation
+
+**Rejected approach:** Filtering on Originals page
+- Adds UI complexity
+- Less discoverable (hidden behind interaction)
+- Goes against research findings
+- More code complexity
+- Difficult on mobile
+
+### Technical Implementation
+
+#### Content Schema
+
+Created new `studySchema` with enhanced fields:
+
+```typescript
+const studySchema = z.object({
+  titleEs: z.string(),
+  titleEn: z.string(),
+  descriptionEs: z.string(),
+  descriptionEn: z.string(),
+  studyType: z.enum(['copy', 'original']), // NEW
+  originalArtist: z.string().optional(),   // NEW
+  price: z.string().optional(),
+  year: z.number(),
+  dimensionsCm: z.string(),
+  image: z.string(),
+  available: z.boolean().default(true),
+  order: z.number().optional(),
+});
+```
+
+**New fields:**
+- `studyType`: Distinguishes copies from original practice work
+- `originalArtist`: Credits original artist for copies (e.g., "Edward Hopper")
+
+**Business logic:**
+```
+IF studyType === 'copy':
+  - Show "Not for sale" badge
+  - Hide price field
+  - Hide WhatsApp contact button
+  - Display originalArtist field
+
+IF studyType === 'original':
+  - Show price if set
+  - Show availability status
+  - Show WhatsApp button if available
+  - No originalArtist field
+```
+
+#### Navigation Structure
+
+**Updated order:**
+```
+Spanish: Originales | Impresiones | Estudios | Acerca de mí
+English: Originals  | Prints      | Studies  | About me
+```
+
+**Files modified:**
+- `src/components/Navigation.astro` - Added Studies link (desktop + mobile)
+
+**Tab count:** 4 content tabs (within 4-7 best practice)
+
+#### Pages Created
+
+**Spanish:**
+1. `/studies` - Gallery list page
+2. `/studies/[id]` - Dynamic detail pages
+
+**English:**
+3. `/en/studies` - Gallery list page
+4. `/en/studies/[id]` - Dynamic detail pages
+
+**Shared features:**
+- Same scrollable gallery layout
+- Orientation-aware responsive design (landscape vs portrait)
+- Bilingual content
+- Inch/cm conversions for English
+
+#### Intro Text
+
+Added explanatory text at top of Studies pages:
+
+**Spanish:**
+> "Estudios y copias de artistas que admiro, junto con pinturas originales realizadas como práctica y aprendizaje."
+
+**English:**
+> "Studies and copies of artists I admire, along with original paintings created for practice and learning."
+
+**Purpose:**
+- Clarifies what "Studies" means
+- Sets expectations (includes both copies and originals)
+- Transparent about learning/practice nature
+
+#### i18n Updates
+
+**New translations added:**
+
+```json
+{
+  "nav.studies": "Estudios" / "Studies",
+  "studies.intro": "[full intro text]",
+  "studies.originalArtist": "Artista original" / "Original artist",
+  "common.notForSale": "No está en venta" / "Not for sale"
+}
+```
+
+#### UI Conditional Logic
+
+**Detail pages display:**
+
+```astro
+{artwork.data.originalArtist && (
+  <div>
+    <dt>Original artist</dt>
+    <dd>{artwork.data.originalArtist}</dd>
+  </div>
+)}
+
+{isCopy ? (
+  <span class="bg-gray-100">Not for sale</span>
+) : (
+  <span class={artwork.data.available ? "bg-green-100" : "bg-gray-100"}>
+    {artwork.data.available ? "Available" : "Sold"}
+  </span>
+)}
+
+{!isCopy && artwork.data.available && (
+  <a href={whatsappUrl}>Ask about this painting</a>
+)}
+```
+
+### Content Migration
+
+**Edward Hopper study:**
+- **From:** `src/content/originals/edward_hopper_study.json`
+- **To:** `src/content/studies/edward_hopper_study.json`
+
+**Updated fields:**
+```json
+{
+  "studyType": "copy",
+  "originalArtist": "Edward Hopper",
+  "available": false
+}
+```
+
+### Build Impact
+
+**Before Studies section:**
+- Pages: 22
+- Collections: 2 (originals, prints)
+- Navigation tabs: 3
+
+**After Studies section:**
+- Pages: 26 (+4)
+- Collections: 3 (originals, prints, studies)
+- Navigation tabs: 4
+- Build time: ~1.2s (no significant impact)
+
+### User Experience Improvements
+
+1. **Clear categorization** - Studies no longer mixed with original artworks
+2. **Transparency** - Intro text explains what studies are
+3. **Discoverability** - Dedicated tab makes studies easy to find
+4. **Education** - Shows artistic development and influences
+5. **Proper crediting** - Original artists credited for copies
+6. **Smart pricing** - Copies clearly marked as not for sale
+
+### Future Extensibility
+
+Schema supports:
+- More study types (could add 'sketch', 'draft', etc.)
+- Multiple original artists (for collaborative studies)
+- Additional metadata fields
+- Easy to add new studies (just create JSON file)
+
+### Lessons Learned
+
+1. **Research first** - UX research prevented choosing filter approach
+2. **Simple > complex** - Separate page simpler than filtering logic
+3. **Type safety** - Schema validation caught errors early
+4. **Conditional UI** - studyType field enables smart UI decisions
+5. **Documentation** - Clear intro text sets user expectations
 
 ## SEO Meta Description Strategy (2026-03-02)
 

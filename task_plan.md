@@ -5,6 +5,66 @@ All major features complete ✅ - Ready for content updates and future enhanceme
 
 ## Completed Sessions
 
+### Session 2026-03-02/03 (Part 5): Studies Section Implementation
+**Status:** Complete ✅
+
+#### Research & Design Decision
+- [x] Research artist portfolio best practices for categorizing studies/copies
+- [x] Evaluate separate tab vs filter approach
+- [x] Decision: Separate "Studies" navigation tab (based on UX research)
+- **Research findings:** 4-7 tabs ideal, separate pages > filters, studies show artistic development
+- **Result:** Research-backed decision for clean, discoverable design
+
+#### Studies Content Collection
+- [x] Create studies collection with new schema
+- [x] Add studyType field ('copy' or 'original')
+- [x] Add originalArtist field for copies (e.g., "Edward Hopper")
+- [x] Implement conditional pricing logic (copies not for sale)
+- [x] Move Edward Hopper study from originals to studies
+- **Result:** Type-safe studies collection with smart pricing
+
+#### Navigation Updates
+- [x] Add "Estudios" / "Studies" tab to navigation
+- [x] New order: Originales | Impresiones | Estudios | Acerca de mí
+- [x] Update desktop and mobile navigation components
+- [x] Stays within 4-7 tab best practice
+- **Result:** Clean navigation with 4 content tabs
+
+#### Pages Created
+- [x] Spanish studies gallery page (/studies)
+- [x] Spanish studies detail pages (/studies/[id])
+- [x] English studies gallery page (/en/studies)
+- [x] English studies detail pages (/en/studies/[id])
+- [x] Intro text explaining both copies and original practice work
+- **Result:** 4 new pages, full bilingual support
+
+#### Features Implemented
+- [x] Display "Original artist" field for copies
+- [x] Show "Not for sale" badge for copies
+- [x] Allow pricing for original studies
+- [x] WhatsApp contact only for available originals
+- [x] Same scrollable gallery layout as other sections
+- [x] Inch/cm conversions for English pages
+- **Result:** Smart conditional UI based on study type
+
+#### Translations Added
+- [x] nav.studies (ES/EN)
+- [x] studies.intro (ES/EN)
+- [x] studies.originalArtist (ES/EN)
+- [x] common.notForSale (ES/EN)
+- **Result:** Complete bilingual support
+
+#### Minor Fixes
+- [x] Fix About page title alignment (add pt-12 padding)
+- [x] Update print prices (Valizas Reflejo, Terrazas Palermo)
+- **Result:** All page titles aligned, current prices live
+
+**Build Stats:**
+- Pages built: 26 (was 22)
+- Files modified: 11
+- Files created: 7
+- Deploy time: 37s
+
 ### Session 2026-03-02 (Part 4): Humble SEO Descriptions
 **Status:** Complete ✅
 

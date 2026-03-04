@@ -1,5 +1,174 @@
 # Progress Log
 
+## Session: 2026-03-02/03 (Part 5)
+
+### Studies Section Implementation
+
+**Goal:** Create a new "Studies" section for practice paintings and copies of admired artists, separate from the main Originals gallery.
+
+---
+
+### Part 1: Research & Design Decision
+- **Status:** Complete ✅
+- **Started:** 2026-03-02
+- **Completed:** 2026-03-02
+
+**User Request:**
+- Has paintings that are studies (originals or copies of other artists)
+- Example: Edward Hopper study currently in Originals
+- Needs separate listing since some are copies (not for sale)
+- Two options: separate navigation tab vs filter on Originals page
+
+**Research conducted:**
+- Artist portfolio categorization best practices (2026)
+- Oil painter navigation structure patterns
+- Filtering vs separate pages UX research
+
+**Key findings:**
+- Ideal navigation: 4-7 tabs (current: 3, proposed: 4)
+- Separate pages preferred over filters for different work types
+- Studies show artistic development (valuable to include)
+- Separate pages = better discoverability than filters
+- Minimalist aesthetic maintained with 4 tabs
+
+**Recommendation provided:**
+Option 1: Separate "Studies" tab
+- Within 4-7 tab best practice
+- Clear separation (studies are conceptually different)
+- Better discoverability
+- Simpler than filters
+- Follows research recommendations
+
+**User decision:** Go with separate tab ✓
+
+---
+
+### Part 2: Content Schema Design
+- **Status:** Complete ✅
+- **Started:** 2026-03-02
+- **Completed:** 2026-03-02
+
+**Schema created:**
+```typescript
+studySchema = {
+  titleEs: string,
+  titleEn: string,
+  descriptionEs: string,
+  descriptionEn: string,
+  studyType: 'copy' | 'original',  // NEW
+  originalArtist: string (optional), // NEW
+  price: string (optional),
+  year: number,
+  dimensionsCm: string,
+  image: string,
+  available: boolean,
+  order: number (optional)
+}
+```
+
+**Key additions:**
+- `studyType`: Distinguishes copies from original practice work
+- `originalArtist`: For copies (e.g., "Edward Hopper", "Vincent van Gogh")
+- Smart pricing logic based on study type
+
+**Business rules:**
+- Copies (`studyType: 'copy'`): NOT for sale
+- Original studies (`studyType: 'original'`): CAN be for sale
+
+---
+
+### Part 3: Implementation
+- **Status:** Complete ✅
+- **Started:** 2026-03-02
+- **Completed:** 2026-03-02
+
+**Feature branch:** feature/add-studies-section
+
+**Files modified (11):**
+1. src/content/config.ts - Added studies collection and schema
+2. src/components/Navigation.astro - Added Studies tab (desktop + mobile)
+3. src/i18n/es.json - Added Spanish translations
+4. src/i18n/en.json - Added English translations
+5. src/content/studies/edward_hopper_study.json - Moved from originals
+6. src/content/studies/cerro_de_los_cuervos.json - New study artwork
+7-11. Updated navigation rendering
+
+**Files created (7):**
+1. src/content/studies/ - New directory
+2. src/pages/studies.astro - Spanish gallery
+3. src/pages/studies/[id].astro - Spanish detail pages
+4. src/pages/en/studies.astro - English gallery
+5. src/pages/en/studies/[id].astro - English detail pages
+6. public/images/cerro_de_los_cuervos.jpeg - New artwork image
+7. (studies content JSON files)
+
+**Navigation order implemented:**
+- Spanish: Originales | Impresiones | Estudios | Acerca de mí
+- English: Originals | Prints | Studies | About me
+
+**Intro text added:**
+- Spanish: "Estudios y copias de artistas que admiro, junto con pinturas originales realizadas como práctica y aprendizaje."
+- English: "Studies and copies of artists I admire, along with original paintings created for practice and learning."
+
+**Content migration:**
+- Edward Hopper study moved from originals → studies
+- Set as `studyType: "copy"`
+- Set `originalArtist: "Edward Hopper"`
+- Set `available: false` (not for sale)
+
+**Features implemented:**
+- Conditional "Original artist" field display (copies only)
+- "Not for sale" badge for copies
+- Price + availability for original studies
+- WhatsApp contact only for available originals
+- Same scrollable gallery layout
+- Responsive design (landscape vs portrait)
+- Bilingual support with inch/cm conversions
+
+**Translations added:**
+```json
+{
+  "nav.studies": "Estudios" / "Studies",
+  "studies.intro": "..." (full intro text),
+  "studies.originalArtist": "Artista original" / "Original artist",
+  "common.notForSale": "No está en venta" / "Not for sale"
+}
+```
+
+**Testing:**
+- Build tested locally: ✅ 26 pages in 1.18s
+- TypeScript validation: ✅ No errors
+- Schema validation: ✅ Passed
+- Responsive layouts: ✅ Both orientations work
+
+**Deployment:**
+- Merged to main
+- Deployed successfully
+- Build: 26 pages (was 22)
+- Total deployment time: 37s
+- Live on https://rodrigallardo.art/studies
+
+---
+
+### Part 4: Minor Fixes & Updates
+- **Status:** Complete ✅
+- **Started:** 2026-03-03
+- **Completed:** 2026-03-03
+
+**1. About Page Title Alignment**
+- **Issue:** About page title started at different height than other pages
+- **Fix:** Added `pt-12` padding to title container
+- **Files:** src/pages/about.astro, src/pages/en/about.astro
+- **Result:** All page titles now aligned at same height
+
+**2. Print Prices Update**
+- **Updated:** Valizas Reflejo and Terrazas Palermo print prices
+- **Files:** src/content/prints/valizas_reflejo.json, src/content/prints/terrazas_palermo.json
+- **Deploy:** 45s total
+- **Result:** Current prices live on site
+
+---
+
 ## Session: 2026-03-02 (Part 4)
 
 ### Humble SEO Meta Descriptions
