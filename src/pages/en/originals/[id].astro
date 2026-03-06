@@ -28,8 +28,8 @@ const widthInches = (widthCm / 2.54).toFixed(1);
 const heightInches = (heightCm / 2.54).toFixed(1);
 const dimensionsInches = `${widthInches} x ${heightInches} inches`;
 
-// Determine orientation
-const isLandscape = widthCm > heightCm;
+// Determine orientation from artwork data
+const isLandscape = artwork.data.orientation === 'landscape';
 
 // WhatsApp configuration
 const phoneNumber = WHATSAPP_PHONE_NUMBER;

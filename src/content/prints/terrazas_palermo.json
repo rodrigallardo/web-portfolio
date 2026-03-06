@@ -4,8 +4,22 @@
   "descriptionEs": "Una vista nocturna de las terrazas del barrio de Palermo.",
   "descriptionEn": "A night view of the rooftops in the Palermo neighborhood.",
   "year": 2025,
-  "dimensionsCm": "80 x 60",
   "image": "/images/terrazas_palermo.jpeg",
   "available": true,
-  "order": 1
+  "order": 1,
+  "orientation": "landscape",
+  "sizes": [
+    {
+      "name": "A3",
+      "dimensionsCm": "29.7 x 42",
+      "price": "$1000 UYU",
+      "available": true
+    },
+    {
+      "name": "A2",
+      "dimensionsCm": "50 x 70",
+      "price": "$2000 UYU",
+      "available": true
+    }
+  ]
 }

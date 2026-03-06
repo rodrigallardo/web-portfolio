@@ -11,6 +11,31 @@ const artworkSchema = z.object({
   image: z.string(),
   available: z.boolean().default(true),
   order: z.number().optional(), // Display order (lower numbers first)
+  orientation: z.enum(['landscape', 'portrait']), // Artwork orientation for layout
+});
+
+// Schema for individual print sizes
+const printSizeSchema = z.object({
+  name: z.string(),                      // Display name: "A3", "A2", etc.
+  dimensionsCm: z.string(),              // Format: "29.7 x 42" (width x height in cm)
+  price: z.string(),                     // Display price: "$1000 UYU", etc.
+  available: z.boolean().default(true),  // Per-size availability
+});
+
+// Print schema with optional sizes array for multi-size support
+const printSchema = z.object({
+  titleEs: z.string(),
+  titleEn: z.string(),
+  descriptionEs: z.string(),
+  descriptionEn: z.string(),
+  price: z.string().optional(),          // Legacy field (used if no sizes array)
+  year: z.number(),
+  dimensionsCm: z.string().optional(),   // Legacy field (used if no sizes array)
+  image: z.string(),
+  available: z.boolean().default(true),
+  order: z.number().optional(),
+  orientation: z.enum(['landscape', 'portrait']), // Artwork orientation for layout
+  sizes: z.array(printSizeSchema).optional(), // Multi-size support
 });
 
 const studySchema = z.object({
@@ -26,6 +51,7 @@ const studySchema = z.object({
   image: z.string(),
   available: z.boolean().default(true),
   order: z.number().optional(), // Display order (lower numbers first)
+  orientation: z.enum(['landscape', 'portrait']), // Artwork orientation for layout
 });
 
 const originals = defineCollection({
@@ -35,7 +61,7 @@ const originals = defineCollection({
 
 const prints = defineCollection({
   type: 'data',
-  schema: artworkSchema,
+  schema: printSchema,
 });
 
 const studies = defineCollection({

@@ -5,6 +5,7 @@ import { useTranslations } from '../../../i18n';
 import { WHATSAPP_PHONE_NUMBER } from '../../../config';
 import ArtworkSchema from '../../../components/ArtworkSchema.astro';
 import BreadcrumbSchema from '../../../components/BreadcrumbSchema.astro';
+import PrintSizeSelector from '../../../components/PrintSizeSelector.astro';
 
 export async function getStaticPaths() {
   const prints = await getCollection('prints');
@@ -22,18 +23,28 @@ const baseUrl = '/en';
 const title = artwork.data.titleEn;
 const description = artwork.data.descriptionEn;
 
+// Check for multi-size support
+const hasSizes = artwork.data.sizes && artwork.data.sizes.length > 0;
+const defaultSize = hasSizes
+  ? artwork.data.sizes.find(s => s.available) || artwork.data.sizes[0]
+  : null;
+
 // Convert dimensions from cm to inches
-const [widthCm, heightCm] = artwork.data.dimensionsCm.split(' x ').map(d => parseFloat(d.trim()));
+const dimensionsCmForConversion = (hasSizes && defaultSize?.dimensionsCm) || artwork.data.dimensionsCm || "42 x 29.7";
+const [widthCm, heightCm] = dimensionsCmForConversion.split(' x ').map(d => parseFloat(d.trim()));
 const widthInches = (widthCm / 2.54).toFixed(1);
 const heightInches = (heightCm / 2.54).toFixed(1);
 const dimensionsInches = `${widthInches} x ${heightInches} inches`;
 
-// Determine orientation
-const isLandscape = widthCm > heightCm;
+// Determine orientation from artwork data
+const isLandscape = artwork.data.orientation === 'landscape';
 
 // WhatsApp configuration
 const phoneNumber = WHATSAPP_PHONE_NUMBER;
-const message = `Hello, I'm interested in the artwork "${title}". I would like to get more information.`;
+const selectedSizeName = defaultSize?.name || '';
+const message = hasSizes
+  ? `Hello, I'm interested in the print "${title}" (${selectedSizeName}). I would like to get more information.`
+  : `Hello, I'm interested in the artwork "${title}". I would like to get more information.`;
 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
 // Price inquiry message (when price is not listed)
@@ -96,10 +107,22 @@ const breadcrumbs = [
                 <dt class="text-sm font-medium text-gray-500">{t('common.year')}</dt>
                 <dd class="text-base text-gray-900">{artwork.data.year}</dd>
               </div>
-              <div>
-                <dt class="text-sm font-medium text-gray-500">{t('common.dimensions')}</dt>
-                <dd class="text-base text-gray-900">{dimensionsInches}</dd>
-              </div>
+              {hasSizes ? (
+                <PrintSizeSelector sizes={artwork.data.sizes} lang="en" />
+              ) : (
+                <>
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">{t('common.dimensions')}</dt>
+                    <dd class="text-base text-gray-900">{dimensionsInches}</dd>
+                  </div>
+                  {artwork.data.available && artwork.data.price && (
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Price</dt>
+                      <dd class="text-base text-gray-900 font-semibold">{artwork.data.price}</dd>
+                    </div>
+                  )}
+                </>
+              )}
               <div>
                 <dt class="text-sm font-medium text-gray-500">{t('common.medium')}</dt>
                 <dd class="text-base text-gray-900">{t('common.mediumValue')}</dd>
@@ -117,13 +140,10 @@ const breadcrumbs = [
                   </span>
                 </dd>
               </div>
-              {artwork.data.available && (
-              <div>
-                <dt class="text-sm font-medium text-gray-500">Price</dt>
-                <dd>
-                  {artwork.data.price ? (
-                    <span class="text-base text-gray-900 font-semibold">{artwork.data.price}</span>
-                  ) : (
+              {!hasSizes && artwork.data.available && !artwork.data.price && (
+                <div>
+                  <dt class="text-sm font-medium text-gray-500">Price</dt>
+                  <dd>
                     <a
                       href={priceInquiryUrl}
                       target="_blank"
@@ -140,9 +160,8 @@ const breadcrumbs = [
                       </svg>
                       {t('common.askPrice')}
                     </a>
-                  )}
-                </dd>
-              </div>
+                  </dd>
+                </div>
               )}
             </dl>
           </div>
@@ -150,10 +169,13 @@ const breadcrumbs = [
           {artwork.data.available && (
           <div class="border-t border-gray-200 pt-6">
             <a
+              id="whatsapp-inquiry-btn"
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               data-artwork-title={title}
+              data-phone-number={phoneNumber}
+              data-has-sizes={hasSizes}
               class="inline-flex items-center justify-center w-full px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200"
             >
               <svg
@@ -195,10 +217,22 @@ const breadcrumbs = [
                 <dt class="text-sm font-medium text-gray-500">{t('common.year')}</dt>
                 <dd class="text-base text-gray-900">{artwork.data.year}</dd>
               </div>
-              <div>
-                <dt class="text-sm font-medium text-gray-500">{t('common.dimensions')}</dt>
-                <dd class="text-base text-gray-900">{dimensionsInches}</dd>
-              </div>
+              {hasSizes ? (
+                <PrintSizeSelector sizes={artwork.data.sizes} lang="en" />
+              ) : (
+                <>
+                  <div>
+                    <dt class="text-sm font-medium text-gray-500">{t('common.dimensions')}</dt>
+                    <dd class="text-base text-gray-900">{dimensionsInches}</dd>
+                  </div>
+                  {artwork.data.available && artwork.data.price && (
+                    <div>
+                      <dt class="text-sm font-medium text-gray-500">Price</dt>
+                      <dd class="text-base text-gray-900 font-semibold">{artwork.data.price}</dd>
+                    </div>
+                  )}
+                </>
+              )}
               <div>
                 <dt class="text-sm font-medium text-gray-500">{t('common.medium')}</dt>
                 <dd class="text-base text-gray-900">{t('common.mediumValue')}</dd>
@@ -216,13 +250,10 @@ const breadcrumbs = [
                   </span>
                 </dd>
               </div>
-              {artwork.data.available && (
-              <div>
-                <dt class="text-sm font-medium text-gray-500">Price</dt>
-                <dd>
-                  {artwork.data.price ? (
-                    <span class="text-base text-gray-900 font-semibold">{artwork.data.price}</span>
-                  ) : (
+              {!hasSizes && artwork.data.available && !artwork.data.price && (
+                <div>
+                  <dt class="text-sm font-medium text-gray-500">Price</dt>
+                  <dd>
                     <a
                       href={priceInquiryUrl}
                       target="_blank"
@@ -239,9 +270,8 @@ const breadcrumbs = [
                       </svg>
                       {t('common.askPrice')}
                     </a>
-                  )}
-                </dd>
-              </div>
+                  </dd>
+                </div>
               )}
             </dl>
           </div>
@@ -249,10 +279,13 @@ const breadcrumbs = [
           {artwork.data.available && (
           <div class="border-t border-gray-200 pt-6">
             <a
+              id="whatsapp-inquiry-btn"
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               data-artwork-title={title}
+              data-phone-number={phoneNumber}
+              data-has-sizes={hasSizes}
               class="inline-flex items-center justify-center w-full px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200"
             >
               <svg
@@ -271,4 +304,19 @@ const breadcrumbs = [
       </div>
     )}
   </div>
+
+  <script>
+    window.addEventListener('print-size-changed', (e: any) => {
+      const { name } = e.detail;
+      const btn = document.getElementById('whatsapp-inquiry-btn') as HTMLAnchorElement;
+      const title = btn?.getAttribute('data-artwork-title');
+      const phoneNumber = btn?.getAttribute('data-phone-number');
+      const hasSizes = btn?.getAttribute('data-has-sizes') === 'true';
+
+      if (btn && title && phoneNumber && hasSizes) {
+        const message = `Hello, I'm interested in the print "${title}" (${name}). I would like to get more information.`;
+        btn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      }
+    });
+  </script>
 </Layout>

@@ -10,6 +10,23 @@ const prints = (await getCollection('prints')).sort((a, b) => {
   return orderA - orderB;
 });
 const baseUrl = '/en';
+
+// Helper function to get price display for gallery
+function getPriceDisplay(artwork: any): string | null {
+  if (artwork.data.sizes && artwork.data.sizes.length > 0) {
+    const availableSizes = artwork.data.sizes.filter((s: any) => s.available);
+    if (availableSizes.length === 0) return null;
+
+    if (availableSizes.length === 1) {
+      return availableSizes[0].price;
+    }
+
+    // Show "From" with the first available size price
+    return `From ${availableSizes[0].price}`;
+  }
+
+  return artwork.data.price || null;
+}
 ---
 
 <Layout
@@ -41,7 +58,7 @@ const baseUrl = '/en';
               {artwork.data.titleEn}
             </h2>
             <div class="flex justify-center items-center gap-4 text-gray-600">
-              {artwork.data.price && <span class="text-lg font-semibold">{artwork.data.price}</span>}
+              {getPriceDisplay(artwork) && <span class="text-lg font-semibold">{getPriceDisplay(artwork)}</span>}
               <span class:list={[
                 "px-3 py-1 text-sm font-medium transition-all duration-300",
                 artwork.data.available

@@ -17,8 +17,13 @@ const { artwork, lang, isOriginal } = Astro.props;
 const title = lang === 'es' ? artwork.data.titleEs : artwork.data.titleEn;
 const description = lang === 'es' ? artwork.data.descriptionEs : artwork.data.descriptionEn;
 
-// Parse dimensions
-const [width, height] = artwork.data.dimensionsCm.split('x').map((d: string) => parseFloat(d.trim()));
+// Parse dimensions (handle both legacy dimensionsCm and sizes array)
+const hasSizes = artwork.data.sizes && artwork.data.sizes.length > 0;
+const defaultSize = hasSizes
+  ? artwork.data.sizes.find((s: any) => s.available) || artwork.data.sizes[0]
+  : null;
+const dimensionsCm = (hasSizes && defaultSize?.dimensionsCm) || artwork.data.dimensionsCm || "42 x 29.7";
+const [width, height] = dimensionsCm.split('x').map((d: string) => parseFloat(d.trim()));
 
 // Construct full image URL
 const imageUrl = artwork.data.image.startsWith('http')

@@ -7,5 +7,6 @@
   "dimensionsCm": "60 x 40",
   "image": "/images/valizas_reflejo.jpeg",
   "available": true,
-  "order": 5
+  "order": 5,
+  "orientation": "landscape"
 }

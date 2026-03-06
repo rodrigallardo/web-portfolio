@@ -1,0 +1,125 @@
+---
+interface Size {
+  name: string;
+  dimensionsCm: string;
+  price: string;
+  available: boolean;
+}
+
+interface Props {
+  sizes: Size[];
+  lang: 'es' | 'en';
+}
+
+const { sizes, lang } = Astro.props;
+const defaultSize = sizes.find(s => s.available) || sizes[0];
+
+// Convert cm to inches for English
+function cmToInches(dimensionsCm: string): string {
+  const [widthCm, heightCm] = dimensionsCm.split(' x ').map(d => parseFloat(d.trim()));
+  const widthInches = (widthCm / 2.54).toFixed(1);
+  const heightInches = (heightCm / 2.54).toFixed(1);
+  return `${widthInches} x ${heightInches}`;
+}
+
+const labels = {
+  es: {
+    size: 'Tamaño',
+    dimensions: 'Dimensiones',
+    price: 'Precio',
+    soldOut: 'Agotado',
+  },
+  en: {
+    size: 'Size',
+    dimensions: 'Dimensions',
+    price: 'Price',
+    soldOut: 'Sold out',
+  },
+};
+
+const t = labels[lang];
+---
+
+<div class="space-y-4" id="size-selector-container">
+  <div>
+    <label for="size-select" class="block text-sm font-medium text-gray-500 mb-2">
+      {t.size}
+    </label>
+    <select
+      id="size-select"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
+    >
+      {sizes.map((size, index) => (
+        <option
+          value={index}
+          selected={size.name === defaultSize.name}
+          disabled={!size.available}
+          data-price={size.price}
+          data-dimensions-cm={size.dimensionsCm}
+          data-dimensions-in={cmToInches(size.dimensionsCm)}
+          data-available={size.available}
+          data-name={size.name}
+        >
+          {size.name} ({size.dimensionsCm} cm) - {size.price}
+          {!size.available && ` - ${t.soldOut}`}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <div>
+    <dt class="text-sm font-medium text-gray-500">{t.dimensions}</dt>
+    <dd id="selected-dimensions" class="text-base text-gray-900">
+      {lang === 'en'
+        ? `${cmToInches(defaultSize.dimensionsCm)} inches`
+        : `${defaultSize.dimensionsCm} cm`
+      }
+    </dd>
+  </div>
+
+  <div>
+    <dt class="text-sm font-medium text-gray-500">{t.price}</dt>
+    <dd id="selected-price" class="text-base text-gray-900 font-semibold">
+      {defaultSize.price}
+    </dd>
+  </div>
+</div>
+
+<script define:vars={{ lang }}>
+  const selector = document.getElementById('size-select');
+  const priceDisplay = document.getElementById('selected-price');
+  const dimensionsDisplay = document.getElementById('selected-dimensions');
+
+  selector?.addEventListener('change', (e) => {
+    const target = e.target;
+    const selectedOption = target.options[target.selectedIndex];
+
+    const price = selectedOption.getAttribute('data-price');
+    const dimensionsCm = selectedOption.getAttribute('data-dimensions-cm');
+    const dimensionsIn = selectedOption.getAttribute('data-dimensions-in');
+    const name = selectedOption.getAttribute('data-name');
+
+    if (priceDisplay && price) {
+      priceDisplay.textContent = price;
+    }
+
+    if (dimensionsDisplay) {
+      if (lang === 'en' && dimensionsIn) {
+        dimensionsDisplay.textContent = `${dimensionsIn} inches`;
+      } else if (dimensionsCm) {
+        dimensionsDisplay.textContent = `${dimensionsCm} cm`;
+      }
+    }
+
+    // Dispatch custom event for WhatsApp URL update
+    const event = new CustomEvent('print-size-changed', {
+      detail: {
+        name,
+        price,
+        dimensionsCm,
+        dimensionsIn,
+      }
+    });
+    window.dispatchEvent(event);
+  });
+</script>

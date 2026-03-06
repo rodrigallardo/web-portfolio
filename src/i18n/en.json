@@ -14,7 +14,10 @@
     "available": "Available",
     "sold": "Sold",
     "askPrice": "Ask price",
-    "notForSale": "Not for sale"
+    "notForSale": "Not for sale",
+    "size": "Size",
+    "from": "From",
+    "soldOut": "Sold out"
   },
   "studies": {
     "intro": "Studies and copies of artists I admire, along with original paintings created for practice and learning.",

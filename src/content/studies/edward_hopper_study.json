@@ -9,5 +9,6 @@
   "dimensionsCm": "35 x 45",
   "image": "/images/edward_hopper_study.jpeg",
   "available": false,
-  "order": 1
+  "order": 1,
+  "orientation": "portrait"
 }

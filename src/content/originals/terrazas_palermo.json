@@ -7,5 +7,6 @@
   "dimensionsCm": "80 x 60",
   "image": "/images/terrazas_palermo.jpeg",
   "available": true,
-  "order": 3
+  "order": 3,
+  "orientation": "landscape"
 }

@@ -36,9 +36,8 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mess
 const priceInquiryMessage = `Hola, me gustaría conocer el precio de la obra "${title}".`;
 const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(priceInquiryMessage)}`;
 
-// Determine orientation from dimensions (format: "width x height")
-const [width, height] = artwork.data.dimensionsCm.split('x').map(d => parseInt(d.trim()));
-const isLandscape = width > height;
+// Determine orientation from artwork data
+const isLandscape = artwork.data.orientation === 'landscape';
 
 // Breadcrumb navigation
 const breadcrumbs = [

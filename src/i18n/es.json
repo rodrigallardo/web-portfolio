@@ -14,7 +14,10 @@
     "available": "Disponible",
     "sold": "Vendido",
     "askPrice": "Consultar precio",
-    "notForSale": "No está en venta"
+    "notForSale": "No está en venta",
+    "size": "Tamaño",
+    "from": "Desde",
+    "soldOut": "Agotado"
   },
   "studies": {
     "intro": "Estudios y copias de artistas que admiro, junto con pinturas originales realizadas como práctica y aprendizaje.",

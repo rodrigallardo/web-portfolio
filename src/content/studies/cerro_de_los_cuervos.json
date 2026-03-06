@@ -8,5 +8,6 @@
   "dimensionsCm": "40 x 30",
   "image": "/images/cerro_de_los_cuervos.jpeg",
   "available": true,
-  "order": 2
+  "order": 2,
+  "orientation": "landscape"
 }

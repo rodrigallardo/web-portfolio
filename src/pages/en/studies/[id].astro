@@ -36,9 +36,11 @@ const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mess
 const priceInquiryMessage = `Hi, I would like to know the price of the artwork "${title}".`;
 const priceInquiryUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(priceInquiryMessage)}`;
 
-// Determine orientation from dimensions (format: "width x height")
+// Determine orientation from artwork data
+const isLandscape = artwork.data.orientation === 'landscape';
+
+// Parse dimensions for inch conversion
 const [widthCm, heightCm] = artwork.data.dimensionsCm.split('x').map(d => parseInt(d.trim()));
-const isLandscape = widthCm > heightCm;
 
 // Convert dimensions to inches for English
 const widthIn = (widthCm / 2.54).toFixed(1);

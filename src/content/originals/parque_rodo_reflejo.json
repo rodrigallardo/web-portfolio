@@ -7,5 +7,6 @@
   "dimensionsCm": "80 x 60",
   "image": "/images/parque_rodo_reflejo.jpeg",
   "available": true,
-  "order": 4
+  "order": 4,
+  "orientation": "landscape"
 }
