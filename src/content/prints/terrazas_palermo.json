@@ -14,12 +14,6 @@
       "dimensionsCm": "29.7 x 42",
       "price": "$1000 UYU",
       "available": true
-    },
-    {
-      "name": "A2",
-      "dimensionsCm": "50 x 70",
-      "price": "$2000 UYU",
-      "available": true
     }
   ]
 }
