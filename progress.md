@@ -1,5 +1,157 @@
 # Progress Log
 
+## Session: 2026-03-06 - Multi-Size Prints & Orientation Attribute
+
+### Portfolio Website Feature Development
+- **Status:** ✅ Completed & Deployed
+- **Branch:** feature/multi-size-prints-and-orientation → main
+- **Deployed:** 2026-03-06
+- **Live:** https://rodrigallardo.art
+
+---
+
+### Part 1: Multi-Size Prints Implementation
+
+**User Request:**
+- Add support for multiple print sizes with different prices
+- Dropdown selector on detail pages
+- Price should change based on selected size
+- Initial data: A3 size (29.7 x 42 cm) at $1000 UYU
+- Gallery should show price range or single price
+
+**Actions Taken:**
+
+**1. Schema Updates** (`src/content/config.ts`)
+- ✅ Created `printSizeSchema` with name, dimensionsCm, price, available fields
+- ✅ Updated `printSchema` with optional `sizes` array
+- ✅ Made `dimensionsCm` and `price` optional (backward compatibility)
+- ✅ Build tested successfully
+
+**2. PrintSizeSelector Component** (`src/components/PrintSizeSelector.astro`)
+- ✅ Created dropdown component with size selection
+- ✅ Dynamic price and dimensions updates
+- ✅ Shows size name, dimensions, price in options
+- ✅ Disables sold-out sizes
+- ✅ Bilingual support (ES/EN)
+- ✅ Auto-converts cm to inches for English
+- ✅ Fires custom event for WhatsApp URL updates
+
+**3. Detail Pages Updated**
+- ✅ Spanish: `src/pages/prints/[id].astro`
+- ✅ English: `src/pages/en/prints/[id].astro`
+- ✅ Integrated PrintSizeSelector component
+- ✅ Conditional rendering (sizes vs legacy)
+- ✅ WhatsApp URL includes selected size
+- ✅ JavaScript event handling for size changes
+
+**4. Gallery Pages Updated**
+- ✅ Spanish: `src/pages/prints.astro`
+- ✅ English: `src/pages/en/prints.astro`
+- ✅ Added price range logic
+- ✅ Shows "Desde $X" / "From $X" for multi-size
+- ✅ Shows single price for single-size
+
+**5. Translations Updated**
+- ✅ Added `size`, `from`, `soldOut` keys to ES and EN
+
+**6. Test Migration**
+- ✅ Updated `terrazas_palermo.json` with A3 and A2 sizes
+- ✅ Tested multi-size functionality
+- ✅ Legacy print (valizas_reflejo) still works
+
+**7. Bug Fixes**
+- ✅ Fixed ArtworkSchema component for multi-size prints
+- ✅ Added defensive null handling for dimensions
+- ✅ Resolved build errors
+
+---
+
+### Part 2: Orientation Attribute
+
+**User Request:**
+- Landscape paintings showing as portrait due to print size dimensions
+- Add explicit `orientation` attribute instead of auto-computing
+
+**Actions Taken:**
+
+**1. Schema Updates**
+- ✅ Added required `orientation` field to `artworkSchema`
+- ✅ Added required `orientation` field to `printSchema`
+- ✅ Added required `orientation` field to `studySchema`
+- ✅ Removed `.optional()` to make it required
+
+**2. Page Logic Updates**
+- ✅ Removed auto-compute orientation from all 6 detail pages:
+  - `src/pages/prints/[id].astro`
+  - `src/pages/en/prints/[id].astro`
+  - `src/pages/originals/[id].astro`
+  - `src/pages/en/originals/[id].astro`
+  - `src/pages/studies/[id].astro`
+  - `src/pages/en/studies/[id].astro`
+- ✅ All pages now use `artwork.data.orientation === 'landscape'`
+
+**3. Content Updates**
+- ✅ Added `orientation` to all originals (5 files)
+  - retrato_billy → portrait
+  - terrazas_palermo → landscape
+  - parque_rodo_reflejo → landscape
+  - valizas_reflejo → landscape
+  - atardecer_minas → landscape
+- ✅ Added `orientation` to all prints (2 files)
+  - terrazas_palermo → landscape
+  - valizas_reflejo → landscape
+- ✅ Added `orientation` to all studies (2 files)
+  - cerro_de_los_cuervos → landscape
+  - edward_hopper_study → portrait
+
+**4. Dev Server Issues Resolved**
+- ✅ Restarted dev server to clear cache
+- ✅ All collections loaded successfully
+- ✅ No validation errors
+
+---
+
+### Part 3: About Page Updates
+
+**User Requests:**
+1. Remove rounded corners from profile picture
+2. Fix mobile layout centering
+
+**Actions Taken:**
+- ✅ Removed `rounded-lg` class from images (ES/EN)
+- ✅ Fixed mobile centering by moving `mx-auto` to image
+- ✅ Updated both mobile and desktop versions
+
+---
+
+### Deployment Summary
+
+**Commits:**
+1. `feat: add multi-size prints with dynamic pricing and orientation attribute`
+   - 24 files changed, 411 insertions(+), 98 deletions(-)
+   - Created PrintSizeSelector.astro component
+
+2. `chore: update terrazas_palermo print metadata`
+   - User-updated print metadata
+
+**Build & Deploy:**
+- ✅ Build time: 21s → 19s
+- ✅ Deploy time: 11s → 9s
+- ✅ Total: 32s → 28s
+- ✅ All tests passed
+- ✅ Live at https://rodrigallardo.art
+
+**Testing:**
+- ✅ Multi-size selector works on `/prints/terrazas_palermo`
+- ✅ Price range shows on `/prints` gallery
+- ✅ Orientation layouts correct
+- ✅ Legacy prints (valizas_reflejo) work unchanged
+- ✅ About page centered and no rounded corners
+- ✅ Mobile responsive design verified
+- ✅ WhatsApp integration includes size
+
+---
+
 ## Session: 2026-03-04 - Painting Perspective Correction Tool
 
 ### Project Initialization

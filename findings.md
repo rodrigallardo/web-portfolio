@@ -1,5 +1,184 @@
 # Findings & Technical Documentation
 
+## Portfolio Website (Production)
+
+**Live:** https://rodrigallardo.art
+**Version:** v1.5.0
+**Last Updated:** 2026-03-06
+
+---
+
+### Multi-Size Prints Feature (v1.5.0)
+
+**Implemented:** 2026-03-06
+**Status:** ✅ Production
+
+#### Overview
+Prints can now have multiple size options with different prices. Users select a size from a dropdown, and the price/dimensions update dynamically.
+
+#### Data Schema
+
+**Print Size Object:**
+```typescript
+{
+  name: string;           // "A3", "A2", "A1", etc.
+  dimensionsCm: string;   // "29.7 x 42"
+  price: string;          // "$1000 UYU"
+  available: boolean;     // Per-size availability
+}
+```
+
+**Print Schema:**
+```typescript
+{
+  titleEs: string;
+  titleEn: string;
+  descriptionEs: string;
+  descriptionEn: string;
+  price?: string;          // Legacy field (optional)
+  dimensionsCm?: string;   // Legacy field (optional)
+  year: number;
+  image: string;
+  available: boolean;
+  order?: number;
+  orientation: 'landscape' | 'portrait';
+  sizes?: Array<PrintSize>;  // Multi-size support
+}
+```
+
+**Backward Compatibility:**
+- Prints without `sizes` array use legacy `price` and `dimensionsCm`
+- Both formats work simultaneously
+- No breaking changes to existing prints
+
+#### Component Architecture
+
+**PrintSizeSelector.astro:**
+- Location: `src/components/PrintSizeSelector.astro`
+- Props: `{ sizes: Size[], lang: 'es' | 'en' }`
+- Features:
+  - Dropdown with all available sizes
+  - Disabled state for sold-out sizes
+  - Dynamic price display
+  - Dynamic dimensions display (cm for ES, inches for EN)
+  - Fires `print-size-changed` custom event
+- JavaScript: ~30 lines for dropdown interaction
+
+**Event Flow:**
+1. User selects size from dropdown
+2. Component updates displayed price and dimensions
+3. Fires `print-size-changed` event with size details
+4. Detail page script listens for event
+5. Updates WhatsApp URL with new size in message
+
+#### Gallery Price Display Logic
+
+**Function:** `getPriceDisplay(artwork)`
+
+**Logic:**
+```typescript
+if (artwork has sizes array) {
+  if (only 1 available size) → return single price
+  if (multiple available sizes) → return "Desde {first price}" / "From {first price}"
+  if (no available sizes) → return null
+} else {
+  return legacy price field
+}
+```
+
+**Examples:**
+- 1 size (A3 $1000): Shows "$1000 UYU"
+- 2 sizes (A3 $1000, A2 $2000): Shows "Desde $1000 UYU" (ES) / "From $1000 UYU" (EN)
+
+#### WhatsApp Integration
+
+**Message Format:**
+- Legacy: `"Hola, estoy interesado en la obra "{title}". Me gustaría obtener más información."`
+- Multi-size: `"Hola, estoy interesado en la impresión "{title}" ({sizeName}). Me gustaría obtener más información."`
+
+**Implementation:**
+- Initial URL includes default size
+- Event listener updates URL when size changes
+- Button has data attributes: `data-artwork-title`, `data-phone-number`, `data-has-sizes`
+
+#### Files Modified
+
+**Schema & Components:**
+- `src/content/config.ts` - Print schema with sizes array
+- `src/components/PrintSizeSelector.astro` - New component
+- `src/components/ArtworkSchema.astro` - Multi-size support
+
+**Detail Pages:**
+- `src/pages/prints/[id].astro` - Spanish detail
+- `src/pages/en/prints/[id].astro` - English detail
+
+**Gallery Pages:**
+- `src/pages/prints.astro` - Spanish gallery with price range
+- `src/pages/en/prints.astro` - English gallery with price range
+
+**Translations:**
+- `src/i18n/es.json` - Added `size`, `from`, `soldOut`
+- `src/i18n/en.json` - Added `size`, `from`, `soldOut`
+
+**Content:**
+- `src/content/prints/terrazas_palermo.json` - Migrated to multi-size
+
+---
+
+### Orientation Attribute (v1.5.0)
+
+**Implemented:** 2026-03-06
+**Status:** ✅ Production
+
+#### Problem Solved
+Print sizes can be different orientations than the original artwork (e.g., landscape painting with portrait-oriented A3 print). Computing orientation from print dimensions caused layout issues.
+
+#### Solution
+Added explicit `orientation` field to all artwork schemas:
+
+```typescript
+orientation: 'landscape' | 'portrait';  // Required field
+```
+
+**Layout Logic:**
+```typescript
+// Old (computed from dimensions)
+const [width, height] = dimensionsCm.split('x').map(d => parseInt(d));
+const isLandscape = width > height;
+
+// New (explicit attribute)
+const isLandscape = artwork.data.orientation === 'landscape';
+```
+
+**Benefits:**
+- Artwork orientation independent of print size dimensions
+- More accurate layout rendering
+- Clearer intent in data model
+- No computation needed
+
+**Files Updated:**
+- All schema definitions (3 schemas)
+- All detail pages (6 pages)
+- All content files (9 JSON files)
+
+---
+
+### About Page Updates (v1.5.0)
+
+**Implemented:** 2026-03-06
+
+**Changes:**
+1. Removed `rounded-lg` class from profile picture
+2. Fixed mobile centering by moving `mx-auto` to image element
+
+**Files Modified:**
+- `src/pages/about.astro`
+- `src/pages/en/about.astro`
+
+---
+
+## Painting Perspective Correction Tool
+
 ## Current Project: Painting Perspective Correction Tool
 
 **Status:** Research phase

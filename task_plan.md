@@ -1,6 +1,60 @@
-# Task Plan: Painting Perspective Correction Tool
+# Task Plan
 
-## Current Status
+## Portfolio Website
+
+### Current Status
+✅ **Production (v1.5.0)** - Multi-size prints with dynamic pricing deployed
+
+### Recent Completions (Session 2026-03-06)
+
+#### Multi-Size Prints Feature ✅
+**Deployed:** 2026-03-06
+
+**Features:**
+- Print size selector dropdown with dynamic pricing
+- Multiple size options per print (A3, A2, etc.)
+- Price range display in gallery ("Desde $X" / "From $X")
+- WhatsApp integration includes selected size
+- Backward compatible with legacy single-price prints
+
+**Implementation:**
+- Created `PrintSizeSelector.astro` component
+- Updated print schema with optional `sizes` array
+- Modified detail pages (ES/EN) for size selection
+- Updated gallery pages with price range logic
+- Migrated Terrazas de Palermo to multi-size format
+
+#### Orientation Attribute ✅
+**Deployed:** 2026-03-06
+
+**Changes:**
+- Added required `orientation` field to all artwork schemas
+- Removed auto-compute orientation logic
+- Updated all artwork JSON files with explicit orientation
+- Layout now based on artwork orientation, not print dimensions
+
+#### About Page Updates ✅
+**Deployed:** 2026-03-06
+
+**Changes:**
+- Removed rounded corners from profile picture
+- Fixed mobile layout centering
+
+### Active Tasks
+- [ ] None currently
+
+### Future Enhancements
+- [ ] Add more print sizes (A0, A1, custom sizes)
+- [ ] Add print material options (glossy, matte, canvas)
+- [ ] Add stock quantity tracking per size
+- [ ] Shopping cart functionality
+- [ ] Online payment integration
+
+---
+
+## Painting Perspective Correction Tool
+
+### Current Status
 Planning phase - Experimental image processing tool (separate from web portfolio)
 
 ## Project Overview
